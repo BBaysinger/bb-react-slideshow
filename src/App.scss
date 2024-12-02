@@ -16,10 +16,11 @@
     .content {
       position: absolute;
       min-height: 60vw;
-      padding-top: 0;
-      padding-left: 28px;
+      // padding-top: 0;
       padding-right: 28px;
       pointer-events: none;
+      @include globals.fluid-property(padding-top, 360px, 1366px, 28px, 80px);
+      @include globals.fluid-property(margin-left, 360px, 1366px, 28px, 79px);
 
       > * > * {
         position: relative;
@@ -58,7 +59,7 @@
       letter-spacing: 0.04em;
       line-height: 1.1em;
       width: 45%;
-      margin-top: 5.3vw;
+      margin-top: 0;
       margin-bottom: 23.5vw;
     }
 
@@ -215,9 +216,12 @@
         background-size 1s ease-in-out;
       &.active {
         left: -14.45vw;
-        background-size: 35.3vw;
         opacity: 1;
-        background-position: 100% 0;
+        // background-position: 100% 0;
+        // background-size: 35.3vw;
+        background-position-y: 0;
+        @include globals.fluid-property(background-position-x, 360px, 1366px, 100%, 97.4%);
+        @include globals.fluid-property(background-size, 360px, 1366px, 200px, 433px);
       }
       &.previous {
         left: 0;
