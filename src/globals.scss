@@ -1,0 +1,86 @@
+@use "sass:map";
+
+// Breakpoints definition
+// Defines standard responsive breakpoints, including an additional 'xs' size (360px).
+// These breakpoints are mobile-first, following Bootstrap conventions.
+$breakpoints: (
+  // Extra small devices (e.g., small smartphones)
+  xs: 360px,
+  // Small devices (e.g., smartphones)
+  sm: 576px,
+  // Medium devices (e.g., tablets)
+  md: 768px,
+  // Large devices (e.g., desktops)
+  lg: 992px,
+  // Extra large devices (e.g., larger desktops)
+  xl: 1200px,
+  // Extra extra large devices (e.g., very large screens)
+  xxl: 1400px
+);
+
+// Mixin for mobile-first media queries
+// Usage: Apply styles starting from the specified breakpoint and up.
+// Example:
+// .example-class {
+//   @include breakpoint-up(md) {
+//     background-color: blue;
+//   }
+// }
+@mixin breakpoint-up($breakpoint) {
+  $min-width: map.get(
+    $breakpoints,
+    $breakpoint
+  ); // Get the breakpoint's value from the map
+  @if $min-width != null {
+    @media (min-width: $min-width) {
+      // Apply styles when the viewport meets the minimum width
+      @content;
+    }
+  }
+}
+
+// Function to remove the unit from a CSS value
+// This is useful for mathematical operations on CSS values
+@function strip-unit($value) {
+  // Divides the value by itself (multiplied by 0 plus 1) to effectively strip units
+  @return $value / ($value * 0 + 1);
+}
+
+// Mixin to create a fluid property based on viewport width
+// It interpolates between a minimum and maximum value as the viewport
+// width scales between the two specified breakpoints
+// Example:
+// h1 {
+//   @include fluid-property(font-size, 320px, 1200px, 16px, 32px);
+// }
+@mixin fluid-property($property, $min-vw, $max-vw, $min-value, $max-value) {
+  // Extract the unit from each input to ensure they match
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-value);
+  $u4: unit($max-value);
+
+  // Ensure all input values use the same unit for consistency
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      // Apply the minimum value as the default property value
+      #{$property}: $min-value;
+
+      // Interpolate the property value between min and max based on viewport width
+      @media screen and (min-width: $min-vw) {
+        #{$property}: calc(
+          #{$min-value} + #{strip-unit($max-value - $min-value)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
+      }
+
+      // Apply the maximum value once the viewport width exceeds the maximum breakpoint
+      @media screen and (min-width: $max-vw) {
+        #{$property}: $max-value;
+      }
+    }
+  } @else {
+    // Throw an error if the units for the input values do not match
+    @error "All units for the input values must match!";
+  }
+}
