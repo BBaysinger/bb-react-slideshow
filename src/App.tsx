@@ -16,12 +16,12 @@ function App() {
       alt: "Slide 1",
       content: (
         <div>
-          <h3>MORE FROM RICO THE DOG</h3>
+          <h3>MORE FROM RICO THE&nbsp;DOG</h3>
           <button>RICO IS BACK!</button>
           <h2 className="">RICOBOT</h2>
           <p>
             Charge into a brand-new supersized adventure with RICO across 50
-            exciting and diverse worlds, available now on PS5!
+            exciting and diverse worlds, available now&nbsp;on&nbsp;PS5!
           </p>
           <a
             href="https://www.playstation.com/"
@@ -41,13 +41,14 @@ function App() {
       alt: "Slide 2",
       content: (
         <div>
-          <h3>CAUGHT IN THE ACT…</h3>
+          <h3>CAUGHT IN THE&nbsp;ACT…</h3>
           <button>Bashful Bulldog Blues</button>
           <h2 className="">RICOBOT</h2>
           <p>
             Rico may be the king of the couch, but when you walk in on his
             mid-afternoon lounging session, he suddenly pretends he's never seen
-            a bed before. His guilty-but-adorable side-eye is unmatched.
+            a bed before. His guilty-but-adorable
+            side-eye&nbsp;is&nbsp;unmatched.
           </p>
           <a
             href="https://www.playstation.com/"

@@ -1,3 +1,5 @@
+@use "../../scss/globals.scss";
+
 /**
 * This should all be overridable defaults. Just the bare minimum
 * to make it seem like a slideshow out of the box.
@@ -5,7 +7,7 @@
 * and if this is best approach.
 */
 
-$slideContainerHeight: 60vw;
+// $slideContainerHeight: 60vw;
 
 .bbaysingerSlideshow {
   position: relative;
@@ -15,7 +17,7 @@ $slideContainerHeight: 60vw;
   position: absolute;
   width: 100vw;
   overflow: hidden;
-  height: $slideContainerHeight;
+  // height: $slideContainerHeight;
   z-index: 0;
 
   .slide {
@@ -45,7 +47,7 @@ $slideContainerHeight: 60vw;
 .contentWrapper {
   position: relative;
   top: 0;
-  min-height: $slideContainerHeight;
+  // min-height: $slideContainerHeight;
 
   .content {
     position: relative;
@@ -79,14 +81,14 @@ $slideContainerHeight: 60vw;
 .overlayWrapper2 {
   position: absolute;
   pointer-events: none;
-  height: $slideContainerHeight;
+  // height: $slideContainerHeight;
   width: 100vw;
   top: 0;
 
   .overlay {
     position: absolute;
     width: 100vw;
-    height: $slideContainerHeight;
+    // height: $slideContainerHeight;
     opacity: 0;
 
     &.active {
