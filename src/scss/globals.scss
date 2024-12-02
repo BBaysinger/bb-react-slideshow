@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @use "sass:map";
 
 // Breakpoints definition
@@ -43,7 +45,7 @@ $breakpoints: (
 // This is useful for mathematical operations on CSS values
 @function strip-unit($value) {
   // Divides the value by itself (multiplied by 0 plus 1) to effectively strip units
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, $value * 0 + 1);
 }
 
 // Mixin to create a fluid property based on viewport width
@@ -55,10 +57,10 @@ $breakpoints: (
 // }
 @mixin fluid-property($property, $min-vw, $max-vw, $min-value, $max-value) {
   // Extract units to ensure consistency for calculations
-  $unit-min-vw: unit($min-vw);
-  $unit-max-vw: unit($max-vw);
-  $unit-min-value: unit($min-value);
-  $unit-max-value: unit($max-value);
+  $unit-min-vw: math.unit($min-vw);
+  $unit-max-vw: math.unit($max-vw);
+  $unit-min-value: math.unit($min-value);
+  $unit-max-value: math.unit($max-value);
 
   // Ensure the viewport breakpoint units match
   @if $unit-min-vw != $unit-max-vw {
