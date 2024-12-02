@@ -220,8 +220,20 @@
         // background-position: 100% 0;
         // background-size: 35.3vw;
         background-position-y: 0;
-        @include globals.fluid-property(background-position-x, 360px, 1366px, 100%, 97.4%);
-        @include globals.fluid-property(background-size, 360px, 1366px, 200px, 433px);
+        @include globals.fluid-property(
+          background-position-x,
+          360px,
+          1366px,
+          100%,
+          97.4%
+        );
+        @include globals.fluid-property(
+          background-size,
+          360px,
+          1366px,
+          200px,
+          433px
+        );
       }
       &.previous {
         left: 0;
