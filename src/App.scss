@@ -9,6 +9,7 @@
   color: white;
   margin-top: 29.6vw;
   max-width: 100vw;
+  @include globals.fluid-property(margin-top, 360px, 1366px, 50px, 151px);
 
   .content-wrapper {
     transition: height 0.9s ease-out;
