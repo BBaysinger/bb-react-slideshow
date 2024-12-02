@@ -2,7 +2,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
-import StyleInjector from "utils/CSSVariableInjector";
+import CSSVariableInjector from "utils/CSSVariableInjector";
 
 import "./App.scss";
 
@@ -109,7 +109,7 @@ function App() {
     },
   ].map((slide) => ({
     ...slide,
-    content: StyleInjector.applyChildCSSVariables(slide.content),
+    content: CSSVariableInjector.applyChildCSSVariables(slide.content),
   }));
 
   return (
