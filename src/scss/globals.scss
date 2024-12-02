@@ -73,7 +73,9 @@ $breakpoints: (
   }
 
   // Apply the fluid property logic
-  #{$property}: $min-value;
+  & {
+    #{$property}: $min-value;
+  }
 
   @media screen and (min-width: $min-vw) {
     #{$property}: calc(
