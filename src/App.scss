@@ -13,10 +13,10 @@ $bpmax: 1366px;
   overflow-y: hidden;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #000 50%);
   @include globals.fluid-property(margin-top, $bpmin, $bpmax, 50px, 66px);
-  .overlay-wrapper-1,
-  .overlay-wrapper-2,
-  .content-wrapper,
-  .slide-wrapper {
+  .bb-overlay-wrapper-1,
+  .bb-overlay-wrapper-2,
+  .bb-content-wrapper,
+  .bb-slide-wrapper {
     @include globals.fluid-property(margin-top, $bpmin, $bpmax, 30px, 86px);
   }
 
