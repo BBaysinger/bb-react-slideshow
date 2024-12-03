@@ -3,7 +3,7 @@
  * one at a time.
  * Each image completes loading before the next load starts.
  * Default rel is 'prefetch' (passive) to let the browser
- * prioritize elements onscreen.
+ * prioritize onscreen elements.
  *
  * @author Bradley Baysinger
  * @since The beginning of time.

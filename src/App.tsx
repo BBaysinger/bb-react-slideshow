@@ -25,7 +25,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="cta"
+            className="bb-cta"
             target="_blank"
           >
             LEARN MORE
@@ -52,7 +52,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="cta"
+            className="bb-cta"
             target="_blank"
           >
             RICOS'S SHENANIGANS
