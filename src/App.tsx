@@ -47,8 +47,7 @@ function App() {
           <p>
             Rico may be the king of the couch, but when you walk in on his
             mid-afternoon lounging session, he suddenly pretends he's never seen
-            a bed before. His guilty-but-adorable
-            side-eye is&nbsp;unmatched.
+            a bed before. His guilty-but-adorable side-eye is&nbsp;unmatched.
           </p>
           <a
             href="https://www.playstation.com/"
@@ -72,9 +71,10 @@ function App() {
           <button>FROSTY FUN</button>
           <h2>SNOW CHOMP</h2>
           <p>
-            Rico takes winter adventures to the next level! Whether he's chomping 
-            on snow or leaving adorable paw prints behind, his enthusiasm for 
-            frosty fun is absolutely contagious. Don't miss his next snowy&nbsp;escapade!
+            Rico takes winter adventures to the next level! Whether he's
+            chomping on snow or leaving adorable paw prints behind, his
+            enthusiasm for frosty fun is absolutely contagious. Don't miss his
+            next snowy&nbsp;escapade!
           </p>
           <a
             href="https://www.playstation.com/"
@@ -98,8 +98,8 @@ function App() {
           <button>SKY-HIGH STYLE</button>
           <h2 className="">RICO TAKES FLIGHT</h2>
           <p>
-            Rico is on top of the world—literally! Whether it's a summer breeze or the
-            view from above, he’s the star of every outdoor adventure. 
+            Rico is on top of the world—literally! Whether it's a summer breeze
+            or the view from above, he’s the star of every outdoor adventure.
             Soak up the sunshine with this fearless flying&nbsp;Frenchie.
           </p>
           <a
@@ -124,9 +124,10 @@ function App() {
           <button>PARTY ANIMAL</button>
           <h2>BIRTHDAY BOY</h2>
           <p>
-            Rico's turning one, and he's ready to celebrate in style! With a cupcake 
-            in front of him and his bright yellow party hat, this pup knows how to 
-            steal the spotlight. Here's to the sweetest birthday&nbsp;ever!
+            Rico's turning one, and he's ready to celebrate in style! With a
+            cupcake in front of him and his bright yellow party hat, this pup
+            knows how to steal the spotlight. Here's to the sweetest
+            birthday&nbsp;ever!
           </p>
           <a
             href="https://www.playstation.com/"
@@ -150,9 +151,10 @@ function App() {
           <button>WALK & ROLL</button>
           <h2>RICO'S RECHARGE</h2>
           <p>
-            Nothing beats a sunny stroll for this happy pup! Rico's mid-walk breather, 
-            complete with closed eyes and a big panting grin, is pure summertime 
-            bliss. Leash up and join him for the ultimate doggy day&nbsp;out.
+            Nothing beats a sunny stroll for this happy pup! Rico's mid-walk
+            breather, complete with closed eyes and a big panting grin, is pure
+            summertime bliss. Leash up and join him for the ultimate doggy
+            day&nbsp;out.
           </p>
           <a
             href="https://www.playstation.com/"
