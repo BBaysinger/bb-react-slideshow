@@ -27,7 +27,7 @@ $bpmax: 1366px;
       position: absolute;
       padding-right: 28px;
       pointer-events: none;
-      @include globals.fluid-property(padding-top, $bpmin, $bpmax, 28px, 78px);
+      @include globals.fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
       @include globals.fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
       @include globals.fluid-property(min-height, $bpmin, $bpmax, 28px, 79px);
 
@@ -73,12 +73,12 @@ $bpmax: 1366px;
 
     h3 {
       margin-top: 0;
-      @include globals.fluid-property(min-width, $bpmin, $bpmax, 200px, 250px);
+      // @include globals.fluid-property(min-width, $bpmin, $bpmax, 200px, 250px);
       @include globals.fluid-property(
         margin-bottom,
         $bpmin,
         $bpmax,
-        50px,
+        84px,
         73px
       );
       @include globals.fluid-property(
@@ -88,7 +88,7 @@ $bpmax: 1366px;
         1.1em,
         1.05em
       );
-      @include globals.fluid-property(width, $bpmin, $bpmax, 45%, 30%);
+      @include globals.fluid-property(width, $bpmin, $bpmax, 47%, 30%);
       @include globals.fluid-property(
         letter-spacing,
         $bpmin,
@@ -114,21 +114,20 @@ $bpmax: 1366px;
         margin-bottom,
         $bpmin,
         $bpmax,
-        20px,
+        16px,
         14px
       );
     }
 
     p {
       margin-top: 0;
-      margin-bottom: 20px;
       font-size: 14px;
       font-weight: 500;
       @include globals.fluid-property(
         line-height,
         $bpmin,
         $bpmax,
-        1.4em,
+        1.5em,
         1.65em
       );
       @include globals.fluid-property(
@@ -143,7 +142,7 @@ $bpmax: 1366px;
         margin-bottom,
         $bpmin,
         $bpmax,
-        32px,
+        25px,
         32px
       );
     }
@@ -163,7 +162,7 @@ $bpmax: 1366px;
       @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 5px, 9px);
       @include globals.fluid-property(padding-left, $bpmin, $bpmax, 5px, 12px);
       @include globals.fluid-property(padding-right, $bpmin, $bpmax, 5px, 12px);
-      @include globals.fluid-property(margin-bottom, $bpmin, $bpmax, 9px, 9px);
+      @include globals.fluid-property(margin-bottom, $bpmin, $bpmax, 6px, 9px);
 
       &.bb-cta {
         background-color: #fff;
@@ -178,7 +177,7 @@ $bpmax: 1366px;
           margin-bottom,
           $bpmin,
           $bpmax,
-          9px,
+          19px,
           17px
         );
         @include globals.fluid-property(

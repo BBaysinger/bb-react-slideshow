@@ -22,7 +22,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
   nextLabel = "Next >",
   resumeLabel = "Restart",
   pauseLabel = "Pause",
-  transitionResetDelay = 2000, // Delay for removing 'previous' class
+  transitionResetDelay = 1500, // Delay for removing 'previous' class
 }) => {
   const isFirstRender = useRef(true);
   const stableSlides = useMemo(() => slides, [slides]);
