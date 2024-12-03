@@ -327,7 +327,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
               key={index}
               className={`${styles.slide} ${
                 index === currentIndex ? styles.active : ""
-              }`}
+              } bb-slide-${index + 1} bb-slide`}
               style={{
                 backgroundImage: `url(${slide.background})`,
               }}

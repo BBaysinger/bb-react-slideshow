@@ -217,19 +217,26 @@ $bpmax: 1366px;
     display: none;
   }
 
-  .bb-slide-wrapper {
-    background-color: #000;
-  }
-
   .bb-slide-wrapper,
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2 {
     @include globals.fluid-property(height, $bpmin, $bpmax, 225px, 767px);
   }
 
+  .bb-slide-wrapper {
+    background-color: #000;
+    .bb-slide-5 {
+      @include globals.fluid-property(background-position-x, $bpmin, $bpmax, 50px, 0px);
+    }
+  }
+
   .bb-overlay-wrapper-1 {
     $offset: -6.05vw;
+    .bb-overlay {
+      display: none;
+    }
     .bb-overlay-1-1 {
+      display: block !important;
       height: 100vw;
       background-image: url("/assets/images/1-foreground.png");
       background-repeat: no-repeat;
