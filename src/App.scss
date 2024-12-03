@@ -27,6 +27,9 @@ $bpmax: 1366px;
       position: absolute;
       padding-right: 28px;
       pointer-events: none;
+      visibility: hidden;
+      will-change: visibility;
+      transition: visibility 0.3s; /* Avoids flicker */
       @include globals.fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
       @include globals.fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
       @include globals.fluid-property(min-height, $bpmin, $bpmax, 28px, 79px);
@@ -45,6 +48,7 @@ $bpmax: 1366px;
       }
 
       &.bb-active {
+        visibility: visible;
         pointer-events: all;
         > * > * {
           will-change: opacity, transform;
@@ -55,6 +59,7 @@ $bpmax: 1366px;
       }
 
       &.bb-previous {
+        visibility: visible;
         > * > * {
           will-change: opacity, transform;
           transform: translateY(10vw);
@@ -73,7 +78,7 @@ $bpmax: 1366px;
 
     h3 {
       margin-top: 0;
-      // @include globals.fluid-property(min-width, $bpmin, $bpmax, 200px, 250px);
+      @include globals.fluid-property(width, $bpmin, $bpmax, 47%, 52%);
       @include globals.fluid-property(
         margin-bottom,
         $bpmin,
@@ -88,7 +93,6 @@ $bpmax: 1366px;
         1.1em,
         1.05em
       );
-      @include globals.fluid-property(width, $bpmin, $bpmax, 47%, 30%);
       @include globals.fluid-property(
         letter-spacing,
         $bpmin,
@@ -178,7 +182,7 @@ $bpmax: 1366px;
           $bpmin,
           $bpmax,
           19px,
-          17px
+          0px
         );
         @include globals.fluid-property(
           padding-top,
@@ -230,7 +234,7 @@ $bpmax: 1366px;
         $bpmin,
         $bpmax,
         50px,
-        0px
+        100px
       );
     }
     .bb-slide-3 {
@@ -239,7 +243,7 @@ $bpmax: 1366px;
         $bpmin,
         $bpmax,
         50px,
-        0px
+        100px
       );
     }
     .bb-slide-4 {
@@ -248,7 +252,7 @@ $bpmax: 1366px;
         $bpmin,
         $bpmax,
         60px,
-        0px
+        200px
       );
     }
     .bb-slide-5 {
