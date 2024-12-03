@@ -159,11 +159,11 @@ $bpmax: 1366px;
       border-radius: 50px;
       text-align: center;
       letter-spacing: 0.045em;
-      @include globals.fluid-property(margin-bottom, $bpmin, $bpmax, 9px, 9px);
-      @include globals.fluid-property(padding-top, $bpmin, $bpmax, 5px, 9px);
+      @include globals.fluid-property(padding-top, $bpmin, $bpmax, 6px, 10px);
       @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 5px, 9px);
       @include globals.fluid-property(padding-left, $bpmin, $bpmax, 5px, 12px);
       @include globals.fluid-property(padding-right, $bpmin, $bpmax, 5px, 12px);
+      @include globals.fluid-property(margin-bottom, $bpmin, $bpmax, 9px, 9px);
 
       &.bb-cta {
         background-color: #fff;
@@ -230,11 +230,11 @@ $bpmax: 1366px;
       background-image: url("/assets/images/1-foreground.png");
       background-repeat: no-repeat;
       margin-top: $offset;
-      left: 50vw;
+      transform: translateX(50vw);
       background-position: 100% 0;
       transition:
         opacity 1s linear,
-        left 1s ease-out;
+        transform 1s ease-out;
       @include globals.fluid-property(
         background-size,
         $bpmin,
@@ -243,28 +243,18 @@ $bpmax: 1366px;
         433px
       );
       &.bb-active {
-        left: -14.45vw;
+        transform: translateX(-14.45vw);
         opacity: 1;
-      }
-      &.bb-previous {
-        left: 0;
-        opacity: 0;
-        transition:
-          opacity 0.5s linear,
-          left 0.5s ease-out;
       }
     }
   }
 
   .bb-overlay-wrapper-2 {
-    // height: 62vw;
-
     // From SPS. Changed to #000 to overlap the BG seamlessly.
     // to left,
     // rgba(37, 45, 55, 0) 40%,
     // #000000 72.92%,
     // #09101a 100%
-
     background: linear-gradient(
         to left,
         rgba(0, 0, 0, 0) 40%,
