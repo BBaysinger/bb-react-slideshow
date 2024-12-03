@@ -180,7 +180,7 @@ function App() {
             <Slideshow
               slides={slides}
               basePath="/rico-slideshow"
-              initialAutoSlide={false}
+              initialAutoSlide={true}
             />
           }
         />

@@ -226,16 +226,40 @@ $bpmax: 1366px;
   .bb-slide-wrapper {
     background-color: #000;
     .bb-slide-1 {
-      @include globals.fluid-property(background-position-x, $bpmin, $bpmax, 50px, 0px);
+      @include globals.fluid-property(
+        background-position-x,
+        $bpmin,
+        $bpmax,
+        50px,
+        0px
+      );
     }
     .bb-slide-3 {
-      @include globals.fluid-property(background-position-x, $bpmin, $bpmax, 50px, 0px);
+      @include globals.fluid-property(
+        background-position-x,
+        $bpmin,
+        $bpmax,
+        50px,
+        0px
+      );
     }
     .bb-slide-4 {
-      @include globals.fluid-property(background-position-x, $bpmin, $bpmax, 60px, 0px);
+      @include globals.fluid-property(
+        background-position-x,
+        $bpmin,
+        $bpmax,
+        60px,
+        0px
+      );
     }
     .bb-slide-5 {
-      @include globals.fluid-property(background-position-x, $bpmin, $bpmax, 20px, 0px);
+      @include globals.fluid-property(
+        background-position-x,
+        $bpmin,
+        $bpmax,
+        20px,
+        0px
+      );
     }
   }
 
