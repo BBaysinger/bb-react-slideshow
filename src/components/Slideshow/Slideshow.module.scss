@@ -3,11 +3,8 @@
 /**
 * This should all be overridable defaults. Just the bare minimum
 * to make it seem like a slideshow out of the box.
-* TODO: Evaluate if everything is a good default, overridable,
-* and if this is best approach.
+* TODO: Evaluate what are good, overridable defaults.
 */
-
-// $slideContainerHeight: 60vw;
 
 .bbaysingerSlideshow {
   position: relative;
@@ -17,7 +14,6 @@
   position: absolute;
   width: 100vw;
   overflow: hidden;
-  // height: $slideContainerHeight;
   z-index: 0;
 
   .slide {
@@ -47,11 +43,9 @@
 .contentWrapper {
   position: relative;
   top: 0;
-  // min-height: $slideContainerHeight;
 
   .content {
     position: relative;
-    // opacity: 0;
     transition: top 400ms ease;
 
     &.active {
@@ -64,15 +58,6 @@
   position: relative;
 }
 
-// .arrowButtonWrapper {
-//   display: flex;
-//   justify-content: center;
-//   bottom: 0;
-//   button {
-//     cursor: pointer;
-//   }
-// }
-
 .visuallyHidden {
   display: none;
 }
@@ -81,14 +66,12 @@
 .overlayWrapper2 {
   position: absolute;
   pointer-events: none;
-  // height: $slideContainerHeight;
   width: 100vw;
   top: 0;
 
   .overlay {
     position: absolute;
     width: 100vw;
-    // height: $slideContainerHeight;
     opacity: 0;
 
     &.active {
