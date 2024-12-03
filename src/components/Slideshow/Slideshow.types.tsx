@@ -23,7 +23,7 @@ interface SlideshowProps {
   nextLabel?: string;
   resumeLabel?: string;
   pauseLabel?: string;
-  resetDelay?: number;
+  transitionResetDelay?: number;
   manipulateContent?: (
     content: React.ReactNode,
     isActive: boolean,

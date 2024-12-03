@@ -10,7 +10,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SlideshowProps } from "./Slideshow.types";
 import ImagePreloader from "utils/ImagePreloader";
 import styles from "./Slideshow.module.scss";
-import useTimer from "utils/useTimer";
 
 const Slideshow: React.FC<SlideshowProps> = ({
   slides,
@@ -23,10 +22,11 @@ const Slideshow: React.FC<SlideshowProps> = ({
   nextLabel = "Next >",
   resumeLabel = "Restart",
   pauseLabel = "Pause",
-  resetDelay = 500, // Delay for removing 'previous' class
+  transitionResetDelay = 2000, // Delay for removing 'previous' class
 }) => {
   const isFirstRender = useRef(true);
   const stableSlides = useMemo(() => slides, [slides]);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   if (enableRouting && !basePath) {
     console.error("'basePath' is required when routing is enabled.");
@@ -49,7 +49,30 @@ const Slideshow: React.FC<SlideshowProps> = ({
     : -1;
 
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
+  const [previousIndex, setPreviousIndex] = useState<number>(-1);
   const currentIndexRef = useRef<number>(currentIndex);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (currentIndex !== -1) {
+      setPreviousIndex(currentIndexRef.current);
+      setIsTransitioning(true);
+
+      timer = setTimeout(() => {
+        setIsTransitioning(false);
+      }, transitionResetDelay);
+    }
+
+    currentIndexRef.current = currentIndex;
+
+    return () => {
+      if (timer) {
+        console.log('clearTimeout');
+        clearTimeout(timer);
+      }
+    };
+  }, [currentIndex]);
 
   const [divHeight, setDivHeight] = useState<string>("unset");
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Array of refs
@@ -89,17 +112,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
       preloaderRan.current = true;
     }
   }, [slides]);
-
-  useEffect(() => {
-    setPreviousIndex(currentIndexRef.current);
-    currentIndexRef.current = currentIndex;
-  }, [currentIndex]);
-
-  const [previousIndex, setPreviousIndex] = useState<number | null>(null);
-
-  const { reset: resetPreviousIndexTimer } = useTimer(resetDelay, () => {
-    setPreviousIndex(null);
-  });
 
   const [currentSlug, setCurrentSlug] = useState(
     stableSlides[currentIndex]?.slug || "",
@@ -213,8 +225,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
   const handleUserInteraction = useCallback(
     (newIndex: number) => {
-      setPreviousIndex(currentIndex);
-      resetPreviousIndexTimer();
+      console.log("handleUserInteraction");
+
       setCurrentIndex(newIndex);
       if (enableRouting) {
         const route = `${basePath}/${stableSlides[newIndex].slug}`;
@@ -230,7 +242,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
     },
     [
       currentIndex,
-      resetPreviousIndexTimer,
       restartDelay,
       restartTimer,
       clearTimer,
@@ -274,7 +285,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      console.log("removeEventListener");
       clearTimerRef.current();
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -292,21 +302,26 @@ const Slideshow: React.FC<SlideshowProps> = ({
   return (
     <>
       <div
+        className="bb-debug"
         style={{
           color: "#000",
-          zIndex: 100,
+          zIndex: 1000,
           position: "absolute",
-          display: "none",
+          top: 0,
+          // display: "none",
         }}
-      >{`${previousIndex} ${currentIndex}`}</div>
+      >{`curr: ${currentIndex} prev: ${previousIndex} transitioning: ${isTransitioning}`}</div>
 
       <div
-        className={`${styles.bbaysingerSlideshow} bbaysinger-slideshow slideshow-slide-${currentSlug}`}
+        className={`${styles.slideshowWrapper} bb-slideshow bb-slideshow-slide-${currentSlug} ${
+          isTransitioning ? styles.disableUI + " bb-disable-ui" : ""
+        }`}
         aria-roledescription="carousel"
         aria-label="Slideshow"
         aria-live="polite"
+        aria-busy={isTransitioning}
       >
-        <div className={`${styles.slideWrapper} slide-wrapper`}>
+        <div className={`${styles.slideWrapper} bb-slide-wrapper`}>
           {stableSlides.map((slide, index) => (
             <div
               tabIndex={index === currentIndex ? 0 : -1}
@@ -328,40 +343,38 @@ const Slideshow: React.FC<SlideshowProps> = ({
         </div>
 
         <div
-          className={`${styles.overlayWrapper1} overlay-wrapper overlay-wrapper-1`}
+          className={`${styles.overlayWrapper1} bb-overlay-wrapper bb-overlay-wrapper-1`}
         >
           {stableSlides.map((_, index) => (
             <div
               key={index}
               className={`
-                overlay-1-${index + 1} 
+                bb-overlay-1-${index + 1} 
                 ${styles.overlay} 
-                overlay 
-                ${index === currentIndex ? `${styles.active} active` : ""} 
-                ${index === previousIndex ? `${styles.previous} previous` : ""}
+                bb-overlay 
+                ${index === currentIndex ? `${styles.active} bb-active` : ""} 
+                ${index === previousIndex && isTransitioning ? ` bb-previous` : ""}
               `}
             ></div>
           ))}
         </div>
         <div
-          className={`${styles.overlayWrapper2} overlay-wrapper overlay-wrapper-2`}
+          className={`${styles.overlayWrapper2} bb-overlay-wrapper bb-overlay-wrapper-2`}
         >
-          {/* TODO: Consider populating overlay wrappers as needed
-          from props/configuration. */}
         </div>
 
         <div
           style={{ height: divHeight }}
-          className={`${styles.contentWrapper} content-wrapper`}
+          className={`${styles.contentWrapper} bb-content-wrapper`}
         >
           {stableSlides.map((_, index) => (
             <div
               key={index}
               ref={(el) => (slideRefs.current[index] = el)}
-              className={`${styles.content} content ${
-                index === currentIndex ? styles.active + " active " : ""
+              className={`${styles.content} bb-content ${
+                index === currentIndex ? styles.active + " bb-active " : ""
               } ${
-                index === previousIndex ? styles.previous + " previous" : ""
+                index === previousIndex ? styles.previous + " bb-previous" : ""
               }`}
             >
               {stableSlides[index].content}
@@ -369,7 +382,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
           ))}
         </div>
 
-        <div className={`${styles.arrowButtonWrapper} arrow-button-wrapper`}>
+        <div className={`${styles.arrowButtonWrapper} bb-arrow-button-wrapper`}>
           {previousLabel && (
             <button
               onClick={handlePrevUserTriggered}
@@ -397,7 +410,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         </div>
 
         <div
-          className={`${styles.thumbnailButtonWrapper} thumbnail-button-wrapper`}
+          className={`${styles.thumbnailButtonWrapper} bb-thumbnail-button-wrapper`}
           role="tablist"
         >
           {stableSlides.map((_, index) => (
@@ -406,8 +419,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
               ref={(el) => (thumbnailRefs.current[index] = el!)}
               onClick={() => handleUserInteraction(index)}
               className={`${styles.thumbnail} ${
-                index === currentIndex ? `${styles.active} active` : ""
-              } thumbnail`}
+                index === currentIndex ? `${styles.active} bb-active` : ""
+              } bb-thumbnail`}
               role="tab"
               aria-selected={index === currentIndex}
               aria-controls={`slide-${index}`}
@@ -421,12 +434,12 @@ const Slideshow: React.FC<SlideshowProps> = ({
                   }
                 />
               ) : (
-                <span className="visually-hidden">{`Slide ${index + 1}`}</span>
+                <span className="bb-visually-hidden">{`Slide ${index + 1}`}</span>
               )}
             </button>
           ))}
         </div>
-        <p className={`${styles.visuallyHidden} visually-hidden`}>
+        <p className={`${styles.visuallyHidden} bb-visually-hidden`}>
           Use the left and right arrow keys to navigate the slideshow.
         </p>
       </div>

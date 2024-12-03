@@ -6,8 +6,17 @@
 * TODO: Evaluate what are good, overridable defaults.
 */
 
-.bbaysingerSlideshow {
+.slideshowWrapper {
   position: relative;
+  &.disableUI {
+    .arrowButtonWrapper,
+    .thumbnailButtonWrapper {
+      button {
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
 
 .slideWrapper {
