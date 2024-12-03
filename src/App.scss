@@ -11,7 +11,7 @@ $bpmax: 1366px;
   color: white;
   max-width: 100vw;
   overflow-y: hidden;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #000 50%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 25%, #000 25%);
   @include globals.fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2,
@@ -224,7 +224,7 @@ $bpmax: 1366px;
   .bb-slide-wrapper,
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2 {
-    @include globals.fluid-property(height, $bpmin, $bpmax, 300px, 767px);
+    @include globals.fluid-property(height, $bpmin, $bpmax, 225px, 767px);
   }
 
   .bb-overlay-wrapper-1 {
@@ -271,7 +271,7 @@ $bpmax: 1366px;
         #000 72.92%,
         #000 100%
       ),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, #000000 94%);
+      linear-gradient(to bottom, rgba(0, 0, 0, 0) 65%, #000000 90%);
   }
 
   .bb-thumbnail-button-wrapper {
@@ -329,6 +329,7 @@ $bpmax: 1366px;
       &.bb-active {
         background-image: url("@/assets/images/border.svg");
         opacity: 1;
+        cursor: not-allowed;
         @include globals.breakpoint-up(lg) {
           width: 20%;
           top: 0;
