@@ -68,7 +68,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
     return () => {
       if (timer) {
-        console.log('clearTimeout');
+        console.log("clearTimeout");
         clearTimeout(timer);
       }
     };
@@ -143,7 +143,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
     (immediateSlide = false) => {
       clearTimer();
       setIsPaused(false);
-      // TODO: Is this the appropriate condition?
       if (initialAutoSlide) {
         if (immediateSlide) {
           setCurrentIndex((prevIndex) => (prevIndex + 1) % stableSlides.length);
@@ -360,8 +359,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         </div>
         <div
           className={`${styles.overlayWrapper2} bb-overlay-wrapper bb-overlay-wrapper-2`}
-        >
-        </div>
+        ></div>
 
         <div
           style={{ height: divHeight }}
@@ -372,10 +370,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
               key={index}
               ref={(el) => (slideRefs.current[index] = el)}
               className={`${styles.content} bb-content ${
-                index === currentIndex ? styles.active + " bb-active " : ""
-              } ${
-                index === previousIndex ? styles.previous + " bb-previous" : ""
-              }`}
+                index === currentIndex ? styles.active + " bb-active" : ""
+              } ${index === previousIndex ? " bb-previous" : ""}`}
             >
               {stableSlides[index].content}
             </div>
