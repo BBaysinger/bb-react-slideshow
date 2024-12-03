@@ -88,3 +88,22 @@ $breakpoints: (
     #{$property}: $max-value;
   }
 }
+
+// Untested, but it's supposed to work on transform properties...
+@mixin fluid-transform($min-vw, $max-vw, $min-transform, $max-transform) {
+  @media screen and (max-width: $min-vw) {
+    transform: $min-transform;
+  }
+
+  @media screen and (min-width: $min-vw) and (max-width: $max-vw) {
+    transform: calc(
+      #{$min-transform} + (#{$max-transform - $min-transform}) * ((
+              100vw - #{$min-vw}
+            ) / (#{$max-vw - $min-vw}))
+    );
+  }
+
+  @media screen and (min-width: $max-vw) {
+    transform: $max-transform;
+  }
+}

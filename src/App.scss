@@ -12,7 +12,7 @@ $bpmax: 1366px;
   max-width: 100vw;
   overflow-y: hidden;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #000 50%);
-  @include globals.fluid-property(margin-top, $bpmin, $bpmax, 50px, 66px);
+  @include globals.fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2,
   .bb-content-wrapper,
@@ -213,37 +213,47 @@ $bpmax: 1366px;
     }
   }
 
-  .bb-slide-wrapper {
-    background-color: #000;
-    @include globals.fluid-property(height, $bpmin, $bpmax, 500px, 767px);
-  }
-
   .bb-arrow-button-wrapper {
     display: none;
   }
 
+  .bb-slide-wrapper {
+    background-color: #000;
+  }
+
+  .bb-slide-wrapper,
+  .bb-overlay-wrapper-1,
+  .bb-overlay-wrapper-2 {
+    @include globals.fluid-property(height, $bpmin, $bpmax, 300px, 767px);
+  }
+
   .bb-overlay-wrapper-1 {
     $offset: -6.05vw;
-    @include globals.fluid-property(height, $bpmin, $bpmax, 500px, 767px);
     .bb-overlay-1-1 {
-      height: calc(100vw);
+      height: 100vw;
       background-image: url("/assets/images/1-foreground.png");
       background-repeat: no-repeat;
       margin-top: $offset;
       transform: translateX(50vw);
-      background-position: 100% 0;
       transition:
         opacity 1s linear,
         transform 1s ease-out;
       @include globals.fluid-property(
+        background-position-x,
+        $bpmin,
+        $bpmax,
+        103%,
+        100%
+      );
+      @include globals.fluid-property(
         background-size,
         $bpmin,
         $bpmax,
-        200px,
+        127px,
         433px
       );
       &.bb-active {
-        transform: translateX(-14.45vw);
+        transform: translateX(-16.1vw);
         opacity: 1;
       }
     }
@@ -262,7 +272,6 @@ $bpmax: 1366px;
         #000 100%
       ),
       linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, #000000 94%);
-    @include globals.fluid-property(height, $bpmin, $bpmax, 500px, 767px);
   }
 
   .bb-thumbnail-button-wrapper {
