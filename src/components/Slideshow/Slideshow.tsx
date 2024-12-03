@@ -307,7 +307,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
           zIndex: 1000,
           position: "absolute",
           top: 0,
-          // display: "none",
+          display: "none",
         }}
       >{`curr: ${currentIndex} prev: ${previousIndex} transitioning: ${isTransitioning}`}</div>
 
