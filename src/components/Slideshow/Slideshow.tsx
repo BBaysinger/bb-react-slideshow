@@ -68,7 +68,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
     return () => {
       if (timer) {
-        console.log("clearTimeout");
         clearTimeout(timer);
       }
     };
@@ -177,7 +176,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
   ]);
 
   useEffect(() => {
-    const delay = 1000;
+    const delay = 0;
     if (!isPausedRef.current) {
       if (enableRouting) {
         if (isFirstRender.current) {
@@ -199,7 +198,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
           }, delay);
         }
       }
-      if (!isFirstRender.current || initialAutoSlide) {
+      if (isFirstRender.current && initialAutoSlide) {
         startAutoSlide();
       }
     }
@@ -224,8 +223,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
   const handleUserInteraction = useCallback(
     (newIndex: number) => {
-      console.log("handleUserInteraction");
-
       setCurrentIndex(newIndex);
       if (enableRouting) {
         const route = `${basePath}/${stableSlides[newIndex].slug}`;
@@ -233,7 +230,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
       }
       clearTimer();
 
-      if (restartDelay > 0 && !isPausedRef.current) {
+      if (restartDelay > -1 && !isPausedRef.current) {
         timerRef.current = setTimeout(() => {
           restartTimer();
         }, restartDelay);
