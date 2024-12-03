@@ -42,7 +42,7 @@ function App() {
       content: (
         <div>
           <h3>CAUGHT IN THE&nbsp;ACT…</h3>
-          <button>Bashful Bulldog Blues</button>
+          <button>BASHFUL BULLDOG</button>
           <h2>RICO NAPS</h2>
           <p>
             Rico may be the king of the couch, but when you walk in on his
