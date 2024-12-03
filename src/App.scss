@@ -39,7 +39,9 @@ $bpmax: 1366px;
         transition:
           opacity 0.4s linear,
           transform 1s ease-out;
-        transition-delay: 0s;
+        transition-delay: calc(
+          (var(--numChildren) - var(--childIndex) - 1) * 0.08s
+        );
       }
 
       &.bb-active {
@@ -48,7 +50,7 @@ $bpmax: 1366px;
           will-change: opacity, transform;
           transform: translateY(0);
           opacity: 1;
-          transition-delay: calc(var(--childIndex) * 0.2s + 0.1s);
+          transition-delay: calc(var(--childIndex) * 0.2s + 0.1s) !important;
         }
       }
 
@@ -56,12 +58,10 @@ $bpmax: 1366px;
         > * > * {
           will-change: opacity, transform;
           transform: translateY(10vw);
+          opacity: 0;
           transition:
             opacity 0.4s linear,
             transform 0.4s ease-out;
-          transition-delay: calc(
-            (var(--numChildren) - var(--childIndex) - 1) * 0.1s
-          );
         }
       }
     }
