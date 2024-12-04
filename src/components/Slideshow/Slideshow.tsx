@@ -306,12 +306,20 @@ const Slideshow: React.FC<SlideshowProps> = ({
           top: 0,
           display: "none",
         }}
-      >{`curr: ${currentIndex} prev: ${previousIndex} transitioning: ${isTransitioning}`}</div>
-
+      >
+        {`
+          curr: ${currentIndex}
+          prev: ${previousIndex}
+          transitioning: ${isTransitioning}
+        `}
+      </div>
       <div
-        className={`${styles.slideshowWrapper} bb-slideshow bb-slideshow-slide-${currentSlug} ${
-          isTransitioning ? styles.disableUI + " bb-disable-ui" : ""
-        }`}
+        className={`
+          ${styles.slideshowWrapper} 
+          bb-slideshow 
+          bb-slideshow-slide-${currentSlug} 
+          ${isTransitioning ? `${styles.disableUI} bb-disable-ui` : ""}
+        `}
         aria-roledescription="carousel"
         aria-label="Slideshow"
         aria-live="polite"
