@@ -97,9 +97,8 @@ $breakpoints: (
 
   @media screen and (min-width: $min-vw) and (max-width: $max-vw) {
     transform: calc(
-      #{$min-transform} + (#{$max-transform - $min-transform}) * ((
-              100vw - #{$min-vw}
-            ) / (#{$max-vw - $min-vw}))
+      #{$min-transform} + (#{$max-transform - $min-transform}) *
+        ((100vw - #{$min-vw}) / (#{$max-vw - $min-vw}))
     );
   }
 
