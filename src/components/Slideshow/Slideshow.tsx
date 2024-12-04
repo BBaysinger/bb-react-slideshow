@@ -74,7 +74,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
   }, [currentIndex]);
 
   const [divHeight, setDivHeight] = useState<string>("unset");
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Array of refs
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const updateHeight = () => {
