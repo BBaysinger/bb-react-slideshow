@@ -7,11 +7,14 @@ import CSSVariableInjector from "utils/CSSVariableInjector";
 import "./App.scss";
 
 function App() {
+  const basePath =
+    process.env.NODE_ENV === "production" ? "/bb-react-slideshow" : "";
+
   const slides: Slide[] = [
     {
       slug: "one",
-      background: "/assets/images/1-background.jpg",
-      thumbnail: "/assets/images/1-thumbnail.jpg",
+      background: `${basePath}/assets/images/1-background.jpg`,
+      thumbnail: `${basePath}/assets/images/1-thumbnail.jpg`,
       desc: "",
       alt: "Rico the dog",
       content: (
@@ -35,8 +38,8 @@ function App() {
     },
     {
       slug: "two",
-      background: "/assets/images/2-background.jpg",
-      thumbnail: "/assets/images/2-thumbnail.jpg",
+      background: `${basePath}/assets/images/2-background.jpg`,
+      thumbnail: `${basePath}/assets/images/2-thumbnail.jpg`,
       desc: "",
       alt: "Rico napping",
       content: (
@@ -61,8 +64,8 @@ function App() {
     },
     {
       slug: "three",
-      background: "/assets/images/3-background.jpg",
-      thumbnail: "/assets/images/3-thumbnail.jpg",
+      background: `${basePath}/assets/images/3-background.jpg`,
+      thumbnail: `${basePath}/assets/images/3-thumbnail.jpg`,
       desc: "",
       alt: "Rico in the snow",
       content: (
@@ -88,8 +91,8 @@ function App() {
     },
     {
       slug: "four",
-      background: "/assets/images/4-background.jpg",
-      thumbnail: "/assets/images/4-thumbnail.jpg",
+      background: `${basePath}/assets/images/4-background.jpg`,
+      thumbnail: `${basePath}/assets/images/4-thumbnail.jpg`,
       desc: "",
       alt: "Rico flying",
       content: (
@@ -114,8 +117,8 @@ function App() {
     },
     {
       slug: "five",
-      background: "/assets/images/5-background.jpg",
-      thumbnail: "/assets/images/5-thumbnail.jpg",
+      background: `${basePath}/assets/images/5-background.jpg`,
+      thumbnail: `${basePath}/assets/images/5-thumbnail.jpg`,
       desc: "",
       alt: "Rico's birthday",
       content: (
@@ -141,8 +144,8 @@ function App() {
     },
     {
       slug: "six",
-      background: "/assets/images/6-background.jpg",
-      thumbnail: "/assets/images/6-thumbnail.jpg",
+      background: `${basePath}/assets/images/6-background.jpg`,
+      thumbnail: `${basePath}/assets/images/6-thumbnail.jpg`,
       desc: "",
       alt: "Rico in the sun",
       content: (
@@ -175,18 +178,23 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="rico-slideshow/:slug"
+          path={`${basePath}/rico-slideshow/:slug`}
           element={
             <Slideshow
               slides={slides}
-              basePath="/rico-slideshow"
+              basePath={`${basePath}/rico-slideshow`}
               initialAutoSlide={true}
             />
           }
         />
         <Route
-          path="second-slideshow/:slug"
-          element={<Slideshow slides={slides} basePath="/second-slideshow" />}
+          path={`${basePath}/second-slideshow/:slug`}
+          element={
+            <Slideshow
+              slides={slides}
+              basePath={`${basePath}/rico-slideshow`}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
