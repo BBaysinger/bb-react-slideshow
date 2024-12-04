@@ -8,7 +8,9 @@ import "./App.scss";
 
 function App() {
   const basePath =
-    process.env.NODE_ENV === "production" ? "/bb-react-slideshow" : "";
+    process.env.NODE_ENV === "production"
+      ? import.meta.env.VITE_PROD_BASE_URL
+      : import.meta.env.VITE_DEV_BASE_URL;
 
   const slides: Slide[] = [
     {
