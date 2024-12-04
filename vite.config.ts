@@ -2,23 +2,27 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
-  resolve: {
-    alias: {
-      "@": "/src", // Set up an alias
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: "modern-compiler", // or "modern"
+export default defineConfig(({ command }) => {
+  const isProduction = command === "build";
+
+  return {
+    base: isProduction ? "/bb-react-slideshow/" : "/",
+    plugins: [react(), tsconfigPaths()],
+    resolve: {
+      alias: {
+        "@": "/src",
       },
     },
-  },
-  build: {
-    outDir: "dist", // The output directory
-    emptyOutDir: true, // Clears the output directory before each build
-  },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: "modern-compiler",
+        },
+      },
+    },
+    build: {
+      outDir: "dist",
+      emptyOutDir: true,
+    },
+  };
 });
