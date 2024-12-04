@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://bbaysinger.github.io/bb-react-slideshow/rico-slideshow/one",
   "scripts": {
     "dev": "vite",
     "deploy": "vite build",
