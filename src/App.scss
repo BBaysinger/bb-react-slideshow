@@ -129,7 +129,7 @@ $bpmax: 1366px;
       margin-top: 0;
       font-size: 14px;
       font-weight: 500;
-      max-width: 87vw;
+      max-width: 83vw;
       @include globals.fluid-property(
         line-height,
         $bpmin,
@@ -322,7 +322,7 @@ $bpmax: 1366px;
     @include globals.fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
     @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
     @include globals.fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
-    @include globals.fluid-property(margin-right, $bpmin, $bpmax, 22px, 0px);
+    @include globals.fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
 
     @include globals.breakpoint-up(xs) {
       grid-template-columns: repeat(3, 1fr);
@@ -334,7 +334,6 @@ $bpmax: 1366px;
       align-items: flex-end;
       gap: 26px;
     }
-
 
     button.bb-thumbnail {
       cursor: pointer;
