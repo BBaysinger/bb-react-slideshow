@@ -11,7 +11,7 @@ $bpmax: 1366px;
   color: white;
   max-width: 100vw;
   overflow-y: hidden;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 25%, #000 25%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, #000 15%);
   @include globals.fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2,
@@ -22,7 +22,7 @@ $bpmax: 1366px;
 
   .bb-content-wrapper {
     transition: height 0.9s ease-out;
-    @include globals.fluid-property(min-height, $bpmin, $bpmax, 400px, 506px);
+    @include globals.fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
     .bb-content {
       position: absolute;
       padding-right: 28px;
@@ -30,9 +30,10 @@ $bpmax: 1366px;
       visibility: hidden;
       will-change: visibility;
       transition: visibility 0.3s; /* Avoids flicker */
+      // @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 10px, 0px);
       @include globals.fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
       @include globals.fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
-      @include globals.fluid-property(min-height, $bpmin, $bpmax, 28px, 79px);
+      // @include globals.fluid-property(min-height, $bpmin, $bpmax, 28px, 79px);
 
       > * > * {
         position: relative;
@@ -106,6 +107,7 @@ $bpmax: 1366px;
     h2 {
       font-weight: 900;
       margin-top: 0;
+      max-width: 87vw;
       @include globals.fluid-property(
         letter-spacing,
         $bpmin,
@@ -127,6 +129,7 @@ $bpmax: 1366px;
       margin-top: 0;
       font-size: 14px;
       font-weight: 500;
+      max-width: 87vw;
       @include globals.fluid-property(
         line-height,
         $bpmin,
@@ -177,13 +180,7 @@ $bpmax: 1366px;
         letter-spacing: 0.045em;
         display: inline-block;
         cursor: pointer;
-        @include globals.fluid-property(
-          margin-bottom,
-          $bpmin,
-          $bpmax,
-          19px,
-          0px
-        );
+        margin-bottom: 25px;
         @include globals.fluid-property(
           padding-top,
           $bpmin,
@@ -322,9 +319,14 @@ $bpmax: 1366px;
     grid-template-columns: repeat(2, 1fr);
     gap: 2vw;
 
+    @include globals.fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
+    @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
+    @include globals.fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
+    @include globals.fluid-property(margin-right, $bpmin, $bpmax, 22px, 0px);
+
     @include globals.breakpoint-up(xs) {
       grid-template-columns: repeat(3, 1fr);
-      gap: 1vw;
+      @include globals.fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
     }
 
     @include globals.breakpoint-up(lg) {
@@ -333,10 +335,6 @@ $bpmax: 1366px;
       gap: 26px;
     }
 
-    @include globals.fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
-    @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 10px, 51px);
-    @include globals.fluid-property(margin-left, $bpmin, $bpmax, 12px, 88px);
-    @include globals.fluid-property(margin-right, $bpmin, $bpmax, 12px, 0px);
 
     button.bb-thumbnail {
       cursor: pointer;
@@ -372,7 +370,7 @@ $bpmax: 1366px;
       &.bb-active {
         background-image: url("@/assets/images/border.svg");
         opacity: 1;
-        cursor: not-allowed;
+        cursor: default;
         @include globals.breakpoint-up(lg) {
           width: 20%;
           top: 0;
