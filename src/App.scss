@@ -53,7 +53,7 @@ $bpmax: 1366px;
           will-change: opacity, transform;
           transform: translateY(0);
           opacity: 1;
-          transition-delay: calc(var(--childIndex) * 0.2s + 0.1s) !important;
+          transition-delay: calc(var(--childIndex) * 0.2s + 0.1s);
         }
       }
 
@@ -267,7 +267,7 @@ $bpmax: 1366px;
       display: none;
     }
     .bb-overlay-1-1 {
-      display: block !important;
+      display: block;
       height: 100vw;
       background-image: url("/assets/images/1-foreground.png");
       background-repeat: no-repeat;
@@ -351,6 +351,7 @@ $bpmax: 1366px;
       justify-content: center;
       align-items: center;
       justify-self: center;
+      transition: transform 0.3s ease-out;
 
       @include globals.breakpoint-up(xs) {
         min-width: 30%;
@@ -374,6 +375,7 @@ $bpmax: 1366px;
         }
         &:hover {
           opacity: 1;
+          transform: scale(0.9);
         }
       }
 
@@ -386,6 +388,7 @@ $bpmax: 1366px;
 
       &:hover {
         opacity: 0.9;
+        transform: scale(1.1);
       }
     }
   }
