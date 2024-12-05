@@ -30,10 +30,8 @@ $bpmax: 1366px;
       visibility: hidden;
       will-change: visibility;
       transition: visibility 0.3s; /* Avoids flicker */
-      // @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 10px, 0px);
       @include globals.fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
       @include globals.fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
-      // @include globals.fluid-property(min-height, $bpmin, $bpmax, 28px, 79px);
 
       > * > * {
         position: relative;
@@ -396,3 +394,5 @@ $bpmax: 1366px;
 //////////////////////////////////////////////////////////////////
 // Rico Slideshow Config 2
 //////////////////////////////////////////////////////////////////
+
+// TODO: Set this up using alternate controls.

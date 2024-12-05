@@ -1,12 +1,11 @@
 @use "sass:math";
-
 @use "sass:map";
 
 // Breakpoints definition
 // Defines standard responsive breakpoints, including an additional 'xs' size (360px).
 // These breakpoints are mobile-first, following Bootstrap conventions.
 $breakpoints: (
-  // Extra small devices (e.g., small smartphones)
+  // Extra small devices (This one is not one of Bootstrap's default breakpoints)
   xs: 360px,
   // Small devices (e.g., smartphones)
   sm: 576px,
@@ -72,11 +71,14 @@ $breakpoints: (
     @error "Property value units ($unit-min-value, $unit-max-value) must match!";
   }
 
-  // Apply the fluid property logic
+  // Apply the fluid property logic for the minimum value.
+  // The property is initially set to the smallest value before the minimum viewport width.
   & {
     #{$property}: $min-value;
   }
 
+  // Gradually adjust the property value between the min and max values
+  // as the viewport width scales between the min and max breakpoints.
   @media screen and (min-width: $min-vw) {
     #{$property}: calc(
       #{$min-value} + #{strip-unit($max-value - $min-value)} *
@@ -84,12 +86,13 @@ $breakpoints: (
     );
   }
 
+  // Set the property to the maximum value once the viewport exceeds the max width.
   @media screen and (min-width: $max-vw) {
     #{$property}: $max-value;
   }
 }
 
-// Untested, but it's supposed to work on transform properties...
+// Untested/unused, but it's supposed to work on transform properties...
 @mixin fluid-transform($min-vw, $max-vw, $min-transform, $max-transform) {
   @media screen and (max-width: $min-vw) {
     transform: $min-transform;

@@ -9,6 +9,7 @@ import "./App.scss";
 /**
  * Main entry point for the application.
  * Defines routes, initializes slide data, and configures the Slideshow component.
+ * Essentially a demo and example of usage.
  */
 function App() {
   // Determine the base URL for assets and routing based on the environment
