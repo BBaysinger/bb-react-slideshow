@@ -24,10 +24,6 @@ interface SlideshowProps {
   resumeLabel?: string;
   pauseLabel?: string;
   transitionResetDelay?: number;
-  manipulateContent?: (
-    content: React.ReactNode,
-    isActive: boolean,
-  ) => React.ReactNode;
 }
 
 export type { SlideshowProps, Slide };
