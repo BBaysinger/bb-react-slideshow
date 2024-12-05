@@ -6,12 +6,18 @@ import CSSVariableInjector from "utils/CSSVariableInjector";
 
 import "./App.scss";
 
+/**
+ * Main entry point for the application.
+ * Defines routes, initializes slide data, and configures the Slideshow component.
+ */
 function App() {
+  // Determine the base URL for assets and routing based on the environment
   const basePath =
     process.env.NODE_ENV === "production"
       ? import.meta.env.VITE_PROD_BASE_URL
       : import.meta.env.VITE_DEV_BASE_URL;
 
+  // Array of slide data for the slideshow, including images, content, and metadata
   const slides: Slide[] = [
     {
       slug: "one",
@@ -173,12 +179,18 @@ function App() {
     },
   ].map((slide) => ({
     ...slide,
+    // Apply CSS variables to the content of each slide. In this demo,
+    // we are using this to apply a staggered crossfade animation to the
+    // content elements.
     content: CSSVariableInjector.applyChildCSSVariables(slide.content),
   }));
 
+  // Render the application with two routes, each displaying a Slideshow component
+  // with different configuration options.
   return (
     <BrowserRouter>
       <Routes>
+        {/* Route for the primary slideshow, with dynamic slide navigation */}
         <Route
           path={`${basePath}/rico-slideshow/:slug`}
           element={
@@ -189,6 +201,8 @@ function App() {
             />
           }
         />
+        {/* Route for an additional slideshow. (Non-functional so far...)
+        TODO: Need to finish setting this up. */}
         <Route
           path={`${basePath}/second-slideshow/:slug`}
           element={
