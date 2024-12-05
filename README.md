@@ -18,21 +18,25 @@ The React Slideshow Component is a reusable, scalable, and fluid slideshow desig
 Here is an example JavaScript function:
 
 ```javascript
-import { Slideshow } from '@bbaysinger/bb-react-slideshow';
+import { Slideshow } from "@bbaysinger/bb-react-slideshow";
 
 const slides = [
-  { id: 1, content: (
-        <div>
-          <h3>Your HTML content.</h3>
-        </div>
-      ),
- },
-  { id: 2, content: (
-        <div>
-          <h3>More HTML content.</h3>
-        </div>
-      ),
- },
+  {
+    id: 1,
+    content: (
+      <div>
+        <h3>Your HTML content.</h3>
+      </div>
+    ),
+  },
+  {
+    id: 2,
+    content: (
+      <div>
+        <h3>More HTML content.</h3>
+      </div>
+    ),
+  },
 ];
 
 export default function App() {
