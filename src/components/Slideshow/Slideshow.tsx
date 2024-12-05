@@ -13,8 +13,6 @@ import styles from "./Slideshow.module.scss";
  * It adjusts height dynamically based on the current slide and preloads images
  * for better performance.
  *
- * TODO: Better establish defaults in the SCSS.
- *
  * @param slides - An array of slide content or components.
  * @param initialAutoSlide - Whether the slideshow should auto-slide initially.
  * @param interval - Interval in milliseconds between auto-slides.
