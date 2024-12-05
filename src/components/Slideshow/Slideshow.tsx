@@ -1,9 +1,20 @@
+/**
+ * Slideshow Component
+ * 
+ * A reusable and interactive slideshow that supports dynamic routing, autoslide,
+ * and user interactions like navigation, pausing, and restarting. The slideshow
+ * adjusts its height dynamically based on the current slide and preloads images
+ * for better performance.
+ * 
+ * TODO: Memoize basically everything, since none of the props should change.
+ * TODO: Better establish defaults in the SCSS.
+ */
+
 import React, {
   useState,
   useEffect,
   useCallback,
   useRef,
-  useMemo,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,7 +22,7 @@ import { SlideshowProps } from "./Slideshow.types";
 import ImagePreloader from "utils/ImagePreloader";
 import styles from "./Slideshow.module.scss";
 
-const Slideshow: React.FC<SlideshowProps> = ({
+const Slideshow: React.FC<SlideshowProps> = React.memo(({
   slides,
   initialAutoSlide = true,
   interval = 6000,
@@ -22,18 +33,32 @@ const Slideshow: React.FC<SlideshowProps> = ({
   nextLabel = "Next >",
   resumeLabel = "Restart",
   pauseLabel = "Pause",
-  transitionResetDelay = 1500, // Delay for removing 'previous' class
+  transitionResetDelay = 1500,
 }) => {
-  const isFirstRender = useRef(true);
-  const stableSlides = useMemo(() => slides, [slides]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Refs
+  const isFirstRender = useRef(true); // Tracks the first render
+  const navigateRef = useRef(useNavigate()); // Stable ref for navigation
+  const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
+  const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
+  const thumbnailRefs = useRef<HTMLButtonElement[]>([]); // Refs for thumbnail buttons
+  const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for autoslide
+  const preloaderRan = useRef(false); // If the preloader has run
+
+  // States
+  const [currentIndex, setCurrentIndex] = useState<number>(-1); // Current slide index
+  const [previousIndex, setPreviousIndex] = useState<number>(-1); // Previous slide index
+  const [isTransitioning, setIsTransitioning] = useState(false); // Whether a transition is happening
+  const [divHeight, setDivHeight] = useState<string>("unset"); // Height of the current slide
+  const [isPaused, setIsPaused] = useState(false); // Whether the slideshow is paused
+  const [currentSlug, setCurrentSlug] = useState(""); // Current slide slug for routing
+
+  const navigate = useNavigate();
 
   if (enableRouting && !basePath) {
     console.error("'basePath' is required when routing is enabled.");
   }
-
-  const navigate = useNavigate();
-  const navigateRef = useRef(navigate);
 
   useEffect(() => {
     navigateRef.current = navigate;
@@ -45,12 +70,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
   }
 
   const currentRouteIndex = enableRouting
-    ? stableSlides.findIndex((slide) => slide.slug === slug)
+    ? slides.findIndex((slide) => slide.slug === slug)
     : -1;
-
-  const [currentIndex, setCurrentIndex] = useState<number>(-1);
-  const [previousIndex, setPreviousIndex] = useState<number>(-1);
-  const currentIndexRef = useRef<number>(currentIndex);
 
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
@@ -73,9 +94,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
     };
   }, [currentIndex]);
 
-  const [divHeight, setDivHeight] = useState<string>("unset");
-  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   useEffect(() => {
     const updateHeight = () => {
       const currentRef = slideRefs.current[currentIndex];
@@ -92,8 +110,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
       window.removeEventListener("resize", updateHeight);
     };
   }, [currentIndex]);
-
-  const preloaderRan = useRef(false);
 
   useEffect(() => {
     if (!preloaderRan.current) {
@@ -112,23 +128,13 @@ const Slideshow: React.FC<SlideshowProps> = ({
     }
   }, [slides]);
 
-  const [currentSlug, setCurrentSlug] = useState(
-    stableSlides[currentIndex]?.slug || "",
-  );
-
   useEffect(() => {
-    setCurrentSlug(stableSlides[currentIndex]?.slug || "");
-  }, [currentIndex, stableSlides]);
-
-  const [isPaused, setIsPaused] = useState(false);
-  const isPausedRef = useRef(isPaused);
+    setCurrentSlug(slides[currentIndex]?.slug || "");
+  }, [currentIndex, slides]);
 
   useEffect(() => {
     isPausedRef.current = isPaused;
   }, [isPaused]);
-
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const thumbnailRefs = useRef<HTMLButtonElement[]>([]);
 
   const clearTimer = useCallback(() => {
     if (timerRef.current) {
@@ -144,14 +150,14 @@ const Slideshow: React.FC<SlideshowProps> = ({
       setIsPaused(false);
       if (initialAutoSlide) {
         if (immediateSlide) {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % stableSlides.length);
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
         }
         timerRef.current = setInterval(() => {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % stableSlides.length);
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
         }, interval);
       }
     },
-    [initialAutoSlide, interval, stableSlides.length, clearTimer],
+    [initialAutoSlide, interval, slides.length, clearTimer],
   );
 
   const restartTimer = useCallback(() => {
@@ -162,16 +168,16 @@ const Slideshow: React.FC<SlideshowProps> = ({
     }
 
     if (initialAutoSlide && !isPausedRef.current) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % stableSlides.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
       timerRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % stableSlides.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
       }, interval);
     }
   }, [
     initialAutoSlide,
     interval,
     restartDelay,
-    stableSlides.length,
+    slides.length,
     clearTimer,
   ]);
 
@@ -184,7 +190,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
             if (currentRouteIndex !== -1) {
               setCurrentIndex(currentRouteIndex);
             } else {
-              navigateRef.current(`${basePath}/${stableSlides[0].slug}`);
+              navigateRef.current(`${basePath}/${slides[0].slug}`);
               setCurrentIndex(0);
             }
             isFirstRender.current = false;
@@ -205,7 +211,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
   }, [
     slug,
     currentRouteIndex,
-    stableSlides,
+    slides,
     navigateRef,
     startAutoSlide,
     basePath,
@@ -225,7 +231,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     (newIndex: number) => {
       setCurrentIndex(newIndex);
       if (enableRouting) {
-        const route = `${basePath}/${stableSlides[newIndex].slug}`;
+        const route = `${basePath}/${slides[newIndex].slug}`;
         navigateRef.current(route);
       }
       clearTimer();
@@ -243,21 +249,21 @@ const Slideshow: React.FC<SlideshowProps> = ({
       clearTimer,
       enableRouting,
       basePath,
-      stableSlides,
+      slides,
     ],
   );
 
   const handlePrevUserTriggered = useCallback(() => {
     const newIndex: number =
-      (currentIndexRef.current - 1 + stableSlides.length) % stableSlides.length;
+      (currentIndexRef.current - 1 + slides.length) % slides.length;
     handleUserInteraction(newIndex);
-  }, [stableSlides, handleUserInteraction]);
+  }, [slides, handleUserInteraction]);
 
   const handleNextUserTriggered = useCallback(() => {
     const newIndex: number =
-      (currentIndexRef.current + 1) % stableSlides.length;
+      (currentIndexRef.current + 1) % slides.length;
     handleUserInteraction(newIndex);
-  }, [stableSlides, handleUserInteraction]);
+  }, [slides, handleUserInteraction]);
 
   const handlePrevRef = useRef(handlePrevUserTriggered);
   const handleNextRef = useRef(handleNextUserTriggered);
@@ -326,7 +332,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         aria-busy={isTransitioning}
       >
         <div className={`${styles.slideWrapper} bb-slide-wrapper`}>
-          {stableSlides.map((slide, index) => (
+          {slides.map((slide, index) => (
             <div
               tabIndex={index === currentIndex ? 0 : -1}
               key={index}
@@ -339,7 +345,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
               role="group"
               aria-roledescription="slide"
               aria-label={`${
-                slide.alt || `Slide ${index + 1} of ${stableSlides.length}`
+                slide.alt || `Slide ${index + 1} of ${slides.length}`
               }`}
               aria-hidden={index !== currentIndex}
             ></div>
@@ -349,7 +355,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         <div
           className={`${styles.overlayWrapper1} bb-overlay-wrapper bb-overlay-wrapper-1`}
         >
-          {stableSlides.map((_, index) => (
+          {slides.map((_, index) => (
             <div
               key={index}
               className={`
@@ -370,7 +376,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
           style={{ height: divHeight }}
           className={`${styles.contentWrapper} bb-content-wrapper`}
         >
-          {stableSlides.map((_, index) => (
+          {slides.map((_, index) => (
             <div
               key={index}
               ref={(el) => (slideRefs.current[index] = el)}
@@ -378,7 +384,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
                 index === currentIndex ? styles.active + " bb-active" : ""
               } ${index === previousIndex ? " bb-previous" : ""}`}
             >
-              {stableSlides[index].content}
+              {slides[index].content}
             </div>
           ))}
         </div>
@@ -414,7 +420,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
           className={`${styles.thumbnailButtonWrapper} bb-thumbnail-button-wrapper`}
           role="tablist"
         >
-          {stableSlides.map((_, index) => (
+          {slides.map((_, index) => (
             <button
               key={index}
               ref={(el) => (thumbnailRefs.current[index] = el!)}
@@ -427,11 +433,11 @@ const Slideshow: React.FC<SlideshowProps> = ({
               aria-controls={`slide-${index}`}
               id={`tab-${index}`}
             >
-              {stableSlides[index].thumbnail ? (
+              {slides[index].thumbnail ? (
                 <img
-                  src={stableSlides[index].thumbnail}
+                  src={slides[index].thumbnail}
                   alt={
-                    stableSlides[index].alt || `Slide thumbnail ${index + 1}`
+                    slides[index].alt || `Slide thumbnail ${index + 1}`
                   }
                 />
               ) : (
@@ -446,6 +452,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
       </div>
     </>
   );
-};
+});
 
 export default Slideshow;
