@@ -6,8 +6,7 @@ The React Slideshow Component is a reusable, scalable, and fluid slideshow desig
 
 ## Features
 
-- **Reusable Component**: The slideshow is modular and can be seamlessly integrated into any React application.
-- **Fluid Scaling**: Designed with responsiveness in mind, the demo adapts fluidly across multiple breakpoints, supporting a minimum width of 320px and scaling up to larger screens.
+- **Reusable Component**: The slideshow can be integrated into any React application and fits many use cases with the options available.
 - **Dynamic Routing (Optional)**: Utilize dynamic routes for deep-linking slides, keeping navigation in sync with the application state.
 - **Auto-Slide Functionality**: Automatically transitions between slides, pausing when user interaction is detected. Includes a restart button to re-enable auto-slide.
 - **Redux Integration**: Leverages `@lagunovsky/redux-react-router` to synchronize routing and Redux state, ensuring consistent behavior.
