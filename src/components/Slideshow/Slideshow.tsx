@@ -6,7 +6,7 @@ import ImagePreloader from "utils/ImagePreloader";
 import styles from "./Slideshow.module.scss";
 
 /**
- * Slideshow Component
+ * React Slideshow Component
  *
  * A reusable and multilayered interactive slideshow that supports dynamic routing,
  * autoslide, and user interactions like navigation, pausing, and restarting.
@@ -23,7 +23,7 @@ import styles from "./Slideshow.module.scss";
  * @param nextLabel - Label for the "Next" button.
  * @param resumeLabel - Label for the "Restart" button.
  * @param pauseLabel - Label for the "Pause" button.
- * @param transitionResetDelay - Delay in milliseconds before resetting transitions.
+ * @param transitionResetDelay - Duration of transitions, after which class names are reset to their default.
  */
 const Slideshow: React.FC<SlideshowProps> = React.memo(
   ({
