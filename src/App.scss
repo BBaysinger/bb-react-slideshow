@@ -262,7 +262,7 @@ $bpmax: 1366px;
   }
 
   .bb-overlay-wrapper-1 {
-    $offset: -6.05vw;
+    $offset: clamp(-80px, -6.05vw, -0px);
     .bb-overlay {
       display: none;
     }
