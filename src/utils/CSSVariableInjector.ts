@@ -1,12 +1,12 @@
 import React from "react";
 
 /**
- * A utility class for injecting custom CSS variables into a React element
- * and its child elements. This is useful for dynamically styling components
- * based on their structure, such as the number of children or their index.
- * This allows for math to be performed in CSS, such as calculating delays
- * based on their position within a container. A good use case is for
- * staggered crossfades.
+ * A utility class for injecting custom CSS variables into a JSX element
+ * and its child elements. For dynamically styling elements based on their
+ * structure, such as the number of children or their index.
+ * This allows for math to be performed in CSS based on structure via calc,
+ * such as calculating delays for staggered crossfades based on their position
+ * within a container.
  */
 class CSSVariableInjector {
   /**
