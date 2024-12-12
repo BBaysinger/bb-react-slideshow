@@ -9,9 +9,8 @@ The React Slideshow Component is a reusable, scalable, and fluid slideshow desig
 - **Reusable Component**: The slideshow can be integrated into any React application and fits many use cases with the options available.
 - **Dynamic Routing (Optional)**: Utilize dynamic routes for deep-linking slides, keeping navigation in sync with the application state.
 - **Auto-Slide Functionality**: Automatically transitions between slides, pausing when user interaction is detected. Includes a restart button to re-enable auto-slide.
-- **Redux Integration**: Leverages `@lagunovsky/redux-react-router` to synchronize routing and Redux state, ensuring consistent behavior.
 - **Custom Hooks**: Simplified logic using custom hooks for professional, maintainable code.
-- **Configuration Options**: Adjustable settings for auto-slide timing, slide transition behavior, and dynamic routing.
+- **Configuration Options**: Adjustable settings for auto-slide timing/restart and dynamic routing. Two optional sets of controls.
 - **Accessibility**: Built with keyboard navigation support and ARIA attributes to ensure an inclusive experience.
 
 Here is an example JavaScript function:
