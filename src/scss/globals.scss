@@ -71,41 +71,24 @@ $breakpoints: (
     @error "Property value units ($unit-min-value, $unit-max-value) must match!";
   }
 
-  // Apply the fluid property logic for the minimum value.
-  // The property is initially set to the smallest value before the minimum viewport width.
+  // Set the default (fallback) value for small screens
   & {
     #{$property}: $min-value;
   }
 
-  // Gradually adjust the property value between the min and max values
-  // as the viewport width scales between the min and max breakpoints.
+  // Set the fluid value between the breakpoints
   @media screen and (min-width: $min-vw) {
     #{$property}: calc(
-      #{$min-value} + #{strip-unit($max-value - $min-value)} *
-        ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+      #{$min-value} +
+        (
+          #{strip-unit($max-value - $min-value)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        )
     );
   }
 
-  // Set the property to the maximum value once the viewport exceeds the max width.
+  // Set the maximum value explicitly for large screens
   @media screen and (min-width: $max-vw) {
     #{$property}: $max-value;
-  }
-}
-
-// Untested/unused, but it's supposed to work on transform properties...
-@mixin fluid-transform($min-vw, $max-vw, $min-transform, $max-transform) {
-  @media screen and (max-width: $min-vw) {
-    transform: $min-transform;
-  }
-
-  @media screen and (min-width: $min-vw) and (max-width: $max-vw) {
-    transform: calc(
-      #{$min-transform} + (#{$max-transform - $min-transform}) *
-        ((100vw - #{$min-vw}) / (#{$max-vw - $min-vw}))
-    );
-  }
-
-  @media screen and (min-width: $max-vw) {
-    transform: $max-transform;
   }
 }

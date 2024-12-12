@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
@@ -191,6 +191,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route
+          path="/"
+          element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
+        />
+
         {/* Route for the primary slideshow, with dynamic slide navigation */}
         <Route
           path={`${basePath}/rico-slideshow/:slug`}

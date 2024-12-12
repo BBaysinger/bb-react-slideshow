@@ -44,16 +44,13 @@ class CSSVariableInjector {
     // Iterate over the children and inject a `--childIndex` CSS variable into each
     const updatedChildren = children.map((child, index) => {
       // Check if the child is a valid React element
-      if (React.isValidElement(child)) {
+      if (React.isValidElement<{ style?: React.CSSProperties }>(child)) {
         const childStyle: React.CSSProperties = {
           ...(child.props.style || {}), // Retain any existing child styles
           "--childIndex": index.toString(), // Add `--childIndex` as a string
         };
         // Clone the child element with the updated `style` property
-        return React.cloneElement(
-          child as React.ReactElement<{ style?: React.CSSProperties }>,
-          { style: childStyle },
-        );
+        return React.cloneElement(child, { style: childStyle });
       }
       return child; // Non-element children are returned unchanged
     });

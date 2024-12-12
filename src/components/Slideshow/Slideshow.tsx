@@ -45,7 +45,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
     const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
     const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
-    const thumbnailRefs = useRef<HTMLButtonElement[]>([]); // Refs for thumbnail buttons
+    const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for thumbnail buttons
     const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for autoslide
     const preloaderRan = useRef(false); // If the preloader has run
 
@@ -303,12 +303,17 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     useEffect(() => {
       // Ensure the current thumbnail element exists before attempting to focus it
-      if (thumbnailRefs.current[currentIndexRef.current]) {
+      if (
+        thumbnailRefs.current &&
+        thumbnailRefs.current[currentIndexRef.current]
+      ) {
         // Set focus to the thumbnail corresponding to the current slide
         // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
-        thumbnailRefs.current[currentIndexRef.current].focus({
-          preventScroll: true,
-        });
+        if (thumbnailRefs.current[currentIndexRef.current]) {
+          thumbnailRefs.current[currentIndexRef.current]!.focus({
+            preventScroll: true,
+          });
+        }
       }
     });
 
@@ -499,7 +504,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             {slides.map((_, index) => (
               <div
                 key={index}
-                ref={(el) => (slideRefs.current[index] = el)}
+                ref={(el) => {
+                  slideRefs.current[index] = el;
+                }}
                 className={`${styles.content} bb-content ${
                   index === currentIndex ? styles.active + " bb-active" : ""
                 } ${index === previousIndex ? " bb-previous" : ""}`}
@@ -552,7 +559,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             {slides.map((_, index) => (
               <button
                 key={index}
-                ref={(el) => (thumbnailRefs.current[index] = el!)}
+                // ref={(el) => (thumbnailRefs.current[index] = el!)}
+                ref={(el) => {
+                  if (thumbnailRefs.current !== null) {
+                    thumbnailRefs.current[index] = el;
+                  }
+                }}
                 onClick={() => handleUserInteraction(index)}
                 className={`${styles.thumbnail} ${
                   index === currentIndex ? `${styles.active} bb-active` : ""
