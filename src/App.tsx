@@ -203,7 +203,7 @@ function App() {
           }
         />
         {/* Route for an additional slideshow. (Non-functional so far...)
-        TODO: Need to finish setting this up. */}
+        TODO: Finish setting this up. */}
         <Route
           path={`${basePath}/second-slideshow/:slug`}
           element={
