@@ -111,7 +111,7 @@ function App() {
           <h2 className="">RICO TAKES FLIGHT</h2>
           <p>
             Rico is on top of the world—literally! Whether it's a summer breeze
-            or the view from above, he’s the star of every outdoor adventure.
+            or the view from above, he's the star of every outdoor adventure.
             Soak up the sunshine with this fearless flying&nbsp;Frenchie.
           </p>
           <a
@@ -207,14 +207,15 @@ function App() {
             />
           }
         />
-        {/* Route for an additional slideshow. (Non-functional so far...)
+        {/* Route for additional slideshow with other config options. Non-functional so far.
         TODO: Finish setting this up. */}
         <Route
-          path={`${basePath}/second-slideshow/:slug`}
+          path={`${basePath}/another-config/:slug`}
           element={
             <Slideshow
               slides={slides}
-              basePath={`${basePath}/rico-slideshow`}
+              basePath={`${basePath}/another-config`}
+              initialAutoSlide={true}
             />
           }
         />
