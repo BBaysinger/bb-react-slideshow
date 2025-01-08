@@ -9,12 +9,12 @@ import styles from "./Slideshow.module.scss";
  * React Slideshow Component
  *
  * A reusable and multilayered interactive slideshow that supports dynamic routing,
- * autoslide, and user interactions like navigation, pausing, and restarting.
+ * auto-slide, and user interactions like navigation, pausing, and restarting.
  * It adjusts height dynamically based on the current slide and preloads images
  * for better performance.
  *
  * @param slides - An array of slide content or components.
- * @param initialAutoSlide - Whether the slideshow should auto-slide initially.
+ * @param initialAutoSlide - Whether it should start out paused or auto-sliding.
  * @param interval - Interval in milliseconds between auto-slides.
  * @param basePath - Base path for routing.
  * @param enableRouting - Enables dynamic routing for slides.
