@@ -7,8 +7,8 @@ import CSSVariableInjector from "utils/CSSVariableInjector";
 import "./App.scss";
 
 /**
- * Main entry point for the application.
- * Defines routes, initializes slide data, and configures the Slideshow component.
+ * Essentially a demo and example of usage for the Slideshow component.
+ * Defines routes, initializes slide data, and configures the Slideshow.
  *
  * JSX slide content is passed along to the slideshow(s) as props along with respective data.
  * In this use case the HTML gets pre-processed to dynamically apply CSS variables
@@ -17,7 +17,9 @@ import "./App.scss";
  * The content was added taking a cue from the SPS home page where there is content on
  * each slide, but also that it's a logical feature. And crossfades are awesome.
  *
- * Essentially a demo and example of usage.
+ * @author Bradley Baysinger
+ * @since The beginning of time.
+ * @version N/A
  */
 function App() {
   // Prevent CSS class name conflicts in larger applications by using a class prefix

@@ -20,6 +20,9 @@ const defaultLabels: SlideshowLabels = {
  * auto-slide, and user interactions like navigation, pausing, and restarting.
  * It adjusts height dynamically based on the current slide and preloads images
  * for better performance.
+ * 
+ * Slides are defined as an array of objects with background images, thumbnails,
+ * passed in as props to make the component reusable and flexible.
  *
  * @param slides - An array of slide content or components.
  * @param initialAutoSlide - Whether it should start out paused or auto-sliding.

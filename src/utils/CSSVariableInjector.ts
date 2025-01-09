@@ -7,6 +7,10 @@ import React from "react";
  * This allows for math to be performed in CSS based on structure via calc,
  * such as calculating delays for staggered crossfades based on their position
  * within a container.
+ * 
+ * @author Bradley Baysinger
+ * @since The beginning of time.
+ * @version N/A
  */
 class CSSVariableInjector {
   /**
