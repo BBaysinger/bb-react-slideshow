@@ -19,10 +19,12 @@ interface SlideshowProps {
   heading?: React.ReactNode;
   enableRouting?: boolean;
   restartDelay?: number;
-  previousLabel?: string;
-  nextLabel?: string;
-  resumeLabel?: string;
-  pauseLabel?: string;
+  labels?: {
+    previous?: string;
+    next?: string;
+    resume?: string;
+    pause?: string;
+  }
   transitionResetDelay?: number;
   classPrefix?: string;
   debug?: string | number | boolean | null;
