@@ -91,6 +91,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         // Update the currentIndex to match the slug from the URL
         if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
           setCurrentIndex(matchedIndex);
+          delayAutoSlide();
           // currentIndexRef.current = matchedIndex;
         }
       }
@@ -335,6 +336,24 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       }
     });
 
+    const delayAutoSlide = useCallback(() => {
+      // Clear any existing timers to reset the auto-slide behavior
+      clearTimer();
+
+      // If auto-slide is enabled and a restart delay is configured
+      if (restartDelay > -1 && !isPausedRef.current) {
+        // Set a timeout to restart the auto-slide after the specified delay
+        timerRef.current = setTimeout(() => {
+          restartTimer();
+        }, restartDelay);
+      }
+    }, [
+      // Dependencies: ensure the function remains stable and up-to-date
+      clearTimer,
+      restartDelay,
+      restartTimer,
+    ]);
+
     const handleUserInteraction = useCallback(
       (newIndex: number) => {
         // If routing is enabled, navigate to the new slide's route
@@ -345,23 +364,10 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           setCurrentIndex(newIndex);
         }
 
-        // Clear any existing timers to reset the auto-slide behavior
-        clearTimer();
-
-        // If auto-slide is enabled and a restart delay is configured
-        if (restartDelay > -1 && !isPausedRef.current) {
-          // Set a timeout to restart the auto-slide after the specified delay
-          timerRef.current = setTimeout(() => {
-            restartTimer();
-          }, restartDelay);
-        }
+        delayAutoSlide();
       },
       [
         // Dependencies: ensure the function remains stable and up-to-date
-        currentIndex,
-        restartDelay,
-        restartTimer,
-        clearTimer,
         enableRouting,
         basePath,
         slides,
