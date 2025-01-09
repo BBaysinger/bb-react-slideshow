@@ -215,6 +215,7 @@ function App() {
               slides={slides}
               basePath={`${basePath}/rico-slideshow`}
               initialAutoSlide={true}
+              debug={true}
             />
           }
         />
