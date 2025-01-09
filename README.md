@@ -4,6 +4,10 @@
 
 The React Slideshow Component is a reusable, scalable, and fluid slideshow designed to enhance modern web experiences. It combines dynamic interactivity with best practices in front-end development to offer a robust and configurable solution for displaying content-rich slideshows.
 
+## Demo
+
+[https://bb-react-slideshow.netlify.app/rico-slideshow/one](https://bb-react-slideshow.netlify.app/rico-slideshow/one)
+
 ## Features
 
 - **Reusable Component**: The slideshow can be integrated into any React application and fits many use cases with the options available.
@@ -53,7 +57,7 @@ export default function App() {
     <Slideshow
       slides={slides}
       interval={5000}
-      basePath={`${basePath}/rico-slideshow`}
+      basePath={`${basePath}/slideshow`}
       enableRouting={true}
     />
   );
