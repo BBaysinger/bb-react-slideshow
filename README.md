@@ -53,6 +53,7 @@ export default function App() {
     <Slideshow
       slides={slides}
       interval={5000}
+      basePath={`${basePath}/rico-slideshow`}
       enableRouting={true}
     />
   );
