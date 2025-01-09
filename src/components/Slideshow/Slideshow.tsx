@@ -46,6 +46,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const isFirstRender = useRef(true); // Tracks the first render
     const navigateRef = useRef(useNavigate()); // Stable ref for navigation
     const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
+    const previousIndexRef = useRef<number>(-1); // Tracks the current index for stable access
     const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
     const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
     const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for thumbnail buttons
@@ -54,7 +55,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     // States
     const [currentIndex, setCurrentIndex] = useState<number>(-1); // Current slide index
-    const [previousIndex, setPreviousIndex] = useState<number>(-1); // Previous slide index
+    const [_previousIndex, setPreviousIndex] = useState<number>(-1); // Previous slide index
     const [isTransitioning, setIsTransitioning] = useState(false); // Whether a transition is happening
     const [divHeight, setDivHeight] = useState<string>("unset"); // Height of the current slide
     const [isPaused, setIsPaused] = useState(false); // Whether the slideshow is paused
@@ -90,7 +91,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         // Update the currentIndex to match the slug from the URL
         if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
           setCurrentIndex(matchedIndex);
-          currentIndexRef.current = matchedIndex;
+          // currentIndexRef.current = matchedIndex;
         }
       }
     }, [slug, enableRouting, slides]);
@@ -105,18 +106,19 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       // Timer to control the delay before resetting the transition state
       let timer: NodeJS.Timeout | null = null;
 
-      if (currentIndex !== -1) {
-        // Update the previous index to the current one before it changes
-        setPreviousIndex(currentIndexRef.current);
+      // if (currentIndex !== -1) {
+      // Update the previous index to the current one before it changes
+      setPreviousIndex(currentIndexRef.current);
+      previousIndexRef.current = currentIndexRef.current;
 
-        // Set the transitioning state to true for triggering transition effects
-        setIsTransitioning(true);
+      // Set the transitioning state to true for triggering transition effects
+      setIsTransitioning(true);
 
-        // Schedule the transitioning state to reset after the specified delay
-        timer = setTimeout(() => {
-          setIsTransitioning(false); // End the transitioning state after the delay
-        }, transitionResetDelay);
-      }
+      // Schedule the transitioning state to reset after the specified delay
+      timer = setTimeout(() => {
+        setIsTransitioning(false); // End the transitioning state after the delay
+      }, transitionResetDelay);
+      // }
 
       // Update the current index reference for use in the next render
       currentIndexRef.current = currentIndex;
@@ -440,7 +442,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         {/* Debugging Information (Hidden by default) */}
         {isDebug() && (
           <div className={`${styles["debug"]} ${classPrefix}debug`}>
-            {`curr: ${currentIndex} prev: ${previousIndex} ` +
+            {`curr: ${currentIndexRef.current} prev: ${previousIndexRef.current} ` +
               `transitioning: ${isTransitioning}`}
           </div>
         )}
@@ -492,7 +494,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                   `${classPrefix}overlay-1-${index + 1} ` +
                   `${styles.overlay} ${classPrefix}overlay ` +
                   `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
-                  `${index === previousIndex && isTransitioning ? ` ${classPrefix}previous` : ""}`
+                  `${index === previousIndexRef.current && isTransitioning ? ` ${classPrefix}previous` : ""}`
                 }
               ></div>
             ))}
@@ -518,7 +520,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                 className={
                   `${styles.content} ${classPrefix}content ` +
                   `${index === currentIndex ? styles.active + ` ${classPrefix}active` : ""} ` +
-                  `${index === previousIndex ? `${classPrefix}previous` : ""}`
+                  `${index === previousIndexRef.current ? `${classPrefix}previous` : ""}`
                 }
               >
                 {slides[index].content}
