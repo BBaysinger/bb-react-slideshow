@@ -1,9 +1,17 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { SlideshowProps } from "./Slideshow.types";
+import { SlideshowProps, SlideshowLabels } from "./Slideshow.types";
 import ImagePreloader from "utils/ImagePreloader";
 import styles from "./Slideshow.module.scss";
+
+// Default navigation button labels
+const defaultLabels: SlideshowLabels = {
+  previous: "< Previous",
+  next: "Next >",
+  resume: "Restart",
+  pause: "Pause",
+};
 
 /**
  * React Slideshow Component
@@ -35,12 +43,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     transitionResetDelay = 1500,
     classPrefix = "",
     debug = false,
-    labels = {
-      previousLabel: "< Previous",
-      nextLabel: "Next >",
-      resumeLabel: "Restart",
-      pauseLabel: "Pause",
-    }
+    labels = defaultLabels,
   }) => {
     // Refs
     const isFirstRender = useRef(true); // Tracks the first render
