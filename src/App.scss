@@ -315,7 +315,7 @@ $bpmax: 1366px;
 .bb-not-hover-capable .bb-slideshow {
   button.bb-thumbnail {
     &:hover {
-      transform: scale(1);
+      transform: scale(0.9);
     }
   }
 }
