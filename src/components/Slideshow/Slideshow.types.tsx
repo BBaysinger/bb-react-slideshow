@@ -24,6 +24,7 @@ interface SlideshowProps {
   resumeLabel?: string;
   pauseLabel?: string;
   transitionResetDelay?: number;
+  classPrefix?: string;
 }
 
 export type { SlideshowProps, Slide };

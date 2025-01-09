@@ -369,12 +369,12 @@ $bpmax: 1366px;
         background-image: url("@/assets/images/border.svg");
         opacity: 1;
         cursor: default;
+        transition: none;
         @include globals.breakpoint-up(lg) {
           width: 20%;
           top: 0;
         }
         &:hover {
-          // opacity: 1;
           transform: scale(1);
         }
       }

@@ -9,16 +9,19 @@ import "./App.scss";
 /**
  * Main entry point for the application.
  * Defines routes, initializes slide data, and configures the Slideshow component.
- * 
- * JSX slide content is passed along to the slideshow(s) as props. In this use case it gets
- * processed prior to this to dynamically apply CSS variables for crossfade animations.
- * 
+ *
+ * JSX slide content is passed along to the slideshow(s) as props along with respective data.
+ * In this use case the HTML gets pre-processed to dynamically apply CSS variables
+ * for crossfade animations.
+ *
  * The content was added taking a cue from the SPS home page where there is content on
  * each slide, but also that it's a logical feature. And crossfades are awesome.
- * 
+ *
  * Essentially a demo and example of usage.
  */
 function App() {
+  // Prevent CSS class name conflicts in larger applications by using a class prefix
+  const classPrefix = "bb-";
   // Determine the base URL for assets and routing based on the environment
   const basePath =
     process.env.NODE_ENV === "production"
@@ -44,7 +47,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="bb-cta"
+            className={`${classPrefix}cta`}
             target="_blank"
           >
             LEARN MORE
@@ -70,7 +73,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="bb-cta"
+            className={`${classPrefix}cta`}
             target="_blank"
           >
             RICOS'S SHENANIGANS
@@ -97,7 +100,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="bb-cta"
+            className={`${classPrefix}cta`}
             target="_blank"
           >
             EXPLORE MORE
@@ -115,7 +118,7 @@ function App() {
         <div>
           <h3>FLY HIGH, RICO!</h3>
           <button>SKY-HIGH STYLE</button>
-          <h2 className="">RICO TAKES FLIGHT</h2>
+          <h2>RICO TAKES FLIGHT</h2>
           <p>
             Rico is on top of the world—literally! Whether it's a summer breeze
             or the view from above, he's the star of every outdoor adventure.
@@ -123,7 +126,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="bb-cta"
+            className={`${classPrefix}cta`}
             target="_blank"
           >
             JOIN THE FUN
@@ -139,7 +142,7 @@ function App() {
       alt: "Rico's birthday",
       content: (
         <div>
-          <h3>IT'S RICO'S&nbsp;DAY!</h3>
+          <h3>IT'S RICO'S DAY!</h3>
           <button>PARTY ANIMAL</button>
           <h2>BIRTHDAY BOY</h2>
           <p>
@@ -150,7 +153,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="bb-cta"
+            className={`${classPrefix}cta`}
             target="_blank"
           >
             CELEBRATE WITH RICO
@@ -177,7 +180,7 @@ function App() {
           </p>
           <a
             href="https://www.playstation.com/"
-            className="bb-cta"
+            className={`${classPrefix}cta`}
             target="_blank"
           >
             WALK WITH RICO
@@ -208,6 +211,7 @@ function App() {
           path={`${basePath}/rico-slideshow/:slug`}
           element={
             <Slideshow
+              classPrefix={classPrefix}
               slides={slides}
               basePath={`${basePath}/rico-slideshow`}
               initialAutoSlide={true}
@@ -220,6 +224,7 @@ function App() {
           path={`${basePath}/another-config/:slug`}
           element={
             <Slideshow
+              classPrefix={classPrefix}
               slides={slides}
               basePath={`${basePath}/another-config`}
               initialAutoSlide={true}
