@@ -457,7 +457,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           <div className={`${styles.slideWrapper} bb-slide-wrapper`}>
             {slides.map((slide, index) => (
               <div
-                tabIndex={index === currentIndex ? 0 : -1}
                 key={index}
                 className={`${styles.slide} ${
                   index === currentIndex ? styles.active : ""
@@ -523,6 +522,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             {/* Previous Slide Button */}
             {previousLabel && (
               <button
+                tabIndex={0}
                 onClick={handlePrevUserTriggered}
                 aria-label="Previous slide"
                 aria-controls="slideshow"
@@ -533,6 +533,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
             {/* Pause/Resume Button */}
             <button
+              tabIndex={0}
               onClick={togglePause}
               aria-label={isPausedRef.current ? resumeLabel : pauseLabel}
             >
@@ -542,6 +543,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             {/* Next Slide Button */}
             {nextLabel && (
               <button
+                tabIndex={0}
                 onClick={handleNextUserTriggered}
                 aria-label="Next slide"
                 aria-controls="slideshow"
@@ -558,8 +560,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           >
             {slides.map((_, index) => (
               <button
+                tabIndex={index}
                 key={index}
-                // ref={(el) => (thumbnailRefs.current[index] = el!)}
                 ref={(el) => {
                   if (thumbnailRefs.current !== null) {
                     thumbnailRefs.current[index] = el;

@@ -9,6 +9,13 @@ import "./App.scss";
 /**
  * Main entry point for the application.
  * Defines routes, initializes slide data, and configures the Slideshow component.
+ * 
+ * JSX slide content is passed along to the slideshow(s) as props. In this use case it gets
+ * processed prior to this to dynamically apply CSS variables for crossfade animations.
+ * 
+ * The content was added taking a cue from the SPS home page where there is content on
+ * each slide, but also that it's a logical feature. And crossfades are awesome.
+ * 
  * Essentially a demo and example of usage.
  */
 function App() {
