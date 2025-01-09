@@ -1,4 +1,4 @@
-@use "scss/globals.scss";
+@use "scss/globals.scss" as *;
 
 $bpmin: 360px;
 $bpmax: 1366px;
@@ -12,17 +12,17 @@ $bpmax: 1366px;
   max-width: 100vw;
   overflow-y: hidden;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 15%, #000 15%);
-  @include globals.fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
+  @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2,
   .bb-content-wrapper,
   .bb-slide-wrapper {
-    @include globals.fluid-property(margin-top, $bpmin, $bpmax, 30px, 86px);
+    @include fluid-property(margin-top, $bpmin, $bpmax, 30px, 86px);
   }
 
   .bb-content-wrapper {
     transition: height 0.9s ease-out;
-    @include globals.fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
+    @include fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
     .bb-content {
       position: absolute;
       padding-right: 28px;
@@ -30,8 +30,8 @@ $bpmax: 1366px;
       visibility: hidden;
       will-change: visibility;
       transition: visibility 0.3s; /* Avoids flicker */
-      @include globals.fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
-      @include globals.fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
+      @include fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
+      @include fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
 
       > * > * {
         position: relative;
@@ -77,50 +77,20 @@ $bpmax: 1366px;
 
     h3 {
       margin-top: 0;
-      @include globals.fluid-property(width, $bpmin, $bpmax, 47%, 52%);
-      @include globals.fluid-property(
-        margin-bottom,
-        $bpmin,
-        $bpmax,
-        84px,
-        73px
-      );
-      @include globals.fluid-property(
-        line-height,
-        $bpmin,
-        $bpmax,
-        1.1em,
-        1.05em
-      );
-      @include globals.fluid-property(
-        letter-spacing,
-        $bpmin,
-        $bpmax,
-        0.04em,
-        0.02em
-      );
-      @include globals.fluid-property(font-size, $bpmin, $bpmax, 16px, 30px);
+      @include fluid-property(width, $bpmin, $bpmax, 47%, 52%);
+      @include fluid-property(margin-bottom, $bpmin, $bpmax, 84px, 73px);
+      @include fluid-property(line-height, $bpmin, $bpmax, 1.1em, 1.05em);
+      @include fluid-property(letter-spacing, $bpmin, $bpmax, 0.04em, 0.02em);
+      @include fluid-property(font-size, $bpmin, $bpmax, 16px, 30px);
     }
 
     h2 {
       font-weight: 900;
       margin-top: 0;
       max-width: 87vw;
-      @include globals.fluid-property(
-        letter-spacing,
-        $bpmin,
-        $bpmax,
-        0.03em,
-        0.01em
-      );
-      @include globals.fluid-property(font-size, $bpmin, $bpmax, 35px, 49px);
-      @include globals.fluid-property(
-        margin-bottom,
-        $bpmin,
-        $bpmax,
-        16px,
-        14px
-      );
+      @include fluid-property(letter-spacing, $bpmin, $bpmax, 0.03em, 0.01em);
+      @include fluid-property(font-size, $bpmin, $bpmax, 35px, 49px);
+      @include fluid-property(margin-bottom, $bpmin, $bpmax, 16px, 14px);
     }
 
     p {
@@ -128,28 +98,10 @@ $bpmax: 1366px;
       font-size: 14px;
       font-weight: 500;
       max-width: 83vw;
-      @include globals.fluid-property(
-        line-height,
-        $bpmin,
-        $bpmax,
-        1.5em,
-        1.65em
-      );
-      @include globals.fluid-property(
-        letter-spacing,
-        $bpmin,
-        $bpmax,
-        0.01em,
-        0.072em
-      );
-      @include globals.fluid-property(width, $bpmin, $bpmax, 300px, 500px);
-      @include globals.fluid-property(
-        margin-bottom,
-        $bpmin,
-        $bpmax,
-        25px,
-        32px
-      );
+      @include fluid-property(line-height, $bpmin, $bpmax, 1.5em, 1.65em);
+      @include fluid-property(letter-spacing, $bpmin, $bpmax, 0.01em, 0.072em);
+      @include fluid-property(width, $bpmin, $bpmax, 300px, 500px);
+      @include fluid-property(margin-bottom, $bpmin, $bpmax, 25px, 32px);
     }
 
     button,
@@ -163,11 +115,11 @@ $bpmax: 1366px;
       border-radius: 50px;
       text-align: center;
       letter-spacing: 0.045em;
-      @include globals.fluid-property(padding-top, $bpmin, $bpmax, 6px, 10px);
-      @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 5px, 9px);
-      @include globals.fluid-property(padding-left, $bpmin, $bpmax, 5px, 12px);
-      @include globals.fluid-property(padding-right, $bpmin, $bpmax, 5px, 12px);
-      @include globals.fluid-property(margin-bottom, $bpmin, $bpmax, 6px, 9px);
+      @include fluid-property(padding-top, $bpmin, $bpmax, 6px, 10px);
+      @include fluid-property(padding-bottom, $bpmin, $bpmax, 5px, 9px);
+      @include fluid-property(padding-left, $bpmin, $bpmax, 5px, 12px);
+      @include fluid-property(padding-right, $bpmin, $bpmax, 5px, 12px);
+      @include fluid-property(margin-bottom, $bpmin, $bpmax, 6px, 9px);
 
       &.bb-cta {
         background-color: #fff;
@@ -179,34 +131,10 @@ $bpmax: 1366px;
         display: inline-block;
         cursor: pointer;
         margin-bottom: 25px;
-        @include globals.fluid-property(
-          padding-top,
-          $bpmin,
-          $bpmax,
-          12px,
-          16px
-        );
-        @include globals.fluid-property(
-          padding-bottom,
-          $bpmin,
-          $bpmax,
-          12px,
-          17px
-        );
-        @include globals.fluid-property(
-          padding-left,
-          $bpmin,
-          $bpmax,
-          12px,
-          14px
-        );
-        @include globals.fluid-property(
-          padding-right,
-          $bpmin,
-          $bpmax,
-          12px,
-          14px
-        );
+        @include fluid-property(padding-top, $bpmin, $bpmax, 12px, 16px);
+        @include fluid-property(padding-bottom, $bpmin, $bpmax, 12px, 17px);
+        @include fluid-property(padding-left, $bpmin, $bpmax, 12px, 14px);
+        @include fluid-property(padding-right, $bpmin, $bpmax, 12px, 14px);
       }
     }
   }
@@ -218,13 +146,13 @@ $bpmax: 1366px;
   .bb-slide-wrapper,
   .bb-overlay-wrapper-1,
   .bb-overlay-wrapper-2 {
-    @include globals.fluid-property(height, $bpmin, $bpmax, 225px, 767px);
+    @include fluid-property(height, $bpmin, $bpmax, 225px, 767px);
   }
 
   .bb-slide-wrapper {
     background-color: #000;
     .bb-slide-1 {
-      @include globals.fluid-property(
+      @include fluid-property(
         background-position-x,
         $bpmin,
         $bpmax,
@@ -233,7 +161,7 @@ $bpmax: 1366px;
       );
     }
     .bb-slide-3 {
-      @include globals.fluid-property(
+      @include fluid-property(
         background-position-x,
         $bpmin,
         $bpmax,
@@ -242,7 +170,7 @@ $bpmax: 1366px;
       );
     }
     .bb-slide-4 {
-      @include globals.fluid-property(
+      @include fluid-property(
         background-position-x,
         $bpmin,
         $bpmax,
@@ -251,13 +179,7 @@ $bpmax: 1366px;
       );
     }
     .bb-slide-5 {
-      @include globals.fluid-property(
-        background-position-x,
-        $bpmin,
-        $bpmax,
-        20px,
-        0px
-      );
+      @include fluid-property(background-position-x, $bpmin, $bpmax, 20px, 0px);
     }
   }
 
@@ -276,20 +198,14 @@ $bpmax: 1366px;
       transition:
         opacity 1s linear,
         transform 1s ease-out;
-      @include globals.fluid-property(
+      @include fluid-property(
         background-position-x,
         $bpmin,
         $bpmax,
         103%,
         100%
       );
-      @include globals.fluid-property(
-        background-size,
-        $bpmin,
-        $bpmax,
-        127px,
-        433px
-      );
+      @include fluid-property(background-size, $bpmin, $bpmax, 127px, 433px);
       &.bb-active {
         transform: translateX(-16.1vw);
         opacity: 1;
@@ -316,12 +232,13 @@ $bpmax: 1366px;
     display: grid;
     gap: 2vw;
     grid-template-columns: repeat(3, 1fr);
-    @include globals.fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
-    @include globals.fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
-    @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
-    @include globals.fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
-    @include globals.fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
-    @include globals.breakpoint-up(lg) {
+
+    @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
+    @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
+    @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
+    @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
+    @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
+    @include breakpoint-up($b992px) {
       display: flex;
       align-items: flex-end;
       gap: 26px;
@@ -347,11 +264,11 @@ $bpmax: 1366px;
       justify-self: center;
       transition: transform 0.3s ease-out;
 
-      @include globals.breakpoint-up(xs) {
+      @include breakpoint-up($b360px) {
         min-width: 30%;
       }
 
-      @include globals.breakpoint-up(lg) {
+      @include breakpoint-up($b992px) {
         min-width: unset;
         width: 110px;
         max-width: 176px;
@@ -364,7 +281,7 @@ $bpmax: 1366px;
         opacity: 1;
         cursor: default;
         transition: none;
-        @include globals.breakpoint-up(lg) {
+        @include breakpoint-up($b992px) {
           width: 20%;
           top: 0;
         }
