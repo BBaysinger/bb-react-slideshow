@@ -1,8 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
 import CSSVariableInjector from "utils/CSSVariableInjector";
+import HoverCapabilityWatcher from "utils/HoverCapabilityWatcher";
 
 import "./App.scss";
 
@@ -21,7 +23,11 @@ import "./App.scss";
  * @since The beginning of time.
  * @version N/A
  */
-function App() {
+const App: React.FC = () => {
+  const [isHoverCapable, setIsHoverCapable] = useState<boolean>(
+    HoverCapabilityWatcher.instance.isHoverCapable,
+  );
+
   // Prevent CSS class name conflicts in larger applications by using a class prefix
   const classPrefix = "bb-";
   // Determine the base URL for assets and routing based on the environment
@@ -198,45 +204,64 @@ function App() {
     content: CSSVariableInjector.applyChildCSSVariables(slide.content),
   }));
 
+  useEffect(() => {
+    const hoverWatcher = HoverCapabilityWatcher.instance;
+
+    // Define a handler to update state on hover capability change
+    const handleHoverChange = (event: { isHoverCapable: boolean }) => {
+      setIsHoverCapable(event.isHoverCapable);
+    };
+
+    // Add the event listener
+    hoverWatcher.addEventListener(handleHoverChange);
+
+    // Cleanup on component unmount
+    return () => {
+      hoverWatcher.removeEventListener(handleHoverChange);
+    };
+  }, []);
+
   // Render the application with two routes, each displaying a Slideshow component
   // with different configuration options.
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
-        />
+    <div className={isHoverCapable ? `` : `${classPrefix}not-hover-capable`}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
+          />
 
-        {/* Route for the primary slideshow, with dynamic slide navigation */}
-        <Route
-          path={`${basePath}/rico-slideshow/:slug`}
-          element={
-            <Slideshow
-              classPrefix={classPrefix}
-              slides={slides}
-              basePath={`${basePath}/rico-slideshow`}
-              initialAutoSlide={true}
-              debug={true}
-            />
-          }
-        />
-        {/* Route for additional slideshow with other config options. Non-functional so far.
+          {/* Route for the primary slideshow, with dynamic slide navigation */}
+          <Route
+            path={`${basePath}/rico-slideshow/:slug`}
+            element={
+              <Slideshow
+                classPrefix={classPrefix}
+                slides={slides}
+                basePath={`${basePath}/rico-slideshow`}
+                initialAutoSlide={true}
+                debug={true}
+              />
+            }
+          />
+          {/* Route for additional slideshow with other config options. Non-functional so far.
         TODO: Finish setting this up. */}
-        <Route
-          path={`${basePath}/another-config/:slug`}
-          element={
-            <Slideshow
-              classPrefix={classPrefix}
-              slides={slides}
-              basePath={`${basePath}/another-config`}
-              initialAutoSlide={true}
-            />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path={`${basePath}/another-config/:slug`}
+            element={
+              <Slideshow
+                classPrefix={classPrefix}
+                slides={slides}
+                basePath={`${basePath}/another-config`}
+                initialAutoSlide={true}
+              />
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-}
+};
 
 export default App;
