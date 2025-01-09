@@ -314,19 +314,13 @@ $bpmax: 1366px;
 
   .bb-thumbnail-button-wrapper {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 2vw;
-
+    grid-template-columns: repeat(3, 1fr);
+    @include globals.fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
     @include globals.fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
     @include globals.fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
     @include globals.fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
     @include globals.fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
-
-    @include globals.breakpoint-up(xs) {
-      grid-template-columns: repeat(3, 1fr);
-      @include globals.fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
-    }
-
     @include globals.breakpoint-up(lg) {
       display: flex;
       align-items: flex-end;
