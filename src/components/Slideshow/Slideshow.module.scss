@@ -90,9 +90,10 @@
 }
 
 .debug {
-  color: #bbb;
+  opacity: 0.5;
   z-index: 1000;
   position: absolute;
   top: 0;
   font-size: 8px;
+  display: none;
 }
