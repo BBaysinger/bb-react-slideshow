@@ -82,6 +82,17 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       navigateRef.current(`${basePath}/${slides[0].slug}`);
     }
 
+    useEffect(() => {
+      if (enableRouting && slug) {
+        const matchedIndex = slides.findIndex((slide) => slide.slug === slug);
+        if (matchedIndex !== -1 && matchedIndex !== currentIndex) {
+          // Update the currentIndex to match the slug from the URL
+          setCurrentIndex(matchedIndex);
+          currentIndexRef.current = matchedIndex;
+        }
+      }
+    }, [slug, enableRouting, slides, currentIndex]);
+  
     // Determine the index of the current slide based on the 'slug' in the URL
     // If routing is disabled, the index is set to -1 (inactive)
     const currentRouteIndex = enableRouting
