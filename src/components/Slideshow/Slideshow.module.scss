@@ -88,3 +88,10 @@
     opacity: 1;
   }
 }
+
+.debug {
+  color: #000;
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+}

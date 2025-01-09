@@ -68,6 +68,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       console.error("'basePath' is required when routing is enabled.");
     }
 
+    const isDebug = () => Boolean(debug);
+
     useEffect(() => {
       // Store the navigate function reference in a mutable ref to
       // access it outside of React's component lifecycle
@@ -85,13 +87,13 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     useEffect(() => {
       if (enableRouting && slug) {
         const matchedIndex = slides.findIndex((slide) => slide.slug === slug);
-        if (matchedIndex !== -1 && matchedIndex !== currentIndex) {
-          // Update the currentIndex to match the slug from the URL
+        // Update the currentIndex to match the slug from the URL
+        if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
           setCurrentIndex(matchedIndex);
           currentIndexRef.current = matchedIndex;
         }
       }
-    }, [slug, enableRouting, slides, currentIndex]);
+    }, [slug, enableRouting, slides]);
 
     // Determine the index of the current slide based on the 'slug' in the URL
     // If routing is disabled, the index is set to -1 (inactive)
@@ -333,13 +335,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     const handleUserInteraction = useCallback(
       (newIndex: number) => {
-        // Update the current index to reflect the user's interaction
-        setCurrentIndex(newIndex);
-
         // If routing is enabled, navigate to the new slide's route
         if (enableRouting) {
           const route = `${basePath}/${slides[newIndex].slug}`;
           navigateRef.current(route); // Programmatically navigate to the new route
+        } else {
+          setCurrentIndex(newIndex);
         }
 
         // Clear any existing timers to reset the auto-slide behavior
@@ -437,17 +438,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     return (
       <>
         {/* Debugging Information (Hidden by default) */}
-        {debug && (
-          <div
-            className={`${classPrefix}debug`}
-            style={{
-              color: "#000",
-              zIndex: 1000,
-              position: "absolute",
-              top: 0,
-              display: "none",
-            }}
-          >
+        {isDebug() && (
+          <div className={`${styles["debug"]} ${classPrefix}debug`}>
             {`curr: ${currentIndex} prev: ${previousIndex} ` +
               `transitioning: ${isTransitioning}`}
           </div>
@@ -604,7 +596,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                   />
                 ) : (
                   <span
-                    className={`${classPrefix}visually-hidden`}
+                    className={`${styles.visuallyHidden} ${classPrefix}visually-hidden`}
                   >{`Slide ${index + 1}`}</span>
                 )}
               </button>
