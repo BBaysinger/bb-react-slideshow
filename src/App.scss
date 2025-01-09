@@ -307,9 +307,8 @@ $bpmax: 1366px;
 
 .bb-not-hover-capable
   .bb-slideshow
-  .bb-thumbnail-button-wrapper
   .bb-active:hover {
-  transform: scale(1);
+  transform: scale(1) !important;
   border: 1px solid red;
 }
 
