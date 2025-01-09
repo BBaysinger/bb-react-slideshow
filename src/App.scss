@@ -292,7 +292,8 @@ $bpmax: 1366px;
 .bb-not-hover-capable .bb-slideshow {
   button.bb-thumbnail {
     &:hover {
-      transform: scale(0.9);
+      // Disable the hover scale, since it sticks after touch. 🤪
+      transform: scale(1);
     }
   }
 }
