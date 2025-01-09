@@ -534,7 +534,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             ))}
           </div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation Buttons (So far only stubbed in. Totally untested.) */}
           <div
             className={`${styles.arrowButtonWrapper} ${classPrefix}arrow-button-wrapper`}
           >
