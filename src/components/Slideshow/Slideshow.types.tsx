@@ -10,6 +10,13 @@ interface Slide {
   content?: React.ReactNode;
 }
 
+type SlideshowLabels = {
+  previous?: string;
+  next?: string;
+  resume?: string;
+  pause?: string;
+};
+
 interface SlideshowProps {
   slides: Slide[];
   basePath?: string;
@@ -19,15 +26,10 @@ interface SlideshowProps {
   heading?: React.ReactNode;
   enableRouting?: boolean;
   restartDelay?: number;
-  labels?: {
-    previous?: string;
-    next?: string;
-    resume?: string;
-    pause?: string;
-  }
+  labels?: SlideshowLabels;
   transitionResetDelay?: number;
   classPrefix?: string;
   debug?: string | number | boolean | null;
 }
 
-export type { SlideshowProps, Slide };
+export type { SlideshowProps, Slide, SlideshowLabels };
