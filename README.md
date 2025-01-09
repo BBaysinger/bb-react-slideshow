@@ -18,9 +18,17 @@ Here is an example JavaScript function:
 ```javascript
 import { Slideshow } from "@bbaysinger/bb-react-slideshow";
 
+const basePath =
+  process.env.NODE_ENV === "production"
+    ? import.meta.env.VITE_PROD_BASE_URL
+    : import.meta.env.VITE_DEV_BASE_URL;
+
 const slides = [
   {
-    id: 1,
+    slug: "one",
+    background: `${basePath}/assets/images/1-background.jpg`,
+    thumbnail: `${basePath}/assets/images/1-thumbnail.jpg`,
+    alt: "Alt text",
     content: (
       <div>
         <h3>Your HTML content.</h3>
@@ -28,7 +36,10 @@ const slides = [
     ),
   },
   {
-    id: 2,
+    slug: "two",
+    background: `${basePath}/assets/images/2-background.jpg`,
+    thumbnail: `${basePath}/assets/images/2-thumbnail.jpg`,
+    alt: "More alt text",
     content: (
       <div>
         <h3>More HTML content.</h3>
@@ -41,8 +52,9 @@ export default function App() {
   return (
     <Slideshow
       slides={slides}
-      autoSlideInterval={5000}
-      enableDynamicRouting={true}
+      interval={5000}
+      basePath={`${basePath}/rico-slideshow`}
+      enableRouting={true}
     />
   );
 }
