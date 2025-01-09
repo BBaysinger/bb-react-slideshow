@@ -296,6 +296,12 @@ $bpmax: 1366px;
       border-radius: 5%;
       width: 86%;
       max-width: 144px;
+      // Disable long press.
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
     &:hover {
@@ -309,7 +315,7 @@ $bpmax: 1366px;
   .bb-slideshow
   .bb-active:hover {
   transform: scale(1) !important;
-  border: 1px solid red;
+  border: 1px solid blue;
 }
 
 //////////////////////////////////////////////////////////////////
