@@ -40,12 +40,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     pauseLabel = "Pause",
     transitionResetDelay = 1500,
     classPrefix = "",
+    debug = false,
   }) => {
     // Refs
     const isFirstRender = useRef(true); // Tracks the first render
     const navigateRef = useRef(useNavigate()); // Stable ref for navigation
     const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
-    const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
     const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
     const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for thumbnail buttons
     const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for autoslide
@@ -171,13 +171,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       setCurrentSlug(slides[currentIndex]?.slug || "");
     }, [currentIndex, slides]);
 
-    useEffect(() => {
-      // Keep the 'isPaused' state synchronized with a mutable reference
-      // This allows other parts of the component to access the latest 'isPaused' value
-      // without re-triggering React's rendering flow
-      isPausedRef.current = isPaused;
-    }, [isPaused]);
-
     const clearTimer = useCallback(() => {
       // Check if there is an active timer stored in the reference
       if (timerRef.current) {
@@ -233,7 +226,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       }
 
       // Check if auto-slide is enabled and the slideshow is not currently paused
-      if (initialAutoSlide && !isPausedRef.current) {
+      if (initialAutoSlide && !isPaused) {
         // Immediately move to the next slide
         setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
 
@@ -257,7 +250,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       const delay = 0;
 
       // Proceed only if the slideshow is not paused
-      if (!isPausedRef.current) {
+      if (!isPaused) {
         if (enableRouting) {
           // Handle the first render when routing is enabled
           if (isFirstRender.current) {
@@ -334,7 +327,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         clearTimer();
 
         // If auto-slide is enabled and a restart delay is configured
-        if (restartDelay > -1 && !isPausedRef.current) {
+        if (restartDelay > -1 && !isPaused) {
           // Set a timeout to restart the auto-slide after the specified delay
           timerRef.current = setTimeout(() => {
             restartTimer();
@@ -411,7 +404,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     const togglePause = () => {
       // Check if the slideshow is currently paused
-      if (isPausedRef.current) {
+      if (isPaused) {
         // If paused, restart the auto-slide and immediately advance to the next slide
         startAutoSlide(true);
       } else {
@@ -425,26 +418,29 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     return (
       <>
         {/* Debugging Information (Hidden by default) */}
-        <div
-          className={`${classPrefix}debug`}
-          style={{
-            color: "#000",
-            zIndex: 1000,
-            position: "absolute",
-            top: 0,
-            display: "none",
-          }}
-        >
-          {`curr: ${currentIndex} prev: ${previousIndex} ` +
-            `transitioning: ${isTransitioning}`}
-        </div>
+        {debug && (
+          <div
+            className={`${classPrefix}debug`}
+            style={{
+              color: "#000",
+              zIndex: 1000,
+              position: "absolute",
+              top: 0,
+              display: "none",
+            }}
+          >
+            {`curr: ${currentIndex} prev: ${previousIndex} ` +
+              `transitioning: ${isTransitioning}`}
+          </div>
+        )}
 
         {/* Slideshow Wrapper */}
         <div
           className={
             `${styles.slideshowWrapper} ${classPrefix}slideshow ` +
             `${classPrefix}slideshow-slide-${currentSlug} ` +
-            `${isTransitioning ? `${styles.disableUI} ${classPrefix}disable-ui` : ""}`
+            `${isTransitioning ? `${styles.disableUI} ${classPrefix}disable-ui` : ""}` +
+            `${isPaused ? `${styles.paused} ${classPrefix}paused` : ""}`
           }
           aria-roledescription="carousel"
           aria-label="Slideshow"
@@ -539,9 +535,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             <button
               tabIndex={0}
               onClick={togglePause}
-              aria-label={isPausedRef.current ? resumeLabel : pauseLabel}
+              aria-label={isPaused ? resumeLabel : pauseLabel}
             >
-              {isPausedRef.current ? resumeLabel : pauseLabel}
+              {isPaused ? resumeLabel : pauseLabel}
             </button>
 
             {/* Next Slide Button */}
