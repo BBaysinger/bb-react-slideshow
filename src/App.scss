@@ -311,11 +311,12 @@ $bpmax: 1366px;
   }
 }
 
-.bb-not-hover-capable
-  .bb-slideshow
-  .bb-active:hover {
+.bb-not-hover-capable .bb-slideshow .bb-thumbnail-button-wrapper .bb-active {
   transform: scale(1) !important;
-  border: 1px solid blue;
+  &:hover {
+    transform: scale(1) !important;
+  }
+  // border: 1px solid blue;
 }
 
 //////////////////////////////////////////////////////////////////
