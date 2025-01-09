@@ -19,12 +19,10 @@ import styles from "./Slideshow.module.scss";
  * @param basePath - Base path for routing.
  * @param enableRouting - Enables dynamic routing for slides.
  * @param restartDelay - Delay in milliseconds before restarting the slideshow.
- * @param previousLabel - Label for the "Previous" button.
- * @param nextLabel - Label for the "Next" button.
- * @param resumeLabel - Label for the "Restart" button.
- * @param pauseLabel - Label for the "Pause" button.
  * @param transitionResetDelay - Duration of transitions, after which class names are reset to their default.
  * @param classPrefix - Prefix for all globally-scoped classes to avoid naming conflicts in applications.
+ * @param debug - Whether to show debugging information.
+ * @param labels - Custom labels for navigation buttons.
  */
 const Slideshow: React.FC<SlideshowProps> = React.memo(
   ({
@@ -34,13 +32,15 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     basePath = "/slideshow",
     enableRouting = true,
     restartDelay = 14000,
-    previousLabel = "< Previous",
-    nextLabel = "Next >",
-    resumeLabel = "Restart",
-    pauseLabel = "Pause",
     transitionResetDelay = 1500,
     classPrefix = "",
     debug = false,
+    labels = {
+      previousLabel: "< Previous",
+      nextLabel: "Next >",
+      resumeLabel: "Restart",
+      pauseLabel: "Pause",
+    }
   }) => {
     // Refs
     const isFirstRender = useRef(true); // Tracks the first render
@@ -539,14 +539,14 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             className={`${styles.arrowButtonWrapper} ${classPrefix}arrow-button-wrapper`}
           >
             {/* Previous Slide Button */}
-            {previousLabel && (
+            {labels.previous && (
               <button
                 tabIndex={0}
                 onClick={handlePrevUserTriggered}
                 aria-label="Previous slide"
                 aria-controls="slideshow"
               >
-                {previousLabel}
+                {labels.previous}
               </button>
             )}
 
@@ -554,20 +554,20 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             <button
               tabIndex={0}
               onClick={togglePause}
-              aria-label={isPausedRef.current ? resumeLabel : pauseLabel}
+              aria-label={isPausedRef.current ? labels.resume : labels.pause}
             >
-              {isPausedRef.current ? resumeLabel : pauseLabel}
+              {isPausedRef.current ? labels.resume : labels.pause}
             </button>
 
             {/* Next Slide Button */}
-            {nextLabel && (
+            {labels.next && (
               <button
                 tabIndex={0}
                 onClick={handleNextUserTriggered}
                 aria-label="Next slide"
                 aria-controls="slideshow"
               >
-                {nextLabel}
+                {labels.next}
               </button>
             )}
           </div>
