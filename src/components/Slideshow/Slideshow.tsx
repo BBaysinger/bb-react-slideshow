@@ -38,6 +38,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     resumeLabel = "Restart",
     pauseLabel = "Pause",
     transitionResetDelay = 1500,
+    classPrefix = "",
   }) => {
     // Refs
     const isFirstRender = useRef(true); // Tracks the first render
@@ -424,7 +425,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       <>
         {/* Debugging Information (Hidden by default) */}
         <div
-          className="bb-debug"
+          className={`${classPrefix}debug`}
           style={{
             color: "#000",
             zIndex: 1000,
@@ -442,25 +443,24 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
         {/* Slideshow Wrapper */}
         <div
-          className={`
-          ${styles.slideshowWrapper} 
-          bb-slideshow 
-          bb-slideshow-slide-${currentSlug} 
-          ${isTransitioning ? `${styles.disableUI} bb-disable-ui` : ""}
-        `}
+          className={
+            `${styles.slideshowWrapper} ${classPrefix}slideshow ` +
+            `${classPrefix}slideshow-slide-${currentSlug} ` +
+            `${isTransitioning ? `${styles.disableUI} ${classPrefix}disable-ui` : ""}`
+          }
           aria-roledescription="carousel"
           aria-label="Slideshow"
           aria-live="polite"
           aria-busy={isTransitioning}
         >
           {/* Slide Elements */}
-          <div className={`${styles.slideWrapper} bb-slide-wrapper`}>
+          <div className={`${styles.slideWrapper} ${classPrefix}slide-wrapper`}>
             {slides.map((slide, index) => (
               <div
                 key={index}
                 className={`${styles.slide} ${
                   index === currentIndex ? styles.active : ""
-                } bb-slide-${index} bb-slide`}
+                } ${classPrefix}slide-${index} ${classPrefix}slide`}
                 style={{
                   backgroundImage: `url(${slide.background})`,
                 }}
@@ -476,29 +476,35 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
           {/* Overlay Layers for Visual Effects */}
           <div
-            className={`${styles.overlayWrapper1} bb-overlay-wrapper bb-overlay-wrapper-1`}
+            className={
+              `${styles.overlayWrapper1} ` +
+              `${classPrefix}overlay-wrapper ${classPrefix}overlay-wrapper-1`
+            }
           >
             {slides.map((_, index) => (
               <div
                 key={index}
                 className={`
-                bb-overlay-1-${index + 1} 
+                ${classPrefix}overlay-1-${index + 1} 
                 ${styles.overlay} 
-                bb-overlay 
-                ${index === currentIndex ? `${styles.active} bb-active` : ""} 
-                ${index === previousIndex && isTransitioning ? ` bb-previous` : ""}
+                ${classPrefix}overlay 
+                ${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} 
+                ${index === previousIndex && isTransitioning ? ` ${classPrefix}previous` : ""}
               `}
               ></div>
             ))}
           </div>
           <div
-            className={`${styles.overlayWrapper2} bb-overlay-wrapper bb-overlay-wrapper-2`}
+            className={
+              `${styles.overlayWrapper2} ` +
+              `${classPrefix}overlay-wrapper ${classPrefix}overlay-wrapper-2`
+            }
           ></div>
 
           {/* Content Wrapper */}
           <div
             style={{ height: divHeight }}
-            className={`${styles.contentWrapper} bb-content-wrapper`}
+            className={`${styles.contentWrapper} ${classPrefix}content-wrapper`}
           >
             {slides.map((_, index) => (
               <div
@@ -506,9 +512,11 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                 ref={(el) => {
                   slideRefs.current[index] = el;
                 }}
-                className={`${styles.content} bb-content ${
-                  index === currentIndex ? styles.active + " bb-active" : ""
-                } ${index === previousIndex ? " bb-previous" : ""}`}
+                className={
+                  `${styles.content} ${classPrefix}content ` +
+                  `${index === currentIndex ? styles.active + ` ${classPrefix}active` : ""} ` +
+                  `${index === previousIndex ? `${classPrefix}previous` : ""}`
+                }
               >
                 {slides[index].content}
               </div>
@@ -517,7 +525,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
           {/* Navigation Buttons */}
           <div
-            className={`${styles.arrowButtonWrapper} bb-arrow-button-wrapper`}
+            className={`${styles.arrowButtonWrapper} ${classPrefix}arrow-button-wrapper`}
           >
             {/* Previous Slide Button */}
             {previousLabel && (
@@ -555,7 +563,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
           {/* Thumbnail Navigation */}
           <div
-            className={`${styles.thumbnailButtonWrapper} bb-thumbnail-button-wrapper`}
+            className={`${styles.thumbnailButtonWrapper} ${classPrefix}thumbnail-button-wrapper`}
             role="tablist"
           >
             {slides.map((_, index) => (
@@ -569,8 +577,10 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                 }}
                 onClick={() => handleUserInteraction(index)}
                 className={`${styles.thumbnail} ${
-                  index === currentIndex ? `${styles.active} bb-active` : ""
-                } bb-thumbnail`}
+                  index === currentIndex
+                    ? `${styles.active} ${classPrefix}active`
+                    : ""
+                } ${classPrefix}thumbnail`}
                 role="tab"
                 aria-selected={index === currentIndex}
                 aria-controls={`slide-${index}`}
@@ -582,14 +592,18 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                     alt={slides[index].alt || `Slide thumbnail ${index + 1}`}
                   />
                 ) : (
-                  <span className="bb-visually-hidden">{`Slide ${index + 1}`}</span>
+                  <span
+                    className={`${classPrefix}visually-hidden`}
+                  >{`Slide ${index + 1}`}</span>
                 )}
               </button>
             ))}
           </div>
 
           {/* Accessibility Note */}
-          <p className={`${styles.visuallyHidden} bb-visually-hidden`}>
+          <p
+            className={`${styles.visuallyHidden} ${classPrefix}visually-hidden`}
+          >
             Use the left and right arrow keys to navigate the slideshow.
           </p>
         </div>
