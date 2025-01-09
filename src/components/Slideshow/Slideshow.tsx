@@ -24,6 +24,7 @@ import styles from "./Slideshow.module.scss";
  * @param resumeLabel - Label for the "Restart" button.
  * @param pauseLabel - Label for the "Pause" button.
  * @param transitionResetDelay - Duration of transitions, after which class names are reset to their default.
+ * @param classPrefix - Prefix for all globally-scoped classes to avoid naming conflicts in applications.
  */
 const Slideshow: React.FC<SlideshowProps> = React.memo(
   ({
