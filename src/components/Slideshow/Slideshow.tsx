@@ -92,7 +92,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         }
       }
     }, [slug, enableRouting, slides, currentIndex]);
-  
+
     // Determine the index of the current slide based on the 'slug' in the URL
     // If routing is disabled, the index is set to -1 (inactive)
     const currentRouteIndex = enableRouting
