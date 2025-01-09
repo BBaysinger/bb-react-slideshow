@@ -434,11 +434,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             display: "none",
           }}
         >
-          {`
-          curr: ${currentIndex}
-          prev: ${previousIndex}
-          transitioning: ${isTransitioning}
-        `}
+          {`curr: ${currentIndex} prev: ${previousIndex} ` +
+            `transitioning: ${isTransitioning}`}
         </div>
 
         {/* Slideshow Wrapper */}
@@ -458,17 +455,16 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             {slides.map((slide, index) => (
               <div
                 key={index}
-                className={`${styles.slide} ${
-                  index === currentIndex ? styles.active : ""
-                } ${classPrefix}slide-${index} ${classPrefix}slide`}
+                className={
+                  `${styles.slide} ${index === currentIndex ? styles.active : ""} ` +
+                  `${classPrefix}slide-${index} ${classPrefix}slide`
+                }
                 style={{
                   backgroundImage: `url(${slide.background})`,
                 }}
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`${
-                  slide.alt || `Slide ${index + 1} of ${slides.length}`
-                }`}
+                aria-label={`${slide.alt || `Slide ${index + 1} of ${slides.length}`}`}
                 aria-hidden={index !== currentIndex}
               ></div>
             ))}
@@ -484,13 +480,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             {slides.map((_, index) => (
               <div
                 key={index}
-                className={`
-                ${classPrefix}overlay-1-${index + 1} 
-                ${styles.overlay} 
-                ${classPrefix}overlay 
-                ${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} 
-                ${index === previousIndex && isTransitioning ? ` ${classPrefix}previous` : ""}
-              `}
+                className={
+                  `${classPrefix}overlay-1-${index + 1} ` +
+                  `${styles.overlay} ${classPrefix}overlay ` +
+                  `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
+                  `${index === previousIndex && isTransitioning ? ` ${classPrefix}previous` : ""}`
+                }
               ></div>
             ))}
           </div>
@@ -576,11 +571,11 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                   }
                 }}
                 onClick={() => handleUserInteraction(index)}
-                className={`${styles.thumbnail} ${
-                  index === currentIndex
-                    ? `${styles.active} ${classPrefix}active`
-                    : ""
-                } ${classPrefix}thumbnail`}
+                className={
+                  `${styles.thumbnail} ` +
+                  `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
+                  `${classPrefix}thumbnail`
+                }
                 role="tab"
                 aria-selected={index === currentIndex}
                 aria-controls={`slide-${index}`}
