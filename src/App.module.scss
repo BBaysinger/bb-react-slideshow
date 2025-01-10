@@ -29,10 +29,13 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         rgba(0, 0, 0, 0) 15%,
         #000 15%
       );
-      // This is correct according to the provided design, but it causes the
-      // UI to overflow the screen vertically on a phone. Changed to 10px @ 360px.
-      // @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
-      @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 66px);
+
+      @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
+      @media (hover: none) and (orientation: portrait) {
+        // Reduce vertical overflow on mobile (though this doesn't does
+        // NOT exactly match the designs).
+        @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 66px);
+      }
       .#{$prefix}overlay-wrapper-1,
       .#{$prefix}overlay-wrapper-2,
       .#{$prefix}content-wrapper,
@@ -45,7 +48,9 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       transition: height 0.9s ease-out;
       @include fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
 
-      * {will-change: opacity, transform;}
+      * {
+        will-change: opacity, transform;
+      }
 
       a {
         text-decoration: none;
@@ -126,7 +131,7 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       position: absolute;
       padding-right: 28px;
       pointer-events: none;
-      // visibility: hidden;
+      visibility: hidden;
       will-change: visibility;
       transition: visibility 0.3s; /* Avoids flicker */
       @include fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
@@ -136,7 +141,7 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         position: relative;
         transform: translateY(10vw) translateZ(0);
         will-change: unset;
-        opacity: 0.01;
+        opacity: 0;
         transition:
           opacity 0.4s linear,
           transform 1s ease-out;
@@ -161,7 +166,7 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         > * > * {
           will-change: opacity, transform;
           transform: translateY(10vw) translateZ(0);
-          opacity: 0.01;
+          opacity: 0;
           transition:
             opacity 0.4s linear,
             transform 0.4s ease-out;
