@@ -334,11 +334,13 @@ $prefixes: ("prefix-one-", "prefix-two-");
       }
     }
 
-    .not-hover-capable .#{$prefix}slideshow {
-      button.#{$prefix}thumbnail {
-        &:hover {
-          // Disable hover scale, since it sticks after touch. 🤪
-          transform: scale(1);
+    @media (hover: none) {
+      .#{$prefix}slideshow {
+        button.#{$prefix}thumbnail {
+          &:hover {
+            // Disable hover scale, since it sticks after touch. 🤪
+            transform: scale(1);
+          }
         }
       }
     }
