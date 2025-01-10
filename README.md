@@ -2,7 +2,6 @@
 
 ## Overview
 
-
 A reusable and multilayered interactive slideshow that supports dynamic routing, auto-slide, and user interactions like navigation, pausing, and restarting. It optionally adjusts height dynamically based on slide content to avoid overflow or excessive whitespace. Also preloads images.
 
 Slides are defined as an array of objects with background images, thumbnails, and JSX content passed in as props to make the component reusable and flexible.
@@ -12,11 +11,11 @@ Dynamic routes (optional) only activate on user interaction. This is so the comp
 ## Demos
 
 - Original design (w/ one notable change):
- [https://bb-react-slideshow.netlify.app/rico-slideshow](https://bb-react-slideshow.netlify.app/rico-slideshow)
+  [https://bb-react-slideshow.netlify.app/rico-slideshow](https://bb-react-slideshow.netlify.app/rico-slideshow)
 - Stepper button demo:
- [https://bb-react-slideshow.netlify.app/config-example-2](https://bb-react-slideshow.netlify.app/config-example-2)
+  [https://bb-react-slideshow.netlify.app/config-example-2](https://bb-react-slideshow.netlify.app/config-example-2)
 - Index dots (and routing disabled):
- [https://bb-react-slideshow.netlify.app/config-example-3](https://bb-react-slideshow.netlify.app/config-example-3)
+  [https://bb-react-slideshow.netlify.app/config-example-3](https://bb-react-slideshow.netlify.app/config-example-3)
 
 ## Features
 
