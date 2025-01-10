@@ -22,7 +22,14 @@ const defaultLabels: SlideshowLabels = {
  * for better performance.
  *
  * Slides are defined as an array of objects with background images, thumbnails,
- * passed in as props to make the component reusable and flexible.
+ * and JSX content passed in as props to make the component reusable and flexible.
+ *
+ * Dynamic routes (optional) only activate on user interaction. This is so the
+ * component doesn't stack the history with every auto-slide, but also because I
+ * was experimenting with redux-first routing. I'll come back to that.
+ *
+ * NOTE: There's a lot that's untested here still, as I'm only focusing on
+ * the current use case.
  *
  * @param slides - An array of slide content or components.
  * @param initialAutoSlide - Whether it should start out paused or auto-sliding.
@@ -542,7 +549,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
           {/* Navigation Buttons (So far only stubbed in. Totally untested.) */}
           <div
-            className={`${styles.arrowButtonWrapper} ${classPrefix}arrow-button-wrapper`}
+            className={`${styles.arrowButtonWrapper} ${classPrefix}directional-button-wrapper`}
           >
             {/* Previous Slide Button */}
             {labels.previous && (
