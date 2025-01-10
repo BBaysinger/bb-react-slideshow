@@ -8,11 +8,11 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
 
 .slideshow-demo {
   position: relative;
-  @media (hover: none) and (orientation: portrait) {
-    // Prevents the UI from overflowing view height on phones
-    max-height: 100dvh;
-    overflow: hidden;
-  }
+  // @media (hover: none) and (orientation: portrait) {
+  //   // Prevents the UI from overflowing view height on phones
+  //   max-height: 100dvh;
+  //   overflow: hidden;
+  // }
 }
 
 :global {
