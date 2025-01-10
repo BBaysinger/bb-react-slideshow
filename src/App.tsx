@@ -276,6 +276,7 @@ const App: React.FC = () => {
               slides={slides}
               basePath={`${basePath}/config-example-3`}
               initialAutoSlide={true}
+              enableRouting={false}
               debug={true}
             />
           }
