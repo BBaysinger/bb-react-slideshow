@@ -9,7 +9,7 @@ import HoverCapabilityWatcher from "utils/HoverCapabilityWatcher";
 import styles from "./App.module.scss";
 
 /**
- * Essentially a demo and example of usage for the Slideshow component.
+ * A demo of the Slideshow component.
  * Defines routes, initializes slide data, and configures the Slideshow.
  *
  * JSX slide content is passed along to the slideshow(s) as props along with respective data.
@@ -17,7 +17,7 @@ import styles from "./App.module.scss";
  * for crossfade animations.
  *
  * The content was added taking a cue from the SPS home page where there is content on
- * each slide, but also that it's a logical feature. And crossfades are awesome.
+ * each slide, but also that it's a logical feature. And crossfades are awesome 🤘.
  *
  * @author Bradley Baysinger
  * @since The beginning of time.
@@ -44,7 +44,6 @@ const App: React.FC = () => {
       slug: "one",
       background: `${basePath}/assets/images/1-background.jpg`,
       thumbnail: `${basePath}/assets/images/1-thumbnail.jpg`,
-      desc: "",
       alt: "Rico the dog",
       content: (
         <div>
@@ -69,7 +68,6 @@ const App: React.FC = () => {
       slug: "two",
       background: `${basePath}/assets/images/2-background.jpg`,
       thumbnail: `${basePath}/assets/images/2-thumbnail.jpg`,
-      desc: "",
       alt: "Rico napping",
       content: (
         <div>
@@ -95,7 +93,6 @@ const App: React.FC = () => {
       slug: "three",
       background: `${basePath}/assets/images/3-background.jpg`,
       thumbnail: `${basePath}/assets/images/3-thumbnail.jpg`,
-      desc: "",
       alt: "Rico in the snow",
       content: (
         <div>
@@ -122,7 +119,6 @@ const App: React.FC = () => {
       slug: "four",
       background: `${basePath}/assets/images/4-background.jpg`,
       thumbnail: `${basePath}/assets/images/4-thumbnail.jpg`,
-      desc: "",
       alt: "Rico flying",
       content: (
         <div>
@@ -148,7 +144,6 @@ const App: React.FC = () => {
       slug: "five",
       background: `${basePath}/assets/images/5-background.jpg`,
       thumbnail: `${basePath}/assets/images/5-thumbnail.jpg`,
-      desc: "",
       alt: "Rico's birthday",
       content: (
         <div>
@@ -175,7 +170,6 @@ const App: React.FC = () => {
       slug: "six",
       background: `${basePath}/assets/images/6-background.jpg`,
       thumbnail: `${basePath}/assets/images/6-thumbnail.jpg`,
-      desc: "",
       alt: "Rico in the sun",
       content: (
         <div>
