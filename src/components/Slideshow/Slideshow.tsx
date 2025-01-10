@@ -549,7 +549,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
           ))}
         </div>
 
-        {/* Navigation Buttons */}
+        {/* Stepper Navigation Buttons */}
         <div
           className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
         >
@@ -593,7 +593,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
           )}
         </div>
 
-        {/* Thumbnail Navigation */}
+        {/* Indexed (Thumbnail/Dot) Navigation */}
         <div
           className={`${styles["indexed-button-wrapper"]} ${classPrefix}indexed-button-wrapper`}
           role="tablist"
