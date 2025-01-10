@@ -19,6 +19,7 @@ export default defineConfig(({ command, mode }) => {
       preprocessorOptions: {
         scss: {
           api: "modern-compiler",
+          additionalData: `@use "sass:map"; @use "sass:list";`,
         },
       },
     },

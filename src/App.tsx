@@ -28,10 +28,6 @@ const App: React.FC = () => {
     HoverCapabilityWatcher.instance.isHoverCapable,
   );
 
-  // Allow external styling and prevent CSS class name conflicts in larger
-  // applications by using a class prefix
-  const classPrefix = "awesome-prefix-";
-
   // Determine the base URL for assets and routing based on the environment
   const basePath =
     process.env.NODE_ENV === "production"
@@ -56,7 +52,7 @@ const App: React.FC = () => {
           </p>
           <a
             href="https://www.playstation.com/"
-            className={`${classPrefix}cta`}
+            className={`cta`}
             target="_blank"
           >
             LEARN MORE
@@ -81,7 +77,7 @@ const App: React.FC = () => {
           </p>
           <a
             href="https://www.playstation.com/"
-            className={`${classPrefix}cta`}
+            className={`cta`}
             target="_blank"
           >
             RICOS'S SHENANIGANS
@@ -107,7 +103,7 @@ const App: React.FC = () => {
           </p>
           <a
             href="https://www.playstation.com/"
-            className={`${classPrefix}cta`}
+            className={`cta`}
             target="_blank"
           >
             EXPLORE MORE
@@ -132,7 +128,7 @@ const App: React.FC = () => {
           </p>
           <a
             href="https://www.playstation.com/"
-            className={`${classPrefix}cta`}
+            className={`cta`}
             target="_blank"
           >
             JOIN THE FUN
@@ -158,7 +154,7 @@ const App: React.FC = () => {
           </p>
           <a
             href="https://www.playstation.com/"
-            className={`${classPrefix}cta`}
+            className={`cta`}
             target="_blank"
           >
             CELEBRATE WITH RICO
@@ -184,7 +180,7 @@ const App: React.FC = () => {
           </p>
           <a
             href="https://www.playstation.com/"
-            className={`${classPrefix}cta`}
+            className={`cta`}
             target="_blank"
           >
             WALK WITH RICO
@@ -221,7 +217,7 @@ const App: React.FC = () => {
   // with different configuration options.
   return (
     <div
-      className={`${isHoverCapable ? "" : `${classPrefix}not-hover-capable`} ${styles["slideshow-demo"]}`}
+      className={`${isHoverCapable ? "" : `not-hover-capable`} ${styles["slideshow-demo"]}`}
     >
       <BrowserRouter>
         <Routes>
@@ -235,7 +231,7 @@ const App: React.FC = () => {
             path={`${basePath}/rico-slideshow/:slug`}
             element={
               <Slideshow
-                classPrefix={classPrefix}
+                classPrefix={"prefix-one-"}
                 slides={slides}
                 basePath={`${basePath}/rico-slideshow`}
                 initialAutoSlide={true}
@@ -243,16 +239,17 @@ const App: React.FC = () => {
               />
             }
           />
-          {/* Route for additional slideshow with other config options. Non-functional so far.
+          {/* Route for additional slideshow with other config options. Not tested so far.
         TODO: Finish setting this up. */}
           <Route
             path={`${basePath}/another-config/:slug`}
             element={
               <Slideshow
-                classPrefix={classPrefix}
+                classPrefix={"prefix-two-"}
                 slides={slides}
                 basePath={`${basePath}/another-config`}
                 initialAutoSlide={true}
+                debug={true}
               />
             }
           />
