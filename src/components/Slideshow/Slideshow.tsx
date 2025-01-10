@@ -40,7 +40,7 @@ const defaultLabels: SlideshowLabels = {
  * @param transitionResetDelay - Duration of transitions, after which class names are reset to their default.
  * @param classPrefix - Prefix for all globally-scoped classes to avoid naming conflicts in applications.
  * @param debug - Whether to show debugging information.
- * @param labels - Custom labels for directional navigation buttons.
+ * @param labels - Custom labels for directional/stepper navigation buttons.
  */
 const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const {
@@ -63,7 +63,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const previousIndexRef = useRef<number>(-1); // Tracks the current index for stable access
   const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
-  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for thumbnail buttons
+  const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
   const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for autoslide
   const preloaderRan = useRef(false); // If the preloader has run
 
@@ -335,15 +335,15 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   ]);
 
   useEffect(() => {
-    // Ensure the current thumbnail element exists before attempting to focus it
+    // Ensure the current indexed element exists before attempting to focus it
     if (
-      thumbnailRefs.current &&
-      thumbnailRefs.current[currentIndexRef.current]
+      indexedButtonRefs.current &&
+      indexedButtonRefs.current[currentIndexRef.current]
     ) {
       // Set focus to the thumbnail corresponding to the current slide
       // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
-      if (thumbnailRefs.current[currentIndexRef.current]) {
-        thumbnailRefs.current[currentIndexRef.current]!.focus({
+      if (indexedButtonRefs.current[currentIndexRef.current]) {
+        indexedButtonRefs.current[currentIndexRef.current]!.focus({
           preventScroll: true,
         });
       }
@@ -552,7 +552,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
         {/* Navigation Buttons */}
         <div
-          className={`${styles["directional-button-wrapper"]} ${classPrefix}directional-button-wrapper`}
+          className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
         >
           {/* Previous Slide Button */}
           {labels.previous && (
@@ -596,7 +596,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
         {/* Thumbnail Navigation */}
         <div
-          className={`${styles.thumbnailButtonWrapper} ${classPrefix}thumbnail-button-wrapper`}
+          className={`${styles["indexed-button-wrapper"]} ${classPrefix}indexed-button-wrapper`}
           role="tablist"
         >
           {slides.map((_, index) => (
@@ -604,30 +604,26 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
               tabIndex={index}
               key={index}
               ref={(el) => {
-                if (thumbnailRefs.current !== null) {
-                  thumbnailRefs.current[index] = el;
+                if (indexedButtonRefs.current !== null) {
+                  indexedButtonRefs.current[index] = el;
                 }
               }}
               onClick={() => handleUserInteraction(index)}
               className={
-                `${styles.thumbnail} ` +
+                `${styles["indexed-button"]} ` +
                 `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
-                `${classPrefix}thumbnail`
+                `${classPrefix}indexed-button`
               }
               role="tab"
               aria-selected={index === currentIndex}
               aria-controls={`slide-${index}`}
               id={`tab-${index}`}
             >
-              {slides[index].thumbnail ? (
+              {slides[index].thumbnail && (
                 <img
                   src={slides[index].thumbnail}
-                  alt={slides[index].alt || `Slide thumbnail ${index + 1}`}
+                  alt={slides[index].alt || `Slide button ${index + 1}`}
                 />
-              ) : (
-                <span
-                  className={`${styles["visually-hidden"]} ${classPrefix}visually-hidden`}
-                >{`Slide ${index + 1}`}</span>
               )}
             </button>
           ))}

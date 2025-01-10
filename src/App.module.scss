@@ -252,7 +252,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
         linear-gradient(to bottom, rgba(0, 0, 0, 0) 65%, #000000 90%);
     }
 
-    .#{$prefix}thumbnail-button-wrapper {
+    .#{$prefix}indexed-button-wrapper {
       display: grid;
       gap: 2vw;
       grid-template-columns: repeat(3, 1fr);
@@ -269,7 +269,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
       }
     }
 
-    button.#{$prefix}thumbnail {
+    button.#{$prefix}indexed-button {
       cursor: pointer;
       opacity: 0.7;
       overflow: hidden;
@@ -336,7 +336,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
 
     @media (hover: none) {
       .#{$prefix}slideshow {
-        button.#{$prefix}thumbnail {
+        button.#{$prefix}indexed-button {
           &:hover {
             // Disable hover scale, since it sticks after touch. 🤪
             transform: scale(1);
@@ -352,7 +352,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
 
   $first-prefix: list.nth($prefixes, 1);
 
-  .#{$first-prefix}directional-button-wrapper {
+  .#{$first-prefix}stepper-button-wrapper {
     display: none;
   }
 
@@ -362,7 +362,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
 
   $second-prefix: list.nth($prefixes, 2);
 
-  .#{$second-prefix}directional-button-wrapper {
+  .#{$second-prefix}stepper-button-wrapper {
     display: flex;
     justify-content: center;
     position: relative;
