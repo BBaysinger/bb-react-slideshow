@@ -31,16 +31,16 @@ const defaultLabels: SlideshowLabels = {
  * NOTE: There's a lot that's untested here still, as I'm only focusing on
  * the current use case.
  *
- * @param slides - An array of slide content or components.
- * @param initialAutoSlide - Whether it should start out paused or auto-sliding.
- * @param interval - Interval in milliseconds between auto-slides.
- * @param basePath - Base path for routing.
- * @param enableRouting - Enables dynamic routing for slides.
- * @param restartDelay - Delay in milliseconds before restarting the slideshow.
- * @param transitionResetDelay - Duration of transitions, after which class names are reset to their default.
- * @param classPrefix - Prefix for all globally-scoped classes to avoid naming conflicts in applications.
- * @param debug - Whether to show debugging information.
- * @param labels - Custom labels for directional/stepper navigation buttons.
+ * @param slides - An array of slide content or components
+ * @param initialAutoSlide - Whether it should start out paused or auto-sliding
+ * @param interval - Interval in milliseconds between auto-slides
+ * @param basePath - Base path for routing
+ * @param enableRouting - Enables dynamic routing for slides
+ * @param restartDelay - Delay in milliseconds before restarting the slideshow
+ * @param transitionResetDelay - Duration of transitions that controls the 'transitioning' state and class
+ * @param classPrefix - Prefix for all globally-scoped classes to avoid naming conflicts in applications
+ * @param debug - Whether to show debugging information
+ * @param labels - Custom labels for directional/stepper navigation buttons
  */
 const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const {
