@@ -16,10 +16,9 @@ const defaultLabels: SlideshowLabels = {
 /**
  * React Slideshow Component
  *
- * A reusable and multilayered interactive slideshow that supports dynamic routing,
- * auto-slide, and user interactions like navigation, pausing, and restarting.
- * It adjusts height dynamically based on the current slide and preloads images
- * for better performance.
+ * A reusable and multilayered interactive slideshow that supports dynamic routing, auto-slide,
+ * and user interactions like navigation, pausing, and restarting. It optionally adjusts height
+ * dynamically based on slide content to avoid overflow or excessive whitespace. Also preloads images.
  *
  * Slides are defined as an array of objects with background images, thumbnails,
  * and JSX content passed in as props to make the component reusable and flexible.
