@@ -344,33 +344,26 @@ $prefixes: ("prefix-one-", "prefix-two-");
         }
       }
     }
-    // .#{$prefix}directional-button-wrapper {
-    //   border: 1px solid green;
-    // }
   }
 
-  .prefix-one-directional-button-wrapper {
+  //////////////////////////////////////////////////////////////////
+  // Rico Slideshow Config 1
+  //////////////////////////////////////////////////////////////////
+
+  $first-prefix: list.nth($prefixes, 1);
+
+  .#{$first-prefix}directional-button-wrapper {
     display: none;
   }
-}
 
-//////////////////////////////////////////////////////////////////
-// Rico Slideshow Config 1
-//////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////
+  // Rico Slideshow Config 2
+  //////////////////////////////////////////////////////////////////
 
-$first-prefix: list.nth($prefixes, 1);
+  $second-prefix: list.nth($prefixes, 2);
 
-.#{$first-prefix}directional-button-wrapper {
-  // border: 1px solid red;
-  display: none;
-}
-
-//////////////////////////////////////////////////////////////////
-// Rico Slideshow Config 2
-//////////////////////////////////////////////////////////////////
-
-$second-prefix: list.nth($prefixes, 1);
-
-.#{$second-prefix}directional-button-wrapper {
-  // border: 100px solid red;
+  .#{$second-prefix}directional-button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 }
