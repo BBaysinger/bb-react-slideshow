@@ -229,8 +229,7 @@ const App: React.FC = () => {
             element={<Navigate to={`${basePath}/another-config/one`} />}
           />
 
-          {/* Route for additional slideshow with other config options.
-          TODO: Finish setting this up. */}
+          {/* Route for additional slideshow with other config options. */}
           <Route
             path={`${basePath}/another-config/:slug`}
             element={
