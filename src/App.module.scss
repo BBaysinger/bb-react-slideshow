@@ -265,9 +265,10 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       gap: 2vw;
       grid-template-columns: repeat(3, 1fr);
 
+      // @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
+      @include fluid-property(padding-bottom, $bpmin, $bpmax, 25px, 51px);
       @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
       @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
-      @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
       @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
       @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
       @include breakpoint-up($b992px) {
