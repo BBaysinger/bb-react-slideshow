@@ -2,7 +2,12 @@
 
 ## Overview
 
-The React Slideshow Component is a reusable, scalable, and fluid slideshow designed to enhance modern web experiences. It combines dynamic interactivity with best practices in front-end development to offer a robust and configurable solution for displaying content-rich slideshows.
+
+A reusable and multilayered interactive slideshow that supports dynamic routing, auto-slide, and user interactions like navigation, pausing, and restarting. It optionally adjusts height dynamically based on slide content to avoid overflow or excessive whitespace. Also preloads images.
+
+Slides are defined as an array of objects with background images, thumbnails, and JSX content passed in as props to make the component reusable and flexible.
+
+Dynamic routes (optional) only activate on user interaction. This is so the component doesn't stack the history with every auto-slide, but also because I was experimenting with redux-first routing. I'll come back to that.
 
 ## Demos
 
