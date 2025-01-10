@@ -352,15 +352,44 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
   }
 
   //////////////////////////////////////////////////////////////////
-  /// Third Slideshow Config Example
+  // Rico Slideshow Config 1
   //////////////////////////////////////////////////////////////////
+
+  $first-prefix: list.nth($main-prefixes, 1);
+
+  .#{$first-prefix}stepper-button-wrapper {
+    display: none;
+  }
+
+  //////////////////////////////////////////////////////////////////
+  // Rico Slideshow Config 2
+  //////////////////////////////////////////////////////////////////
+
+  $second-prefix: list.nth($main-prefixes, 2);
+
+  .#{$second-prefix}stepper-button-wrapper {
+    position: relative;
+    margin-top: 10px;
+    button {
+      margin: 0 5px;
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////
+  /// Rico Slideshow Config 3
+  //////////////////////////////////////////////////////////////////
+
+  .prefix-3-stepper-button-wrapper {
+    display: none;
+  }
 
   .prefix-3-indexed-button-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
   }
 
   button.prefix-3-indexed-button {
@@ -389,32 +418,6 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
     &:hover {
       opacity: 0.9;
       transform: scale(1.1);
-    }
-  }
-
-  //////////////////////////////////////////////////////////////////
-  // Rico Slideshow Config 1
-  //////////////////////////////////////////////////////////////////
-
-  $first-prefix: list.nth($main-prefixes, 1);
-
-  .#{$first-prefix}stepper-button-wrapper {
-    display: none;
-  }
-
-  //////////////////////////////////////////////////////////////////
-  // Rico Slideshow Config 2
-  //////////////////////////////////////////////////////////////////
-
-  $second-prefix: list.nth($main-prefixes, 2);
-
-  .#{$second-prefix}stepper-button-wrapper {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-top: 10px;
-    button {
-      margin: 0 5px;
     }
   }
 }
