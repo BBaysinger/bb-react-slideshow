@@ -569,7 +569,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
           ))}
         </div>
 
-        {/* Navigation Buttons (So far only stubbed in. Totally untested.) */}
+        {/* Navigation Buttons */}
         <div
           className={`${styles["directional-button-wrapper"]} ${classPrefix}directional-button-wrapper`}
         >
@@ -580,6 +580,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
               onClick={handlePrevUserTriggered}
               aria-label="Previous slide"
               aria-controls="slideshow"
+              className={`${styles.prevous} ${classPrefix}previous`}
             >
               {labels.previous}
             </button>
@@ -589,9 +590,13 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
           <button
             tabIndex={0}
             onClick={togglePause}
-            aria-label={isPausedRef.current ? labels.resume : labels.pause}
+            aria-label={isPaused ? labels.resume : labels.pause}
+            className={
+              `${isPaused ? styles.pause : styles.resume}` +
+              `${classPrefix}${isPaused ? "pause" : "resume"}`
+            }
           >
-            {isPausedRef.current ? labels.resume : labels.pause}
+            {isPaused ? labels.resume : labels.pause}
           </button>
 
           {/* Next Slide Button */}
@@ -601,6 +606,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
               onClick={handleNextUserTriggered}
               aria-label="Next slide"
               aria-controls="slideshow"
+              className={`${styles.next} ${classPrefix}next`}
             >
               {labels.next}
             </button>
