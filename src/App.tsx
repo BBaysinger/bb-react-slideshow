@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
@@ -36,6 +36,7 @@ const App: React.FC = () => {
       background: `${basePath}/assets/images/1-background.jpg`,
       thumbnail: `${basePath}/assets/images/1-thumbnail.jpg`,
       alt: "Rico the dog",
+      title: "Rico the Dog",
       content: (
         <div>
           <h3>MORE FROM RICO THE&nbsp;DOG</h3>
@@ -60,6 +61,7 @@ const App: React.FC = () => {
       background: `${basePath}/assets/images/2-background.jpg`,
       thumbnail: `${basePath}/assets/images/2-thumbnail.jpg`,
       alt: "Rico napping",
+      title: "Rico Napping",
       content: (
         <div>
           <h3>CAUGHT IN THE&nbsp;ACT…</h3>
@@ -85,6 +87,7 @@ const App: React.FC = () => {
       background: `${basePath}/assets/images/3-background.jpg`,
       thumbnail: `${basePath}/assets/images/3-thumbnail.jpg`,
       alt: "Rico in the snow",
+      title: "Rico in the Snow",
       content: (
         <div>
           <h3>SNOW DAY WITH&nbsp;RICO</h3>
@@ -111,6 +114,7 @@ const App: React.FC = () => {
       background: `${basePath}/assets/images/4-background.jpg`,
       thumbnail: `${basePath}/assets/images/4-thumbnail.jpg`,
       alt: "Rico flying",
+      title: "Rico Flying",
       content: (
         <div>
           <h3>FLY HIGH, RICO!</h3>
@@ -136,6 +140,7 @@ const App: React.FC = () => {
       background: `${basePath}/assets/images/5-background.jpg`,
       thumbnail: `${basePath}/assets/images/5-thumbnail.jpg`,
       alt: "Rico's birthday",
+      title: "Rico's Birthday",
       content: (
         <div>
           <h3>IT'S RICO'S DAY!</h3>
@@ -162,6 +167,7 @@ const App: React.FC = () => {
       background: `${basePath}/assets/images/6-background.jpg`,
       thumbnail: `${basePath}/assets/images/6-thumbnail.jpg`,
       alt: "Rico in the sun",
+      title: "Rico in the Sun",
       content: (
         <div>
           <h3>SUMMER VIBES&nbsp;ONLY</h3>
@@ -191,59 +197,70 @@ const App: React.FC = () => {
     content: CSSVariableInjector.applyChildCSSVariables(slide.content),
   }));
 
+  const location = useLocation();
+
+  useEffect(() => {
+    // Update the document title based on the route slug
+    const currentSlide = slides.find((slide) =>
+      location.pathname.includes(slide.slug),
+    );
+
+    document.title = currentSlide
+      ? `Rico Slideshow - ${currentSlide.title}`
+      : "Rico Slideshow - Welcome";
+  }, [location, slides]);
+
   // Render the application with two routes, each displaying a Slideshow component
   // with different configuration options.
   return (
     <div className={`${styles["slideshow-demo"]}`}>
-      <BrowserRouter>
-        <Routes>
-          {/* Redirect */}
-          <Route
-            path="/"
-            element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
-          />
+      <Routes>
+        {/* Redirect */}
+        <Route
+          path="/"
+          element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
+        />
 
-          {/* Redirect */}
-          <Route
-            path="/rico-slideshow"
-            element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
-          />
+        {/* Redirect */}
+        <Route
+          path="/rico-slideshow"
+          element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
+        />
 
-          {/* Route for the primary slideshow, with dynamic slide navigation */}
-          <Route
-            path={`${basePath}/rico-slideshow/:slug`}
-            element={
-              <Slideshow
-                classPrefix={"prefix-one-"}
-                slides={slides}
-                basePath={`${basePath}/rico-slideshow`}
-                initialAutoSlide={true}
-                debug={true}
-              />
-            }
-          />
+        {/* Route for the primary slideshow, with dynamic slide navigation */}
+        <Route
+          path={`${basePath}/rico-slideshow/:slug`}
+          element={
+            <Slideshow
+              classPrefix={"prefix-one-"}
+              slides={slides}
+              basePath={`${basePath}/rico-slideshow`}
+              initialAutoSlide={true}
+              debug={true}
+            />
+          }
+        />
 
-          {/* Redirect */}
-          <Route
-            path="/another-config"
-            element={<Navigate to={`${basePath}/another-config/one`} />}
-          />
+        {/* Redirect */}
+        <Route
+          path="/another-config"
+          element={<Navigate to={`${basePath}/another-config/one`} />}
+        />
 
-          {/* Route for additional slideshow with other config options. */}
-          <Route
-            path={`${basePath}/another-config/:slug`}
-            element={
-              <Slideshow
-                classPrefix={"prefix-two-"}
-                slides={slides}
-                basePath={`${basePath}/another-config`}
-                initialAutoSlide={true}
-                debug={true}
-              />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+        {/* Route for additional slideshow with other config options. */}
+        <Route
+          path={`${basePath}/another-config/:slug`}
+          element={
+            <Slideshow
+              classPrefix={"prefix-two-"}
+              slides={slides}
+              basePath={`${basePath}/another-config`}
+              initialAutoSlide={true}
+              debug={true}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 };
