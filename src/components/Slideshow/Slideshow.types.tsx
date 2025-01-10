@@ -8,6 +8,7 @@ interface Slide {
   alt?: string;
   desc?: string;
   content?: React.ReactNode;
+  title?: string;
 }
 
 type SlideshowLabels = {
