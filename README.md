@@ -7,11 +7,11 @@ The React Slideshow Component is a reusable, scalable, and fluid slideshow desig
 ## Demos
 
 - Original design as provided:
-- [https://bb-react-slideshow.netlify.app/rico-slideshow](https://bb-react-slideshow.netlify.app/rico-slideshow)
+ [https://bb-react-slideshow.netlify.app/rico-slideshow](https://bb-react-slideshow.netlify.app/rico-slideshow)
 - Stepper button demo:
-- [https://bb-react-slideshow.netlify.app/config-example-2](https://bb-react-slideshow.netlify.app/config-example-2)
+ [https://bb-react-slideshow.netlify.app/config-example-2](https://bb-react-slideshow.netlify.app/config-example-2)
 - Index dots:
-- [https://bb-react-slideshow.netlify.app/config-example-3](https://bb-react-slideshow.netlify.app/config-example-3)
+ [https://bb-react-slideshow.netlify.app/config-example-3](https://bb-react-slideshow.netlify.app/config-example-3)
 
 ## Features
 
