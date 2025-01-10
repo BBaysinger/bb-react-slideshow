@@ -471,7 +471,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           className={
             `${styles.slideshowWrapper} ${classPrefix}slideshow ` +
             `${classPrefix}slideshow-slide-${currentSlug} ` +
-            `${isTransitioning ? `${styles.disableUI} ${classPrefix}disable-ui` : ""}` +
+            `${isTransitioning ? `${styles.transitioning} ${classPrefix}transitioning` : ""}` +
             `${isPaused ? `${styles.paused} ${classPrefix}paused` : ""}`
           }
           aria-roledescription="carousel"

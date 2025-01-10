@@ -23,7 +23,6 @@ import styles from "./App.module.scss";
  * @version N/A
  */
 const App: React.FC = () => {
-
   // Determine the base URL for assets and routing based on the environment
   const basePath =
     process.env.NODE_ENV === "production"
@@ -195,9 +194,7 @@ const App: React.FC = () => {
   // Render the application with two routes, each displaying a Slideshow component
   // with different configuration options.
   return (
-    <div
-      className={`${styles["slideshow-demo"]}`}
-    >
+    <div className={`${styles["slideshow-demo"]}`}>
       <BrowserRouter>
         <Routes>
           {/* Redirect */}
