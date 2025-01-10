@@ -9,14 +9,6 @@
 
 .slideshowWrapper {
   position: relative;
-  &.disableUI {
-    .arrowButtonWrapper,
-    .thumbnailButtonWrapper {
-      button {
-        cursor: default;
-      }
-    }
-  }
 }
 
 .slideWrapper {
