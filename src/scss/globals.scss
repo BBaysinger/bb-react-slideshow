@@ -1,7 +1,7 @@
 @use "sass:math";
 @use "sass:map";
 
-// Breakpoint Base Variables (Unitless)
+// Breakpoint base variables (unitless)
 $b320: 320; // Ultra-narrow screens (e.g., smartwatches, highly compact UIs).
 $b360: 360; // Baseline for smaller smartphones (practical starting point for mobile-first design).
 $b480: 480; // Compact smartphones or foldables in phone mode (slightly larger mobile devices).
@@ -16,7 +16,7 @@ $b1600: 1600; // Larger desktop screens, mid-size monitors.
 $b1920: 1920; // Wide monitors or premium desktop setups (optimal for expansive layouts).
 $b2200: 2200; // Ultra-wide monitors and 4K setups.
 
-// Breakpoints w/ Units
+// Breakpoints w/ units
 $b320px: $b320 * 1px;
 $b360px: $b360 * 1px;
 $b480px: $b480 * 1px;
@@ -31,7 +31,7 @@ $b1600px: $b1600 * 1px;
 $b1920px: $b1920 * 1px;
 $b2200px: $b2200 * 1px;
 
-// Breakpoints map (Unitless) (for iteration)
+// Breakpoints map (unitless) (for iteration)
 $breakpoints: (
   320: $b320,
   360: $b360,
