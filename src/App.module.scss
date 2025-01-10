@@ -15,6 +15,8 @@ $prefixes: ("prefix-one-", "prefix-two-");
   // out of the box and should all be overrideable. (BTW, this is untested, but it's
   // the end goal.)
 
+  // Prefixing all classes instead of relying on nesting. This is to avoid specificity/
+  // overriding issues and prevent bloating the output CSS. 
   @each $prefix in $prefixes {
     .#{$prefix}slideshow {
       box-sizing: border-box;
