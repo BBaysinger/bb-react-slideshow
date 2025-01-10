@@ -3,7 +3,7 @@ import React from "react";
 interface Slide {
   slug: string;
   background: string;
-  thumbnail: string;
+  thumbnail?: string;
   foreground?: string;
   alt?: string;
   desc?: string;
