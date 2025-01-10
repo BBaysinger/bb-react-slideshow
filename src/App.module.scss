@@ -29,7 +29,10 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         rgba(0, 0, 0, 0) 15%,
         #000 15%
       );
-      @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
+      // This is correct according to the provided design, but it causes the
+      // UI to overflow the screen vertically on a phone. Changed to 10px @ 360px.
+      // @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
+      @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 66px);
       .#{$prefix}overlay-wrapper-1,
       .#{$prefix}overlay-wrapper-2,
       .#{$prefix}content-wrapper,
