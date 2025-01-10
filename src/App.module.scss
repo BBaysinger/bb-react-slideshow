@@ -174,10 +174,13 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       }
     }
 
-    .#{$prefix}slide-wrapper,
+    .#{$prefix}slide-wrapper {
+      @include fluid-property(height, $bpmin, $bpmax, 225px, 767px);
+    }
+
     .#{$prefix}overlay-wrapper-1,
     .#{$prefix}overlay-wrapper-2 {
-      @include fluid-property(height, $bpmin, $bpmax, 225px, 767px);
+      @include fluid-property(height, $bpmin, $bpmax, 226px, 768px);
     }
 
     .#{$prefix}slide-wrapper {
