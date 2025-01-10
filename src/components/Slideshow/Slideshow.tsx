@@ -17,18 +17,16 @@ const defaultLabels: SlideshowLabels = {
  * React Slideshow Component
  *
  * A reusable and multilayered interactive slideshow that supports dynamic routing, auto-slide,
- * and user interactions like navigation, pausing, and restarting. It optionally adjusts height
- * dynamically based on slide content to avoid overflow or excessive whitespace. Also preloads images.
+ * and multiple types of navigation, including thumbnails, steppers, pausing, and restarting.
+ * It (optionally) adjusts height dynamically based on slide content to avoid overflow or
+ * excessive whitespace. Also preloads images.
  *
  * Slides are defined as an array of objects with background images, thumbnails,
  * and JSX content passed in as props to make the component reusable and flexible.
  *
  * Dynamic routes (optional) only activate on user interaction. This is so the
- * component doesn't stack the history with every auto-slide, but also because I
- * was experimenting with redux-first routing. I'll come back to that.
- *
- * NOTE: There's a lot that's untested here still, as I'm only focusing on
- * the current use case.
+ * component doesn't stack the history with every auto-slide (but also because I
+ * was experimenting with redux-first routing. I'll come back to that.)
  *
  * @param slides - An array of slide content or components
  * @param initialAutoSlide - Whether it should start out paused or auto-sliding
