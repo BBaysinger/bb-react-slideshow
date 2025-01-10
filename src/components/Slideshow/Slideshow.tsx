@@ -56,9 +56,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     labels = defaultLabels,
   } = props;
 
-  // Ref to track previous props
-  // const prevProps = useRef<SlideshowProps>(props);
-
   // Refs
   const isFirstRender = useRef(true); // Tracks the first render
   const navigateRef = useRef(useNavigate()); // Stable ref for navigation
@@ -87,22 +84,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   }
 
   const isDebug = () => Boolean(debug);
-
-  // Agressive way to prevent props from changing. You should never need to do that.
-  // Just create a new instance instead.
-  // useEffect(() => {
-  //   for (const key in props) {
-  //     if (
-  //       Object.prototype.hasOwnProperty.call(props, key) &&
-  //       !isEqual(props[key as keyof SlideshowProps], prevProps.current[key as keyof SlideshowProps])
-  //     ) {
-  //       throw new Error(`Prop "${key}" cannot change!`);
-  //     }
-  //   }
-
-  //   // Update the ref to track the current props for the next render
-  //   prevProps.current = props;
-  // }, [props]);
 
   useEffect(() => {
     // Store the navigate function reference in a mutable ref to
