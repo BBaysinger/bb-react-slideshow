@@ -9,7 +9,7 @@ import HoverCapabilityWatcher from "utils/HoverCapabilityWatcher";
 import styles from "./App.module.scss";
 
 /**
- * A demo of the Slideshow component.
+ * Multiple demos of the Slideshow component.
  * Defines routes, initializes slide data, and configures the Slideshow.
  *
  * JSX slide content is passed along to the slideshow(s) as props along with respective data.
@@ -221,8 +221,15 @@ const App: React.FC = () => {
     >
       <BrowserRouter>
         <Routes>
+          {/* Redirect */}
           <Route
             path="/"
+            element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
+          />
+
+          {/* Redirect */}
+          <Route
+            path="/rico-slideshow"
             element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
           />
 
@@ -239,8 +246,15 @@ const App: React.FC = () => {
               />
             }
           />
-          {/* Route for additional slideshow with other config options. Not tested so far.
-        TODO: Finish setting this up. */}
+
+          {/* Redirect */}
+          <Route
+            path="/another-config"
+            element={<Navigate to={`${basePath}/another-config/one`} />}
+          />
+
+          {/* Route for additional slideshow with other config options.
+          TODO: Finish setting this up. */}
           <Route
             path={`${basePath}/another-config/:slug`}
             element={
