@@ -141,7 +141,7 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         position: relative;
         transform: translateY(10vw) translateZ(0);
         will-change: unset;
-        opacity: 0;
+        opacity: 0.01;
         transition:
           opacity 0.4s linear,
           transform 1s ease-out;
@@ -166,7 +166,7 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         > * > * {
           will-change: opacity, transform;
           transform: translateY(10vw) translateZ(0);
-          opacity: 0;
+          opacity: 0.01;
           transition:
             opacity 0.4s linear,
             transform 0.4s ease-out;
