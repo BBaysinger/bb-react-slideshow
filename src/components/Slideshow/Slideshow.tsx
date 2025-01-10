@@ -40,7 +40,7 @@ const defaultLabels: SlideshowLabels = {
  * @param transitionResetDelay - Duration of transitions that controls the 'transitioning' state and class
  * @param classPrefix - Prefix for all globally-scoped classes to avoid naming conflicts in applications
  * This is also so we don't need to rely on nesting, to avoid specificity/
- * overriding issues and prevent bloating the outputed CSS. 
+ * overriding issues and prevent bloating the outputed CSS.
  * @param debug - Whether to show debugging information
  * @param labels - Custom labels for directional/stepper navigation buttons
  */
