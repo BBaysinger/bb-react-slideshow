@@ -98,7 +98,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
         @include fluid-property(padding-right, $bpmin, $bpmax, 5px, 12px);
         @include fluid-property(margin-bottom, $bpmin, $bpmax, 6px, 9px);
 
-        &.#{$prefix}cta {
+        &.cta {
           background-color: #fff;
           color: #000;
           display: block;
