@@ -232,7 +232,7 @@ const App: React.FC = () => {
           path={`${basePath}/rico-slideshow/:slug`}
           element={
             <Slideshow
-              classPrefix={"prefix-one-"}
+              classPrefix={"prefix-1-"}
               slides={slides}
               basePath={`${basePath}/rico-slideshow`}
               initialAutoSlide={true}
@@ -243,18 +243,38 @@ const App: React.FC = () => {
 
         {/* Redirect */}
         <Route
-          path="/another-config"
-          element={<Navigate to={`${basePath}/another-config/one`} />}
+          path="/config-example-2"
+          element={<Navigate to={`${basePath}/config-example-2/one`} />}
         />
 
-        {/* Route for additional slideshow with other config options. */}
+        {/* Route for additional slideshow with other styling/config. */}
         <Route
-          path={`${basePath}/another-config/:slug`}
+          path={`${basePath}/config-example-2/:slug`}
           element={
             <Slideshow
-              classPrefix={"prefix-two-"}
+              classPrefix={"prefix-2-"}
               slides={slides}
-              basePath={`${basePath}/another-config`}
+              basePath={`${basePath}/config-example-2`}
+              initialAutoSlide={true}
+              debug={true}
+            />
+          }
+        />
+
+        {/* Redirect */}
+        <Route
+          path="/config-example-3"
+          element={<Navigate to={`${basePath}/config-example-3/one`} />}
+        />
+
+        {/* Route for yet another slideshow with other styling/config. */}
+        <Route
+          path={`${basePath}/config-example-3/:slug`}
+          element={
+            <Slideshow
+              classPrefix={"prefix-3-"}
+              slides={slides}
+              basePath={`${basePath}/config-example-3`}
               initialAutoSlide={true}
               debug={true}
             />

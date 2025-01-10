@@ -3,7 +3,8 @@
 $bpmin: 360px; // Min width inferred from designs (though 320px is supported)
 $bpmax: 1366px; // Max width inferred from designs
 
-$prefixes: ("prefix-one-", "prefix-two-");
+$main-prefixes: ("prefix-1-", "prefix-2-", "prefix-3-");
+$control-prefixes: ("prefix-1-", "prefix-2-");
 
 .slideshow-demo {
   position: relative;
@@ -17,7 +18,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
 
   // Prefixing all classes instead of relying on nesting. This is to avoid specificity/
   // overriding issues and prevent bloating the output CSS.
-  @each $prefix in $prefixes {
+  @each $prefix in $main-prefixes {
     .#{$prefix}slideshow {
       box-sizing: border-box;
       color: white;
@@ -253,7 +254,9 @@ $prefixes: ("prefix-one-", "prefix-two-");
         ),
         linear-gradient(to bottom, rgba(0, 0, 0, 0) 65%, #000000 90%);
     }
+  }
 
+  @each $prefix in $control-prefixes {
     .#{$prefix}indexed-button-wrapper {
       display: grid;
       gap: 2vw;
@@ -348,11 +351,93 @@ $prefixes: ("prefix-one-", "prefix-two-");
     }
   }
 
+  .prefix-3-indexed-button-wrapper {
+    display: grid;
+    gap: 2vw;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
+    @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
+    @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
+    @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
+    @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
+    @include breakpoint-up($b992px) {
+      display: flex;
+      align-items: flex-end;
+      gap: 26px;
+    }
+  }
+
+  button.prefix-3-indexed-button {
+    cursor: pointer;
+    opacity: 0.7;
+    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: contain;
+    background-position: center center;
+    aspect-ratio: 1 / 1;
+    max-width: 164px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    transition: transform 0.3s ease-out;
+
+    @include breakpoint-up($b360px) {
+      min-width: 30%;
+    }
+
+    @include breakpoint-up($b992px) {
+      min-width: unset;
+      width: 110px;
+      max-width: 176px;
+      position: relative;
+      top: 8px;
+    }
+
+    &.prefix-3-active {
+      background-image: url("@/assets/images/border.svg");
+      opacity: 1;
+      cursor: default;
+      @include breakpoint-up($b992px) {
+        width: 20%;
+        top: 0;
+        transition: none;
+      }
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    img {
+      display: block;
+      border-radius: 5%;
+      width: 86%;
+      max-width: 144px;
+      // Disable long press on mobile.
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+  }
+
   //////////////////////////////////////////////////////////////////
   // Rico Slideshow Config 1
   //////////////////////////////////////////////////////////////////
 
-  $first-prefix: list.nth($prefixes, 1);
+  $first-prefix: list.nth($main-prefixes, 1);
 
   .#{$first-prefix}stepper-button-wrapper {
     display: none;
@@ -362,7 +447,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
   // Rico Slideshow Config 2
   //////////////////////////////////////////////////////////////////
 
-  $second-prefix: list.nth($prefixes, 2);
+  $second-prefix: list.nth($main-prefixes, 2);
 
   .#{$second-prefix}stepper-button-wrapper {
     display: flex;
