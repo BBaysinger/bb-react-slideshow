@@ -320,7 +320,7 @@ $prefixes: ("prefix-one-", "prefix-two-");
         border-radius: 5%;
         width: 86%;
         max-width: 144px;
-        // Disable long press.
+        // Disable long press on mobile.
         -webkit-user-select: none;
         -webkit-touch-callout: none;
         -moz-user-select: none;
@@ -344,6 +344,13 @@ $prefixes: ("prefix-one-", "prefix-two-");
         }
       }
     }
+    // .#{$prefix}directional-button-wrapper {
+    //   border: 1px solid green;
+    // }
+  }
+
+  .prefix-one-directional-button-wrapper {
+    display: none;
   }
 }
 
@@ -351,14 +358,19 @@ $prefixes: ("prefix-one-", "prefix-two-");
 // Rico Slideshow Config 1
 //////////////////////////////////////////////////////////////////
 
-// Store the first prefix in a variable
 $first-prefix: list.nth($prefixes, 1);
 
-// Use the variable in a class name
 .#{$first-prefix}directional-button-wrapper {
+  // border: 1px solid red;
   display: none;
 }
 
 //////////////////////////////////////////////////////////////////
 // Rico Slideshow Config 2
 //////////////////////////////////////////////////////////////////
+
+$second-prefix: list.nth($prefixes, 1);
+
+.#{$second-prefix}directional-button-wrapper {
+  // border: 100px solid red;
+}

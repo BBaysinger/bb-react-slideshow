@@ -489,7 +489,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       {/* Slideshow Wrapper */}
       <div
         className={
-          `${styles.slideshowWrapper} ${classPrefix}slideshow ` +
+          `${styles["slideshow-wrapper"]} ${classPrefix}slideshow ` +
           `${classPrefix}slideshow-slide-${currentSlug} ` +
           `${isTransitioning ? `${styles.transitioning} ${classPrefix}transitioning` : ""}` +
           `${isPaused ? `${styles.paused} ${classPrefix}paused` : ""}`
@@ -500,7 +500,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         aria-busy={isTransitioning}
       >
         {/* Slide Elements */}
-        <div className={`${styles.slideWrapper} ${classPrefix}slide-wrapper`}>
+        <div
+          className={`${styles["slide-wrapper"]} ${classPrefix}slide-wrapper`}
+        >
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -522,7 +524,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         {/* Overlay Layers for Visual Effects */}
         <div
           className={
-            `${styles.overlayWrapper1} ` +
+            `${styles["overlay-wrapper-1"]} ` +
             `${classPrefix}overlay-wrapper ${classPrefix}overlay-wrapper-1`
           }
         >
@@ -540,7 +542,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         </div>
         <div
           className={
-            `${styles.overlayWrapper2} ` +
+            `${styles["overlay-wrapper-2"]} ` +
             `${classPrefix}overlay-wrapper ${classPrefix}overlay-wrapper-2`
           }
         ></div>
@@ -548,7 +550,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         {/* Content Wrapper */}
         <div
           style={{ height: divHeight }}
-          className={`${styles.contentWrapper} ${classPrefix}content-wrapper`}
+          className={`${styles["content-wrapper"]} ${classPrefix}content-wrapper`}
         >
           {slides.map((_, index) => (
             <div
@@ -569,7 +571,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
         {/* Navigation Buttons (So far only stubbed in. Totally untested.) */}
         <div
-          className={`${styles.arrowButtonWrapper} ${classPrefix}directional-button-wrapper`}
+          className={`${styles["directional-button-wrapper"]} ${classPrefix}directional-button-wrapper`}
         >
           {/* Previous Slide Button */}
           {labels.previous && (
@@ -637,7 +639,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
                 />
               ) : (
                 <span
-                  className={`${styles.visuallyHidden} ${classPrefix}visually-hidden`}
+                  className={`${styles["visually-hidden"]} ${classPrefix}visually-hidden`}
                 >{`Slide ${index + 1}`}</span>
               )}
             </button>
@@ -645,7 +647,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         </div>
 
         {/* Accessibility Note */}
-        <p className={`${styles.visuallyHidden} ${classPrefix}visually-hidden`}>
+        <p
+          className={`${styles["visually-hidden"]} ${classPrefix}visually-hidden`}
+        >
           Use the left and right arrow keys to navigate the slideshow.
         </p>
       </div>
