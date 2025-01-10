@@ -268,6 +268,7 @@ const App: React.FC = () => {
         />
 
         {/* Route for yet another slideshow with other styling/config. */}
+        {/* TODO: This should start at the initial route, even if routing is disabled */}
         <Route
           path={`${basePath}/config-example-3/:slug`}
           element={
