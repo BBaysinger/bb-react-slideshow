@@ -7,11 +7,11 @@
 * overridable defaults.
 */
 
-.slideshowWrapper {
+.slideshow-wrapper {
   position: relative;
 }
 
-.slideWrapper {
+.slide-wrapper {
   position: absolute;
   width: 100vw;
   overflow: hidden;
@@ -41,7 +41,7 @@
   }
 }
 
-.contentWrapper {
+.content-wrapper {
   position: relative;
   top: 0;
 }
@@ -59,12 +59,12 @@
   position: relative;
 }
 
-.visuallyHidden {
+.visually-hidden {
   display: none;
 }
 
-.overlayWrapper1,
-.overlayWrapper2 {
+.overlay-wrapper-1,
+.overlay-wrapper-2 {
   position: absolute;
   pointer-events: none;
   width: 100vw;
