@@ -351,80 +351,39 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
     }
   }
 
-  .prefix-3-indexed-button-wrapper {
-    display: grid;
-    gap: 2vw;
-    grid-template-columns: repeat(3, 1fr);
+  //////////////////////////////////////////////////////////////////
+  /// Third Slideshow Config Example
+  //////////////////////////////////////////////////////////////////
 
-    @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
-    @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
-    @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
-    @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
-    @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
-    @include breakpoint-up($b992px) {
-      display: flex;
-      align-items: flex-end;
-      gap: 26px;
-    }
+  .prefix-3-indexed-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 20px;
   }
 
   button.prefix-3-indexed-button {
-    cursor: pointer;
-    opacity: 0.7;
-    overflow: hidden;
-    padding: 0;
-    box-sizing: border-box;
-    outline: 0;
-    border: 0;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    background-size: contain;
-    background-position: center center;
-    aspect-ratio: 1 / 1;
-    max-width: 164px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-self: center;
-    transition: transform 0.3s ease-out;
-
-    @include breakpoint-up($b360px) {
-      min-width: 30%;
-    }
-
-    @include breakpoint-up($b992px) {
-      min-width: unset;
-      width: 110px;
-      max-width: 176px;
-      position: relative;
-      top: 8px;
-    }
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 0;
+    line-height: 0;
+    border: 2px solid #fff;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    outline: 0;
+    margin: 0 5px;
+    cursor: pointer;
+    padding: 0;
 
     &.prefix-3-active {
-      background-image: url("@/assets/images/border.svg");
-      opacity: 1;
-      cursor: default;
-      @include breakpoint-up($b992px) {
-        width: 20%;
-        top: 0;
-        transition: none;
-      }
-      &:hover {
-        transform: scale(1);
-      }
+      background-color: #fff;
     }
 
     img {
-      display: block;
-      border-radius: 5%;
-      width: 86%;
-      max-width: 144px;
-      // Disable long press on mobile.
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+      display: none;
     }
 
     &:hover {
