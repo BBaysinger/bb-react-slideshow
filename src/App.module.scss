@@ -8,11 +8,6 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
 
 .slideshow-demo {
   position: relative;
-  // @media (hover: none) and (orientation: portrait) {
-  //   // Prevents the UI from overflowing view height on phones
-  //   max-height: 100dvh;
-  //   overflow: hidden;
-  // }
 }
 
 :global {
@@ -34,12 +29,10 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
         rgba(0, 0, 0, 0) 15%,
         #000 15%
       );
-
-      @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
-      @media (hover: none) and (orientation: portrait) {
-        // Helps keep the UI from overflowing view height on mobile
-        @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
-      }
+      // This is correct according to the provided design, but it causes the
+      // UI to overflow the screen vertically on a phone. Changed to 10px @ 360px.
+      // @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
+      @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 66px);
       .#{$prefix}overlay-wrapper-1,
       .#{$prefix}overlay-wrapper-2,
       .#{$prefix}content-wrapper,
@@ -51,10 +44,6 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
     .#{$prefix}content-wrapper {
       transition: height 0.9s ease-out;
       @include fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
-
-      * {
-        will-change: opacity, transform;
-      }
 
       a {
         text-decoration: none;
@@ -276,9 +265,9 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       gap: 2vw;
       grid-template-columns: repeat(3, 1fr);
 
-      @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
       @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
       @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
+      @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
       @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
       @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
       @include breakpoint-up($b992px) {
