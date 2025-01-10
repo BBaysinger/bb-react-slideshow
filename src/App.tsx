@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
 import CSSVariableInjector from "utils/CSSVariableInjector";
-import HoverCapabilityWatcher from "utils/HoverCapabilityWatcher";
 
 import styles from "./App.module.scss";
 
@@ -24,9 +23,6 @@ import styles from "./App.module.scss";
  * @version N/A
  */
 const App: React.FC = () => {
-  const [isHoverCapable, setIsHoverCapable] = useState<boolean>(
-    HoverCapabilityWatcher.instance.isHoverCapable,
-  );
 
   // Determine the base URL for assets and routing based on the environment
   const basePath =
@@ -196,28 +192,11 @@ const App: React.FC = () => {
     content: CSSVariableInjector.applyChildCSSVariables(slide.content),
   }));
 
-  useEffect(() => {
-    const hoverWatcher = HoverCapabilityWatcher.instance;
-
-    // Define a handler to update state on hover capability change
-    const handleHoverChange = (event: { isHoverCapable: boolean }) => {
-      setIsHoverCapable(event.isHoverCapable);
-    };
-
-    // Add the event listener
-    hoverWatcher.addEventListener(handleHoverChange);
-
-    // Cleanup on component unmount
-    return () => {
-      hoverWatcher.removeEventListener(handleHoverChange);
-    };
-  }, []);
-
   // Render the application with two routes, each displaying a Slideshow component
   // with different configuration options.
   return (
     <div
-      className={`${isHoverCapable ? "" : `not-hover-capable`} ${styles["slideshow-demo"]}`}
+      className={`${styles["slideshow-demo"]}`}
     >
       <BrowserRouter>
         <Routes>
