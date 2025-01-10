@@ -34,7 +34,7 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       @media (hover: none) and (orientation: portrait) {
         // Reduce vertical overflow on mobile (though this doesn't does
         // NOT exactly match the designs).
-        @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 66px);
+        @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
       }
       .#{$prefix}overlay-wrapper-1,
       .#{$prefix}overlay-wrapper-2,
