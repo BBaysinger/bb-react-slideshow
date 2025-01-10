@@ -6,7 +6,7 @@ import { Slide } from "components/Slideshow/Slideshow.types";
 import CSSVariableInjector from "utils/CSSVariableInjector";
 import HoverCapabilityWatcher from "utils/HoverCapabilityWatcher";
 
-import "./App.scss";
+import styles from "./App.module.scss";
 
 /**
  * Essentially a demo and example of usage for the Slideshow component.
@@ -28,8 +28,10 @@ const App: React.FC = () => {
     HoverCapabilityWatcher.instance.isHoverCapable,
   );
 
-  // Prevent CSS class name conflicts in larger applications by using a class prefix
-  const classPrefix = "bb-";
+  // Allow external styling and prevent CSS class name conflicts in larger
+  // applications by using a class prefix
+  const classPrefix = "awesome-prefix-";
+
   // Determine the base URL for assets and routing based on the environment
   const basePath =
     process.env.NODE_ENV === "production"
@@ -224,7 +226,9 @@ const App: React.FC = () => {
   // Render the application with two routes, each displaying a Slideshow component
   // with different configuration options.
   return (
-    <div className={isHoverCapable ? `` : `${classPrefix}not-hover-capable`}>
+    <div
+      className={`${isHoverCapable ? "" : `${classPrefix}not-hover-capable`} ${styles["slideshow-demo"]}`}
+    >
       <BrowserRouter>
         <Routes>
           <Route
