@@ -52,6 +52,10 @@ $control-prefixes: ("prefix-1-", "prefix-2-");
       transition: height 0.9s ease-out;
       @include fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
 
+      * {
+        will-change: opacity, transform;
+      }
+
       a {
         text-decoration: none;
         cursor: pointer;
