@@ -572,8 +572,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
             onClick={togglePause}
             aria-label={isPaused ? labels.resume : labels.pause}
             className={
-              `${isPaused ? styles.pause : styles.resume}` +
-              `${classPrefix}${isPaused ? "pause" : "resume"}`
+              `${isPaused ? styles.resume : styles.pause} ` +
+              `${classPrefix}${isPaused ? "resume" : "pause"}`
             }
           >
             {isPaused ? labels.resume : labels.pause}
