@@ -232,7 +232,7 @@ const App: React.FC = () => {
           path={`${basePath}/rico-slideshow/:slug`}
           element={
             <Slideshow
-              classPrefix={"prefix-1-"}
+              classPrefix={"demo-1-"}
               slides={slides}
               basePath={`${basePath}/rico-slideshow`}
               initialAutoSlide={true}
@@ -243,18 +243,18 @@ const App: React.FC = () => {
 
         {/* Redirect */}
         <Route
-          path="/config-example-2"
-          element={<Navigate to={`${basePath}/config-example-2/one`} />}
+          path="/demo-2"
+          element={<Navigate to={`${basePath}/demo-2/one`} />}
         />
 
         {/* Route for additional slideshow with other styling/config. */}
         <Route
-          path={`${basePath}/config-example-2/:slug`}
+          path={`${basePath}/demo-2/:slug`}
           element={
             <Slideshow
-              classPrefix={"prefix-2-"}
+              classPrefix={"demo-2-"}
               slides={slides}
-              basePath={`${basePath}/config-example-2`}
+              basePath={`${basePath}/demo-2`}
               initialAutoSlide={true}
               debug={true}
             />
@@ -263,19 +263,19 @@ const App: React.FC = () => {
 
         {/* Redirect */}
         <Route
-          path="/config-example-3"
-          element={<Navigate to={`${basePath}/config-example-3/one`} />}
+          path="/demo-3"
+          element={<Navigate to={`${basePath}/demo-3/one`} />}
         />
 
         {/* Route for yet another slideshow with other styling/config. */}
         {/* TODO: This should start at the initial route, even if routing is disabled */}
         <Route
-          path={`${basePath}/config-example-3/:slug`}
+          path={`${basePath}/demo-3/:slug`}
           element={
             <Slideshow
-              classPrefix={"prefix-3-"}
+              classPrefix={"demo-3-"}
               slides={slides}
-              basePath={`${basePath}/config-example-3`}
+              basePath={`${basePath}/demo-3`}
               initialAutoSlide={true}
               enableRouting={false}
               debug={true}

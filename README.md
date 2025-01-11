@@ -13,9 +13,9 @@ Dynamic routes (optional) only activate on user interaction. This is so the comp
 - Original design (w/ one notable change):
   [https://bb-react-slideshow.netlify.app/rico-slideshow](https://bb-react-slideshow.netlify.app/rico-slideshow)
 - Stepper button demo:
-  [https://bb-react-slideshow.netlify.app/config-example-2](https://bb-react-slideshow.netlify.app/config-example-2)
+  [https://bb-react-slideshow.netlify.app/demo-2](https://bb-react-slideshow.netlify.app/demo-2)
 - Index dots (and routing disabled):
-  [https://bb-react-slideshow.netlify.app/config-example-3](https://bb-react-slideshow.netlify.app/config-example-3)
+  [https://bb-react-slideshow.netlify.app/demo-3](https://bb-react-slideshow.netlify.app/demo-3)
 
 ## Features
 
