@@ -11,12 +11,9 @@ $control-demos: ("demo-1-", "demo-2-");
 }
 
 :global {
-  // Styling globally to demonstrate reusability of the component. The components'
-  // internal module styling should only be enough to make it seem like a slideshow
-  // out of the box and should all be overrideable. (BTW, this is untested, but it's
-  // the end goal.)
+  // Styling globally to demonstrate reusability of the component.
 
-  // demoing all classes instead of relying on nesting. This is to avoid specificity/
+  // Prefixing all classes instead of relying on nesting to avoid specificity/
   // overriding issues and prevent bloating the output CSS.
   @each $demo in $demos {
     .#{$demo}slideshow {
@@ -33,7 +30,7 @@ $control-demos: ("demo-1-", "demo-2-");
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
       @media (hover: none) and (orientation: portrait) {
         // Reduce vertical overflow on mobile (though this doesn't does
-        // NOT exactly match the designs).
+        // *not* exactly match the designs).
         @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
       }
       .#{$demo}overlay-wrapper-1,
@@ -390,6 +387,10 @@ $control-demos: ("demo-1-", "demo-2-");
       font-size: 0;
       line-height: 0;
       height: 22px;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+      }
       &.#{$second-demo}previous {
         &:before {
           content: "";
@@ -438,7 +439,6 @@ $control-demos: ("demo-1-", "demo-2-");
           background-image: url(#{$svg1}#{$svg2}#{$svg3}#{$svg4}#{$svg5}#{$svg6});
           background-size: contain;
           background-repeat: no-repeat;
-          background-position: center;
         }
       }
       &.#{$second-demo}next {
