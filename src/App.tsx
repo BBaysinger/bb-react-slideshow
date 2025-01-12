@@ -221,7 +221,6 @@ const App: React.FC = () => {
           element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
         />
 
-
         {/* All unmatched paths */}
         <Route
           path="*"
