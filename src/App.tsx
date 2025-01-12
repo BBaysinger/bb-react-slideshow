@@ -33,8 +33,8 @@ const App: React.FC = () => {
   const slides: Slide[] = [
     {
       slug: "one",
-      background: `${basePath}/assets/images/1-background.jpg`,
-      thumbnail: `${basePath}/assets/images/1-thumbnail.jpg`,
+      background: `${basePath}/assets/images/1-background.webp`,
+      thumbnail: `${basePath}/assets/images/1-thumbnail.webp`,
       alt: "Rico the dog",
       title: "Rico the Dog",
       content: (
@@ -58,8 +58,8 @@ const App: React.FC = () => {
     },
     {
       slug: "two",
-      background: `${basePath}/assets/images/2-background.jpg`,
-      thumbnail: `${basePath}/assets/images/2-thumbnail.jpg`,
+      background: `${basePath}/assets/images/2-background.webp`,
+      thumbnail: `${basePath}/assets/images/2-thumbnail.webp`,
       alt: "Rico napping",
       title: "Rico Napping",
       content: (
@@ -84,8 +84,8 @@ const App: React.FC = () => {
     },
     {
       slug: "three",
-      background: `${basePath}/assets/images/3-background.jpg`,
-      thumbnail: `${basePath}/assets/images/3-thumbnail.jpg`,
+      background: `${basePath}/assets/images/3-background.webp`,
+      thumbnail: `${basePath}/assets/images/3-thumbnail.webp`,
       alt: "Rico in the snow",
       title: "Rico in the Snow",
       content: (
@@ -111,8 +111,8 @@ const App: React.FC = () => {
     },
     {
       slug: "four",
-      background: `${basePath}/assets/images/4-background.jpg`,
-      thumbnail: `${basePath}/assets/images/4-thumbnail.jpg`,
+      background: `${basePath}/assets/images/4-background.webp`,
+      thumbnail: `${basePath}/assets/images/4-thumbnail.webp`,
       alt: "Rico flying",
       title: "Rico Flying",
       content: (
@@ -137,8 +137,8 @@ const App: React.FC = () => {
     },
     {
       slug: "five",
-      background: `${basePath}/assets/images/5-background.jpg`,
-      thumbnail: `${basePath}/assets/images/5-thumbnail.jpg`,
+      background: `${basePath}/assets/images/5-background.webp`,
+      thumbnail: `${basePath}/assets/images/5-thumbnail.webp`,
       alt: "Rico's birthday",
       title: "Rico's Birthday",
       content: (
@@ -164,8 +164,8 @@ const App: React.FC = () => {
     },
     {
       slug: "six",
-      background: `${basePath}/assets/images/6-background.jpg`,
-      thumbnail: `${basePath}/assets/images/6-thumbnail.jpg`,
+      background: `${basePath}/assets/images/6-background.webp`,
+      thumbnail: `${basePath}/assets/images/6-thumbnail.webp`,
       alt: "Rico in the sun",
       title: "Rico in the Sun",
       content: (
