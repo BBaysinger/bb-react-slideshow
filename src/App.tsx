@@ -218,12 +218,18 @@ const App: React.FC = () => {
         {/* Redirects */}
         <Route
           path="/"
-          element={<Navigate to={`${basePath}/rico/ricobot`} />}
+          element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
         />
 
         <Route
           path="/rico"
-          element={<Navigate to={`${basePath}/rico/ricobot`} />}
+          element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
+        />
+
+        {/* All unmatched paths */}
+        <Route
+          path="*"
+          element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
         />
 
         {/* Route for the primary slideshow, with dynamic slide navigation */}
@@ -243,7 +249,7 @@ const App: React.FC = () => {
         {/* Redirect */}
         <Route
           path="/demo2"
-          element={<Navigate to={`${basePath}/demo2/ricobot`} />}
+          element={<Navigate to={`${basePath}/demo2/ricobot`} replace />}
         />
 
         {/* Route for additional slideshow with other styling/config. */}
@@ -263,7 +269,7 @@ const App: React.FC = () => {
         {/* Redirect */}
         <Route
           path="/demo3"
-          element={<Navigate to={`${basePath}/demo3/ricobot`} />}
+          element={<Navigate to={`${basePath}/demo3/ricobot`} replace />}
         />
 
         {/* Route for yet another slideshow with other styling/config. */}
