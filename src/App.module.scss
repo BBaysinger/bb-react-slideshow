@@ -182,6 +182,7 @@ $control-demos: ("demo-1-", "demo-2-");
     .#{$demo}overlay-wrapper-1,
     .#{$demo}overlay-wrapper-2 {
       @include fluid-property(height, $bpmin, $bpmax, 226px, 768px);
+      max-height: 100%;
     }
 
     .#{$demo}slide-wrapper {
