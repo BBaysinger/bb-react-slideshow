@@ -13,9 +13,9 @@ Dynamic routes (optional) only activate on user interaction. This is so the comp
 - Original design (w/ one notable change):
   [https://bb-react-slideshow.netlify.app/rico](https://bb-react-slideshow.netlify.app/rico)
 - Stepper button demo:
-  [https://bb-react-slideshow.netlify.app/demo-2](https://bb-react-slideshow.netlify.app/demo-2)
+  [https://bb-react-slideshow.netlify.app/demo2](https://bb-react-slideshow.netlify.app/demo2)
 - Index dots (and routing disabled):
-  [https://bb-react-slideshow.netlify.app/demo-3](https://bb-react-slideshow.netlify.app/demo-3)
+  [https://bb-react-slideshow.netlify.app/demo3](https://bb-react-slideshow.netlify.app/demo3)
 
 ## Features
 
@@ -25,6 +25,10 @@ Dynamic routes (optional) only activate on user interaction. This is so the comp
 - **Custom Hooks**: Simplified logic using custom hooks for professional, maintainable code.
 - **Configuration Options**: Adjustable settings for auto-slide timing/restart and dynamic routing. Two optional sets of controls.
 - **Accessibility**: Built with keyboard navigation support and ARIA attributes to ensure an inclusive experience.
+
+## Roadmap
+
+- **Modularize the Controls**: Explore making controls a separate component that can be linked or passed to the slideshow component. Then the slideshow will use whatever features are provided in the control set.
 
 Here is an example JavaScript function:
 
