@@ -79,7 +79,14 @@ $breakpoints: (
 
 // Mixin to create a fluid property based on viewport width
 // It interpolates between a minimum and maximum value as the viewport
-// width scales between the two specified breakpoints
+// width scales between the two specified breakpoints. The output is
+// mobile-first, using only min-width media queries.
+//
+// Using fluid properties is a liberty taken in the absence of
+// provided breakpoints or tablet designs. This would not be done
+// in production if text layout standards are present. Should also 
+// never be done on large bodies of text or intricate table layouts.
+//
 // Example:
 // h1 {
 //   @include global.fluid-property(height, $b360, $b992, 50px, 200px);

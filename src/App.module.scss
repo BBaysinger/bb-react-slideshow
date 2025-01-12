@@ -14,7 +14,7 @@ $control-demos: ("demo-1-", "demo-2-");
   // Styling globally to demonstrate reusability of the component.
 
   // Prefixing all classes instead of relying on nesting to avoid specificity/
-  // overriding issues and prevent bloating the output CSS.
+  // override issues and to prevent bloating the output CSS.
   @each $demo in $demos {
     .#{$demo}slideshow {
       box-sizing: border-box;
@@ -27,6 +27,10 @@ $control-demos: ("demo-1-", "demo-2-");
         #000 15%
       );
 
+      // Using fluid properties is a liberty taken in the absence of
+      // provided breakpoints or tablet designs. This would not be done
+      // in production if text layout standards exist. Should also 
+      // never be done on large bodies of text or intricate table layouts.
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
       @media (hover: none) and (orientation: portrait) {
         // Reduce vertical overflow on mobile (though this doesn't does
@@ -228,7 +232,7 @@ $control-demos: ("demo-1-", "demo-2-");
       .#{$demo}overlay-1-1 {
         display: block;
         height: 100vw;
-        background-image: url("/assets/images/1-foreground.png");
+        background-image: url("/assets/images/1-foreground.webp");
         background-repeat: no-repeat;
         margin-top: $offset;
         transform: translateX(50vw);
@@ -378,6 +382,7 @@ $control-demos: ("demo-1-", "demo-2-");
   $second-demo: list.nth($demos, 2);
 
   .#{$second-demo}stepper-button-wrapper {
+    transform: scale(1.5);
     position: relative;
     margin-top: 10px;
     button {
@@ -387,7 +392,7 @@ $control-demos: ("demo-1-", "demo-2-");
       font-size: 0;
       line-height: 0;
       height: 22px;
-      opacity: 0.7;
+      opacity: 0.82;
       &:hover {
         opacity: 1;
       }
