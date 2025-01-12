@@ -10,7 +10,7 @@ Dynamic routes (optional) only activate on user interaction. This ensures the co
 
 ## Demos
 
-- **Original design (with enhancements):**  
+- **Original design:**  
   [https://bb-react-slideshow.netlify.app/rico](https://bb-react-slideshow.netlify.app/rico)
 - **Stepper button demo:**  
   [https://bb-react-slideshow.netlify.app/demo2](https://bb-react-slideshow.netlify.app/demo2)
