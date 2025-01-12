@@ -28,7 +28,8 @@ Dynamic routes (optional) only activate on user interaction. This is so the comp
 
 ## Roadmap
 
-- **Modularize the Controls**: Explore making controls a separate component that can be linked or passed to the slideshow component. Then the slideshow will use whatever features are provided in the control set.
+- **Modularize the Controls**: Explore making controls a separate component that can be linked or passed to the slideshow component. Then the slideshow will use whatever features are provided in each control set.
+- **Finish Default Styling**: Overridable default styling should represent a basic slideshow out of the box.
 
 Here is an example JavaScript function:
 
@@ -43,8 +44,8 @@ const basePath =
 const slides = [
   {
     slug: "one",
-    background: `${basePath}/assets/images/1-background.jpg`,
-    thumbnail: `${basePath}/assets/images/1-thumbnail.jpg`,
+    background: `${basePath}/assets/images/1-background.webp`,
+    thumbnail: `${basePath}/assets/images/1-thumbnail.webp`,
     alt: "Alt text",
     content: (
       <div>
@@ -54,8 +55,8 @@ const slides = [
   },
   {
     slug: "two",
-    background: `${basePath}/assets/images/2-background.jpg`,
-    thumbnail: `${basePath}/assets/images/2-thumbnail.jpg`,
+    background: `${basePath}/assets/images/2-background.webp`,
+    thumbnail: `${basePath}/assets/images/2-thumbnail.webp`,
     alt: "More alt text",
     content: (
       <div>
