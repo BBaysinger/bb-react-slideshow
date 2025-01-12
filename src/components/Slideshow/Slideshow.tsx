@@ -218,6 +218,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       if (initialAutoSlide) {
         const navigateToSlide = (index: number) => {
           const newIndex = index % slides.length;
+
           if (enableRouting) {
             // Update the route for deep linking without stacking the history.
             navigate(`${basePath}/${slides[newIndex].slug}`, { replace: true });
@@ -247,28 +248,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       clearTimer,
     ],
   );
-
-  const restartTimer = useCallback(() => {
-    // Clear any existing timers to avoid overlapping intervals
-    clearTimer();
-
-    // If the restart delay is zero or negative, exit early as no timer should be started
-    if (restartDelay <= 0) {
-      return;
-    }
-
-    // Check if auto-slide is enabled and the slideshow is not currently paused
-    if (initialAutoSlide && !isPausedRef.current) {
-      // Immediately move to the next slide
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-
-      // Set up a recurring timer to continue auto-sliding at the specified interval
-      timerRef.current = setInterval(() => {
-        // Increment the slide index, wrapping around to the first slide after the last
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-      }, interval);
-    }
-  }, [initialAutoSlide, interval, restartDelay, slides.length, clearTimer]);
 
   useEffect(() => {
     // Delay in milliseconds before triggering the first render actions
@@ -341,10 +320,10 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     if (restartDelay > -1 && !isPausedRef.current) {
       // Set a timeout to restart the auto-slide after the specified delay
       timerRef.current = setTimeout(() => {
-        restartTimer();
+        startAutoSlide();
       }, restartDelay);
     }
-  }, [clearTimer, restartDelay, restartTimer]);
+  }, [clearTimer, restartDelay, startAutoSlide]);
 
   const handleUserInteraction = useCallback(
     (newIndex: number) => {
