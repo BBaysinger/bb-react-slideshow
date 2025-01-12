@@ -215,7 +215,12 @@ const App: React.FC = () => {
   return (
     <div className={`${styles["slideshow-demo"]}`}>
       <Routes>
-        {/* Redirect */}
+        {/* Redirects */}
+        <Route
+          path="/"
+          element={<Navigate to={`${basePath}/rico/ricobot`} />}
+        />
+
         <Route
           path="/rico"
           element={<Navigate to={`${basePath}/rico/ricobot`} />}
