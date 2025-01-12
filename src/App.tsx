@@ -57,7 +57,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "nap",
+      slug: "naps",
       background: `${basePath}/assets/images/2-background.webp`,
       thumbnail: `${basePath}/assets/images/2-thumbnail.webp`,
       alt: "Rico napping",
@@ -163,7 +163,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "walk",
+      slug: "walks",
       background: `${basePath}/assets/images/6-background.webp`,
       thumbnail: `${basePath}/assets/images/6-thumbnail.webp`,
       alt: "Rico in the sun",
