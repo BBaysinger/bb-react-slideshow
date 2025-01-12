@@ -32,7 +32,7 @@ const App: React.FC = () => {
   // Array of slide data for the slideshow, including images, content, and metadata
   const slides: Slide[] = [
     {
-      slug: "one",
+      slug: "ricobot",
       background: `${basePath}/assets/images/1-background.webp`,
       thumbnail: `${basePath}/assets/images/1-thumbnail.webp`,
       alt: "Rico the dog",
@@ -57,7 +57,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "two",
+      slug: "nap",
       background: `${basePath}/assets/images/2-background.webp`,
       thumbnail: `${basePath}/assets/images/2-thumbnail.webp`,
       alt: "Rico napping",
@@ -83,7 +83,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "three",
+      slug: "snow",
       background: `${basePath}/assets/images/3-background.webp`,
       thumbnail: `${basePath}/assets/images/3-thumbnail.webp`,
       alt: "Rico in the snow",
@@ -110,7 +110,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "four",
+      slug: "flight",
       background: `${basePath}/assets/images/4-background.webp`,
       thumbnail: `${basePath}/assets/images/4-thumbnail.webp`,
       alt: "Rico flying",
@@ -136,7 +136,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "five",
+      slug: "birthday",
       background: `${basePath}/assets/images/5-background.webp`,
       thumbnail: `${basePath}/assets/images/5-thumbnail.webp`,
       alt: "Rico's birthday",
@@ -163,7 +163,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      slug: "six",
+      slug: "walk",
       background: `${basePath}/assets/images/6-background.webp`,
       thumbnail: `${basePath}/assets/images/6-thumbnail.webp`,
       alt: "Rico in the sun",
@@ -210,21 +210,15 @@ const App: React.FC = () => {
       : "Rico Slideshow - Welcome";
   }, [location, slides]);
 
-  // Render the application with two routes, each displaying a Slideshow component
+  // Render the application with multiple routes, each displaying a Slideshow demo
   // with different configuration options.
   return (
     <div className={`${styles["slideshow-demo"]}`}>
       <Routes>
         {/* Redirect */}
         <Route
-          path="/"
-          element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
-        />
-
-        {/* Redirect */}
-        <Route
           path="/rico-slideshow"
-          element={<Navigate to={`${basePath}/rico-slideshow/one`} />}
+          element={<Navigate to={`${basePath}/rico-slideshow/ricobot`} />}
         />
 
         {/* Route for the primary slideshow, with dynamic slide navigation */}
@@ -244,7 +238,7 @@ const App: React.FC = () => {
         {/* Redirect */}
         <Route
           path="/demo-2"
-          element={<Navigate to={`${basePath}/demo-2/one`} />}
+          element={<Navigate to={`${basePath}/demo-2/ricobot`} />}
         />
 
         {/* Route for additional slideshow with other styling/config. */}
@@ -264,7 +258,7 @@ const App: React.FC = () => {
         {/* Redirect */}
         <Route
           path="/demo-3"
-          element={<Navigate to={`${basePath}/demo-3/one`} />}
+          element={<Navigate to={`${basePath}/demo-3/ricobot`} />}
         />
 
         {/* Route for yet another slideshow with other styling/config. */}
