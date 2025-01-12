@@ -24,9 +24,8 @@ const defaultLabels: SlideshowLabels = {
  * Slides are defined as an array of objects with background images, thumbnails,
  * and JSX content passed in as props to make the component reusable and flexible.
  *
- * Dynamic routes (optional) only activate on user interaction. This is so the
- * component doesn't stack the history with every auto-slide (but also because I
- * was experimenting with redux-first routing. I'll come back to that.)
+ * Dynamic routes (optional) only stack the history on user interaction, and not
+ * on auto-slide, though the route updates (using `replace: true`) for deep linking.
  *
  * @param slides - An array of slide content or components
  * @param initialAutoSlide - Whether it should start out paused or auto-sliding
@@ -216,21 +215,37 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       // Resume the auto-slide by setting the paused state to false
       setIsPaused(false);
 
-      // Only start the auto-slide if the initialAutoSlide option is enabled
       if (initialAutoSlide) {
+        const navigateToSlide = (index: number) => {
+          const newIndex = index % slides.length;
+          if (enableRouting) {
+            // Update the route for deep linking without stacking the history.
+            navigate(`${basePath}/${slides[newIndex].slug}`, { replace: true });
+          } else {
+            setCurrentIndex(newIndex);
+          }
+        };
+
         // If immediateSlide is true, move to the next slide immediately
         if (immediateSlide) {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+          navigateToSlide(currentIndexRef.current + 1);
         }
 
         // Start a recurring timer to automatically change the slide at the given interval
         timerRef.current = setInterval(() => {
-          // Increment the slide index, wrapping around to the first slide when the end is reached
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+          navigateToSlide(currentIndexRef.current + 1);
         }, interval);
       }
     },
-    [initialAutoSlide, interval, slides.length, clearTimer],
+    [
+      initialAutoSlide,
+      interval,
+      slides,
+      enableRouting,
+      basePath,
+      navigate,
+      clearTimer,
+    ],
   );
 
   const restartTimer = useCallback(() => {
