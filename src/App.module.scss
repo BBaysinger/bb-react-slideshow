@@ -3,8 +3,7 @@
 $bpmin: 360px; // Min width inferred from designs (though 320px is supported)
 $bpmax: 1366px; // Max width inferred from designs
 
-$demos: ("demo-1-", "demo-2-", "demo-3-");
-$control-demos: ("demo-1-", "demo-2-");
+$demos: ("demo1-", "demo2-", "demo3-");
 
 .slideshow-demo {
   position: relative;
@@ -271,121 +270,124 @@ $control-demos: ("demo-1-", "demo-2-");
     }
   }
 
-  @each $demo in $control-demos {
-    .#{$demo}indexed-button-wrapper {
-      display: grid;
-      gap: 2vw;
-      grid-template-columns: repeat(3, 1fr);
-
-      @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
-      @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
-      @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
-      @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
-      @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
-      @include breakpoint-up($b992px) {
-        display: flex;
-        align-items: flex-end;
-        gap: 26px;
-      }
-    }
-
-    button.#{$demo}indexed-button {
-      cursor: pointer;
-      opacity: 0.7;
-      overflow: hidden;
-      padding: 0;
-      box-sizing: border-box;
-      outline: 0;
-      border: 0;
-      background-repeat: no-repeat;
-      background-color: transparent;
-      background-size: contain;
-      background-position: center center;
-      aspect-ratio: 1 / 1;
-      max-width: 164px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-self: center;
-      transition: transform 0.3s ease-out;
-
-      @include breakpoint-up($b360px) {
-        min-width: 30%;
-      }
-
-      @include breakpoint-up($b992px) {
-        min-width: unset;
-        width: 110px;
-        max-width: 176px;
-        position: relative;
-        top: 8px;
-      }
-
-      &.#{$demo}active {
-        background-image: url("@/assets/images/border.svg");
-        opacity: 1;
-        cursor: default;
-        @include breakpoint-up($b992px) {
-          width: 20%;
-          top: 0;
-          transition: none;
-        }
-        &:hover {
-          transform: scale(1);
-        }
-      }
-
-      img {
-        display: block;
-        border-radius: 5%;
-        width: 86%;
-        max-width: 144px;
-        // Disable long press on mobile.
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      &:hover {
-        opacity: 0.9;
-        transform: scale(1.1);
-      }
-    }
-
-    @media (hover: none) {
-      .#{$demo}slideshow {
-        button.#{$demo}indexed-button {
-          &:hover {
-            // Disable hover scale, since it sticks after touch. 🤪
-            transform: scale(1);
-          }
-        }
-      }
-    }
-  }
-
   //////////////////////////////////////////////////////////////////
   // Rico Slideshow Config 1
   //////////////////////////////////////////////////////////////////
 
-  $first-demo: list.nth($demos, 1);
+  $demo1: list.nth($demos, 1);
 
-  .#{$first-demo}stepper-button-wrapper {
+  .#{$demo1}stepper-button-wrapper {
     display: none;
+  }
+
+  .#{$demo1}indexed-button-wrapper {
+    display: grid;
+    gap: 2vw;
+    grid-template-columns: repeat(3, 1fr);
+
+    @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
+    @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
+    @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
+    @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
+    @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
+    @include breakpoint-up($b992px) {
+      display: flex;
+      align-items: flex-end;
+      gap: 26px;
+    }
+  }
+
+  button.#{$demo1}indexed-button {
+    cursor: pointer;
+    opacity: 0.7;
+    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: contain;
+    background-position: center center;
+    aspect-ratio: 1 / 1;
+    max-width: 164px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    transition: transform 0.3s ease-out;
+
+    @include breakpoint-up($b360px) {
+      min-width: 30%;
+    }
+
+    @include breakpoint-up($b992px) {
+      min-width: unset;
+      width: 110px;
+      max-width: 176px;
+      position: relative;
+      top: 8px;
+    }
+
+    &.#{$demo1}active {
+      background-image: url("@/assets/images/border.svg");
+      opacity: 1;
+      cursor: default;
+      @include breakpoint-up($b992px) {
+        width: 20%;
+        top: 0;
+        transition: none;
+      }
+      &:hover {
+        transform: scale(1);
+      }
+    }
+
+    img {
+      display: block;
+      border-radius: 5%;
+      width: 86%;
+      max-width: 144px;
+      // Disable long press on mobile.
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    &:hover {
+      opacity: 0.9;
+      transform: scale(1.1);
+    }
+  }
+
+  @media (hover: none) {
+    .#{$demo1}slideshow {
+      button.#{$demo1}indexed-button {
+        &:hover {
+          // Disable hover scale, since it sticks after touch. 🤪
+          transform: scale(1);
+        }
+      }
+    }
   }
 
   //////////////////////////////////////////////////////////////////
   // Rico Slideshow Config 2
   //////////////////////////////////////////////////////////////////
 
-  $second-demo: list.nth($demos, 2);
+  $demo2: list.nth($demos, 2);
 
-  .#{$second-demo}stepper-button-wrapper {
+  .#{$demo2}indexed-button-wrapper {
+    display: none;
+  }
+
+  .#{$demo2}stepper-button-wrapper {
     transform: scale(1.5);
     position: relative;
     margin-top: 10px;
+    margin-bottom: 40px;
     button {
       margin: 0 5px;
       background-color: transparent;
@@ -397,7 +399,7 @@ $control-demos: ("demo-1-", "demo-2-");
       &:hover {
         opacity: 1;
       }
-      &.#{$second-demo}previous {
+      &.#{$demo2}previous {
         &:before {
           content: "";
           width: 0;
@@ -407,7 +409,7 @@ $control-demos: ("demo-1-", "demo-2-");
           border-right: 22px solid #fff;
         }
       }
-      &.#{$second-demo}pause {
+      &.#{$demo2}pause {
         position: relative;
         width: 22px;
         &::before,
@@ -426,7 +428,7 @@ $control-demos: ("demo-1-", "demo-2-");
           right: 0;
         }
       }
-      &.#{$second-demo}resume {
+      &.#{$demo2}resume {
         width: 22px;
         &:before {
           $svg1: "\"data:image/svg+xml,%3C?xml version='1.0' ";
@@ -447,7 +449,7 @@ $control-demos: ("demo-1-", "demo-2-");
           background-repeat: no-repeat;
         }
       }
-      &.#{$second-demo}next {
+      &.#{$demo2}next {
         &:before {
           content: "";
           width: 0;
@@ -464,11 +466,13 @@ $control-demos: ("demo-1-", "demo-2-");
   /// Rico Slideshow Config 3
   //////////////////////////////////////////////////////////////////
 
-  .demo-3-stepper-button-wrapper {
+  $demo3: list.nth($demos, 3);
+
+  .#{$demo3}stepper-button-wrapper {
     display: none;
   }
 
-  .demo-3-indexed-button-wrapper {
+  .#{$demo3}indexed-button-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -477,7 +481,7 @@ $control-demos: ("demo-1-", "demo-2-");
     margin-bottom: 30px;
   }
 
-  button.demo-3-indexed-button {
+  button.#{$demo3}indexed-button {
     display: flex;
     background-color: transparent;
     border-radius: 50%;
@@ -492,7 +496,7 @@ $control-demos: ("demo-1-", "demo-2-");
     cursor: pointer;
     padding: 0;
 
-    &.demo-3-active {
+    &.#{$demo3}active {
       background-color: #fff;
     }
 

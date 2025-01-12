@@ -226,7 +226,7 @@ const App: React.FC = () => {
           path={`${basePath}/rico/:slug`}
           element={
             <Slideshow
-              classPrefix={"demo-1-"}
+              classPrefix={"demo1-"}
               slides={slides}
               basePath={`${basePath}/rico`}
               initialAutoSlide={true}
@@ -237,18 +237,18 @@ const App: React.FC = () => {
 
         {/* Redirect */}
         <Route
-          path="/demo-2"
-          element={<Navigate to={`${basePath}/demo-2/ricobot`} />}
+          path="/demo2"
+          element={<Navigate to={`${basePath}/demo2/ricobot`} />}
         />
 
         {/* Route for additional slideshow with other styling/config. */}
         <Route
-          path={`${basePath}/demo-2/:slug`}
+          path={`${basePath}/demo2/:slug`}
           element={
             <Slideshow
-              classPrefix={"demo-2-"}
+              classPrefix={"demo2-"}
               slides={slides}
-              basePath={`${basePath}/demo-2`}
+              basePath={`${basePath}/demo2`}
               initialAutoSlide={true}
               debug={true}
             />
@@ -257,19 +257,19 @@ const App: React.FC = () => {
 
         {/* Redirect */}
         <Route
-          path="/demo-3"
-          element={<Navigate to={`${basePath}/demo-3/ricobot`} />}
+          path="/demo3"
+          element={<Navigate to={`${basePath}/demo3/ricobot`} />}
         />
 
         {/* Route for yet another slideshow with other styling/config. */}
         {/* TODO: This should start at the initial route, even if routing is disabled */}
         <Route
-          path={`${basePath}/demo-3/:slug`}
+          path={`${basePath}/demo3/:slug`}
           element={
             <Slideshow
-              classPrefix={"demo-3-"}
+              classPrefix={"demo3-"}
               slides={slides}
-              basePath={`${basePath}/demo-3`}
+              basePath={`${basePath}/demo3`}
               initialAutoSlide={true}
               enableRouting={false}
               debug={true}
