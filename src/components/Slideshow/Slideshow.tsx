@@ -57,7 +57,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
   // Refs
   const isFirstRender = useRef(true); // Tracks the first render
-  const navigateRef = useRef(useNavigate()); // Stable ref for navigation
+  // const navigateRef = useRef(useNavigate()); // Stable ref for navigation
   const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
   const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
   const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
@@ -74,27 +74,18 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const [isPaused, setIsPaused] = useState(false); // Whether the slideshow is paused
   const [currentSlug, setCurrentSlug] = useState(""); // Current slide slug for routing
 
-  // Hook to programmatically navigate between routes
   const navigate = useNavigate();
+  const isDebug = () => Boolean(debug);
+  const { slug } = useParams<{ slug?: string }>();
 
   // Validate that 'basePath' is provided when routing is enabled
   if (enableRouting && !basePath) {
     console.error("'basePath' is required when routing is enabled.");
   }
 
-  const isDebug = () => Boolean(debug);
-
-  useEffect(() => {
-    // Store the navigate function reference in a mutable ref to access it outside of React's component lifecycle
-    navigateRef.current = navigate;
-  }, [navigate]);
-
-  // Extract the current route's 'slug' parameter from the URL
-  const { slug } = useParams<{ slug?: string }>();
-
   if (enableRouting && !slug) {
     // Navigate to the first slide's route if the slug is missing in the URL
-    navigateRef.current(`${basePath}/${slides[0].slug}`);
+    navigate(`${basePath}/${slides[0].slug}`);
   }
 
   // Determine the index of the current slide based on the 'slug' in the URL
@@ -144,8 +135,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   useEffect(() => {
     /**
      * Updates the height of the container to match the current slide's height.
-     * This ensures the slideshow's container dynamically adapts to the tallest
-     * slide content for a seamless user experience.
+     * to reduce whitespace and avoid overflow issues.
      */
     const updateHeight = () => {
       const currentRef = slideRefs.current[currentIndex]; // Get the current slide's ref
@@ -280,8 +270,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
               setCurrentIndex(currentRouteIndex);
             } else {
               // Otherwise, navigate to the first slide and set it as the current slide
-              navigateRef.current(`${basePath}/${slides[0].slug}`);
-              setCurrentIndex(0);
+              navigate(`${basePath}/${slides[0].slug}`);
+              // setCurrentIndex(0);
             }
             // Mark the first render as complete
             isFirstRender.current = false;
@@ -305,11 +295,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       }
     }
   }, [
-    // Dependencies: ensure the function remains stable and up-to-date
     slug,
     currentRouteIndex,
     slides,
-    navigateRef,
     startAutoSlide,
     basePath,
     enableRouting,
@@ -347,8 +335,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     (newIndex: number) => {
       // If routing is enabled, navigate to the new slide's route
       if (enableRouting) {
-        const route = `${basePath}/${slides[newIndex].slug}`;
-        navigateRef.current(route);
+        navigate(`${basePath}/${slides[newIndex].slug}`);
       } else {
         setCurrentIndex(newIndex);
       }
