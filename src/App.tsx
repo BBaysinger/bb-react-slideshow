@@ -15,8 +15,8 @@ import styles from "./App.module.scss";
  * In this use case the HTML gets pre-processed to dynamically apply CSS variables
  * for crossfade animations.
  *
- * The content was added taking a cue from the SPS home page where there is content on
- * each slide, but also that it's a logical feature. And crossfades are awesome 🤘.
+ * Content was added taking a cue from the SPS home page where there is content on
+ * each slide. (But it's also a logical feature. And crossfades are awesome 🤘.)
  *
  * @author Bradley Baysinger
  * @since The beginning of time.
@@ -221,14 +221,16 @@ const App: React.FC = () => {
           element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
         />
 
-        <Route
-          path="/rico"
-          element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
-        />
 
         {/* All unmatched paths */}
         <Route
           path="*"
+          element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
+        />
+
+        {/* Default demo redirect */}
+        <Route
+          path="/rico"
           element={<Navigate to={`${basePath}/rico/ricobot`} replace />}
         />
 
@@ -246,7 +248,7 @@ const App: React.FC = () => {
           }
         />
 
-        {/* Redirect */}
+        {/* Demo 2 redirect */}
         <Route
           path="/demo2"
           element={<Navigate to={`${basePath}/demo2/ricobot`} replace />}
@@ -266,7 +268,7 @@ const App: React.FC = () => {
           }
         />
 
-        {/* Redirect */}
+        {/* Demo 3 redirect */}
         <Route
           path="/demo3"
           element={<Navigate to={`${basePath}/demo3/ricobot`} replace />}
