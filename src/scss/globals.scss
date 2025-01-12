@@ -129,3 +129,10 @@ $breakpoints: (
     #{$property}: $max-value;
   }
 }
+
+// This is to mod the layout to reduce vertical overflow to fit on my iPhone 14 Pro, lol.
+@mixin mobile-portrait-hoverless {
+  @media (hover: none) and (orientation: portrait) and (max-width: 429px) {
+    @content;
+  }
+}

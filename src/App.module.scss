@@ -31,9 +31,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
       // be done in production if text style guide or mobile designs are provided.
       // And should never be done on large bodies of text or intricate table layouts.
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
-      @media (hover: none) and (orientation: portrait) {
-        // Reduce vertical overflow on mobile (though this doesn't does
-        // *not* exactly match the designs).
+      @include mobile-portrait-hoverless {
         @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
       }
       .#{$demo}overlay-wrapper-1,
@@ -431,12 +429,11 @@ $demos: ("demo1-", "demo2-", "demo3-");
       &.#{$demo2}resume {
         width: 22px;
         &:before {
-          $svg1: "\"data:image/svg+xml,%3C?xml version='1.0' ";
-          $svg2: "encoding='UTF-8'?%3E%3Csvg id='a' xmlns='http://www.w3.org/2000/svg' ";
-          $svg3: "width='1in' height='1in' viewBox='0 0 72 72'%3E%3Cpath ";
-          $svg4: "d='M36,0C16.12,0,0,16.12,0,36s16.12,36,36,36,36-16.12,36-36S55.88,0,36,0Z";
-          $svg5: "M22.33,55.31V16.69l36.27,19.31-36.27,19.31Z' ";
-          $svg6: "fill='%23fff'/%3E%3C/svg%3E\"";
+          $play-mask: "\"data:image/svg+xml,%3C?xml version='1.0' " +
+            "encoding='UTF-8'?%3E%3Csvg id='a' xmlns='http://www.w3.org/2000/svg' " +
+            "width='1in' height='1in' viewBox='0 0 72 72'%3E%3Cpath " +
+            "d='M0,0v72h72V0H0ZM22.33,55.31V16.69l36.27,19.31-36.27,19.31Z' " +
+            "fill='%23fff'/%3E%3C/svg%3E\"";
 
           content: "";
           position: absolute;
@@ -444,9 +441,11 @@ $demos: ("demo1-", "demo2-", "demo3-");
           height: 26px;
           top: -2px;
           transform: translateX(-50%);
-          background-image: url(#{$svg1}#{$svg2}#{$svg3}#{$svg4}#{$svg5}#{$svg6});
-          background-size: contain;
-          background-repeat: no-repeat;
+          background-color: #fff;
+          mask-image: url(#{$play-mask});
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          border-radius: 6px;
         }
       }
       &.#{$demo2}next {
@@ -477,8 +476,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
     align-items: center;
     justify-content: center;
     position: relative;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 
   button.#{$demo3}indexed-button {
@@ -488,8 +487,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
     font-size: 0;
     line-height: 0;
     border: 2px solid #fff;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     overflow: hidden;
     outline: 0;
     margin: 0 5px;
