@@ -59,11 +59,11 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const isFirstRender = useRef(true); // Tracks the first render
   const navigateRef = useRef(useNavigate()); // Stable ref for navigation
   const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
-  const previousIndexRef = useRef<number>(-1); // Tracks the current index for stable access
+  const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
   const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
   const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
-  const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for autoslide
+  const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
   const preloaderRan = useRef(false); // If the preloader has run
 
   // States
@@ -85,8 +85,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const isDebug = () => Boolean(debug);
 
   useEffect(() => {
-    // Store the navigate function reference in a mutable ref to
-    // access it outside of React's component lifecycle
+    // Store the navigate function reference in a mutable ref to access it outside of React's component lifecycle
     navigateRef.current = navigate;
   }, [navigate]);
 
@@ -119,7 +118,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     // Timer to control the delay before resetting the transition state
     let timer: NodeJS.Timeout | null = null;
 
-    // if (currentIndex !== -1) {
     // Update the previous index to the current one before it changes
     setPreviousIndex(currentIndexRef.current);
     previousIndexRef.current = currentIndexRef.current;
@@ -131,7 +129,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     timer = setTimeout(() => {
       setIsTransitioning(false); // End the transitioning state after the delay
     }, transitionResetDelay);
-    // }
 
     // Update the current index reference for use in the next render
     currentIndexRef.current = currentIndex;
@@ -142,7 +139,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         clearTimeout(timer); // Prevent memory leaks by ensuring the timer is cleared
       }
     };
-  }, [currentIndex]); // Re-run this effect whenever the currentIndex changes
+  }, [currentIndex]);
 
   useEffect(() => {
     /**
@@ -192,7 +189,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       // Mark the preloader as having run to prevent repeated preloading
       preloaderRan.current = true;
     }
-  }, [slides]); // Re-run the effect only if the 'slides' array changes
+  }, [slides]);
 
   useEffect(() => {
     // Update the current slide's slug whenever the currentIndex or slides change
@@ -219,7 +216,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       // Reset the timer reference to null to indicate no active timer
       timerRef.current = null;
     }
-  }, []); // Dependency array is empty
+  }, []);
 
   const startAutoSlide = useCallback(
     (immediateSlide = false) => {
@@ -243,13 +240,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         }, interval);
       }
     },
-    [
-      // Dependencies: ensures the function remains stable and up-to-date
-      initialAutoSlide,
-      interval,
-      slides.length,
-      clearTimer,
-    ],
+    [initialAutoSlide, interval, slides.length, clearTimer],
   );
 
   const restartTimer = useCallback(() => {
@@ -272,14 +263,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
       }, interval);
     }
-  }, [
-    // Dependencies: ensure the function remains stable and up-to-date
-    initialAutoSlide,
-    interval,
-    restartDelay,
-    slides.length,
-    clearTimer,
-  ]);
+  }, [initialAutoSlide, interval, restartDelay, slides.length, clearTimer]);
 
   useEffect(() => {
     // Delay in milliseconds before triggering the first render actions
@@ -340,11 +324,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     ) {
       // Set focus to the thumbnail corresponding to the current slide
       // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
-      if (indexedButtonRefs.current[currentIndexRef.current]) {
-        indexedButtonRefs.current[currentIndexRef.current]!.focus({
-          preventScroll: true,
-        });
-      }
+      indexedButtonRefs.current[currentIndexRef.current]!.focus({
+        preventScroll: true,
+      });
     }
   });
 
@@ -359,31 +341,21 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         restartTimer();
       }, restartDelay);
     }
-  }, [
-    // Dependencies: ensure the function remains stable and up-to-date
-    clearTimer,
-    restartDelay,
-    restartTimer,
-  ]);
+  }, [clearTimer, restartDelay, restartTimer]);
 
   const handleUserInteraction = useCallback(
     (newIndex: number) => {
       // If routing is enabled, navigate to the new slide's route
       if (enableRouting) {
         const route = `${basePath}/${slides[newIndex].slug}`;
-        navigateRef.current(route); // Programmatically navigate to the new route
+        navigateRef.current(route);
       } else {
         setCurrentIndex(newIndex);
       }
 
       delayAutoSlide();
     },
-    [
-      // Dependencies: ensure the function remains stable and up-to-date
-      enableRouting,
-      basePath,
-      slides,
-    ],
+    [enableRouting, basePath, slides],
   );
 
   const handlePrevUserTriggered = useCallback(() => {
@@ -394,7 +366,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
     // Handle the user-triggered interaction with the calculated index
     handleUserInteraction(newIndex);
-  }, [slides, handleUserInteraction]); // Dependencies: 'slides' for length and 'handleUserInteraction' for navigation
+  }, [slides, handleUserInteraction]);
 
   const handleNextUserTriggered = useCallback(() => {
     // Calculate the new index for the next slide
@@ -403,7 +375,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
     // Handle the user-triggered interaction with the calculated index
     handleUserInteraction(newIndex);
-  }, [slides, handleUserInteraction]); // Dependencies: 'slides' for length and 'handleUserInteraction' for navigation
+  }, [slides, handleUserInteraction]);
 
   // Store references to the functions to maintain stable function identities across renders
   const handlePrevRef = useRef(handlePrevUserTriggered);
@@ -416,7 +388,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     handlePrevRef.current = handlePrevUserTriggered;
     handleNextRef.current = handleNextUserTriggered;
     clearTimerRef.current = clearTimer;
-  }, [handlePrevUserTriggered, handleNextUserTriggered, clearTimer]); // Dependencies: Ensure refs are updated whenever the functions change
+  }, [handlePrevUserTriggered, handleNextUserTriggered, clearTimer]);
 
   useEffect(() => {
     // Handle keyboard navigation for previous and next slides
@@ -559,7 +531,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
               onClick={handlePrevUserTriggered}
               aria-label="Previous slide"
               aria-controls="slideshow"
-              className={`${styles.prevous} ${classPrefix}previous`}
+              className={`${styles.previous} ${classPrefix}previous`}
             >
               {labels.previous}
             </button>
