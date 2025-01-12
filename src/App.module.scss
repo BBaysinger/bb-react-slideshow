@@ -28,9 +28,9 @@ $control-demos: ("demo-1-", "demo-2-");
       );
 
       // Using fluid properties is a liberty taken in the absence of
-      // provided breakpoints or tablet designs. This would not be done
-      // in production if text layout standards exist. Should also
-      // never be done on large bodies of text or intricate table layouts.
+      // breakpoints or tablet design provisons. This would not necessarily
+      // be done in production if text style guide or mobile designs are provided.
+      // And should never be done on large bodies of text or intricate table layouts.
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
       @media (hover: none) and (orientation: portrait) {
         // Reduce vertical overflow on mobile (though this doesn't does
@@ -403,7 +403,7 @@ $control-demos: ("demo-1-", "demo-2-");
           height: 0;
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
-          border-right: 25px solid #fff;
+          border-right: 22px solid #fff;
         }
       }
       &.#{$second-demo}pause {
@@ -453,7 +453,7 @@ $control-demos: ("demo-1-", "demo-2-");
           height: 0;
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
-          border-left: 25px solid #fff;
+          border-left: 22px solid #fff;
         }
       }
     }

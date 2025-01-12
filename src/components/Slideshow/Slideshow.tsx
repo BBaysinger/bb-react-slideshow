@@ -98,23 +98,22 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     navigateRef.current(`${basePath}/${slides[0].slug}`);
   }
 
+  // Determine the index of the current slide based on the 'slug' in the URL
+  // If routing is disabled, the index is set to -1 (inactive)
+  const currentRouteIndex = slug
+    ? slides.findIndex((slide) => slide.slug === slug)
+    : -1;
+
   useEffect(() => {
-    if (enableRouting && slug) {
+    if (slug) {
       const matchedIndex = slides.findIndex((slide) => slide.slug === slug);
       // Update the currentIndex to match the slug from the URL
       if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
         setCurrentIndex(matchedIndex);
         delayAutoSlide();
-        // currentIndexRef.current = matchedIndex;
       }
     }
-  }, [slug, enableRouting, slides]);
-
-  // Determine the index of the current slide based on the 'slug' in the URL
-  // If routing is disabled, the index is set to -1 (inactive)
-  const currentRouteIndex = enableRouting
-    ? slides.findIndex((slide) => slide.slug === slug)
-    : -1;
+  }, [slug, slides]);
 
   useEffect(() => {
     // Timer to control the delay before resetting the transition state
@@ -288,7 +287,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
     // Proceed only if the slideshow is not paused
     if (!isPausedRef.current) {
-      if (enableRouting) {
+      if (slug) {
         // Handle the first render when routing is enabled
         if (isFirstRender.current) {
           setTimeout(() => {
