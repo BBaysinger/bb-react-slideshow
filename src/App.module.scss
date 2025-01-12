@@ -87,6 +87,11 @@ $demos: ("demo1-", "demo2-", "demo3-");
           0.072em
         );
         @include fluid-property(width, $bpmin, $bpmax, 300px, 500px);
+        @include mobile-portrait-hoverless {
+          width: auto;
+          max-width: none;
+          border: 1px solid red;
+        }
         @include fluid-property(margin-bottom, $bpmin, $bpmax, 25px, 32px);
       }
 
