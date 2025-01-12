@@ -6,7 +6,8 @@ A reusable and multilayered interactive slideshow that supports dynamic routing,
 
 Slides are defined as an array of objects with background images, thumbnails, and JSX content passed in as props, making the component reusable and flexible.
 
-Dynamic routes (optional) only activate on user interaction. This ensures the component doesn't stack the history with every auto-slide... Also because I was experimenting with redux-first routing, and I’ll revisit that aspect later.
+Dynamic routes (optional) only stack the history on user interaction, and not
+on auto-slide, though the route updates (using `replace: true`) for deep linking.
 
 ## Demos
 
