@@ -290,9 +290,9 @@ $demos: ("demo1-", "demo2-", "demo3-");
     @include fluid-property(gap, $bpmin, $bpmax, 0px, 40px);
     @include fluid-property(margin-top, $bpmin, $bpmax, 10px, 34px);
     @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
-    @include mobile-portrait-hoverless {
-      @include fluid-property(padding-bottom, $bpmin, $bpmax, 10px, 51px);
-    }
+    // @include mobile-portrait-hoverless {
+    //   @include fluid-property(padding-bottom, $bpmin, $bpmax, 10px, 51px);
+    // }
     @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
     @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
     @include breakpoint-up($b992px) {
@@ -321,10 +321,6 @@ $demos: ("demo1-", "demo2-", "demo3-");
     align-items: center;
     justify-self: center;
     transition: transform 0.3s ease-out;
-
-    // @include breakpoint-up($b360px) {
-    //   min-width: 30%;
-    // }
 
     @include mobile-portrait-hoverless {
       width: 80%;
