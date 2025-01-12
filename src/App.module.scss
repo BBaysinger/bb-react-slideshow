@@ -29,7 +29,7 @@ $control-demos: ("demo-1-", "demo-2-");
 
       // Using fluid properties is a liberty taken in the absence of
       // provided breakpoints or tablet designs. This would not be done
-      // in production if text layout standards exist. Should also 
+      // in production if text layout standards exist. Should also
       // never be done on large bodies of text or intricate table layouts.
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
       @media (hover: none) and (orientation: portrait) {
@@ -232,7 +232,7 @@ $control-demos: ("demo-1-", "demo-2-");
       .#{$demo}overlay-1-1 {
         display: block;
         height: 100vw;
-        background-image: url("/assets/images/1-foreground.webp");
+        background-image: url("@/assets/images/1-foreground.webp");
         background-repeat: no-repeat;
         margin-top: $offset;
         transform: translateX(50vw);
