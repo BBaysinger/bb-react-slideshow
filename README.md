@@ -6,11 +6,11 @@ A reusable and multilayered interactive slideshow that supports dynamic routing,
 
 Slides are defined as an array of objects with background images, thumbnails, and JSX content passed in as props, making the component reusable and flexible.
 
-Dynamic routes (optional) only activate on user interaction. This ensures the component doesn't stack the history with every auto-slide. Additionally, I was experimenting with redux-first routing, and I’ll revisit that aspect later.
+Dynamic routes (optional) only activate on user interaction. This ensures the component doesn't stack the history with every auto-slide... Also because I was experimenting with redux-first routing, and I’ll revisit that aspect later.
 
 ## Demos
 
-- **Original design (with one notable change):**  
+- **Original design (with enhancements):**  
   [https://bb-react-slideshow.netlify.app/rico](https://bb-react-slideshow.netlify.app/rico)
 - **Stepper button demo:**  
   [https://bb-react-slideshow.netlify.app/demo2](https://bb-react-slideshow.netlify.app/demo2)
@@ -28,7 +28,7 @@ Dynamic routes (optional) only activate on user interaction. This ensures the co
 
 ## Roadmap
 
-- **Modularize the Controls:** Explore making controls a separate component that can be linked or passed to the slideshow component. The slideshow will then use whatever features are provided in each control set.
+- **Modularize Controls:** Explore making controls a separate component that can be linked or passed to the slideshow component. The slideshow will then use whatever features are provided in each control set.
 - **Finish Default Styling:** Overridable default styling should represent a basic slideshow out of the box.
 
 ## Example
