@@ -2,34 +2,36 @@
 
 ## Overview
 
-A reusable and multilayered interactive slideshow that supports dynamic routing, auto-slide, and user interactions like navigation, pausing, and restarting. It optionally adjusts height dynamically based on slide content to avoid overflow or excessive whitespace. Also preloads images.
+A reusable and multilayered interactive slideshow that supports dynamic routing, auto-slide, and user interactions like navigation, pausing, and restarting. It optionally adjusts its height dynamically based on slide content to avoid overflow or excessive whitespace. It also preloads images.
 
-Slides are defined as an array of objects with background images, thumbnails, and JSX content passed in as props to make the component reusable and flexible.
+Slides are defined as an array of objects with background images, thumbnails, and JSX content passed in as props, making the component reusable and flexible.
 
-Dynamic routes (optional) only activate on user interaction. This is so the component doesn't stack the history with every auto-slide, but also because I was experimenting with redux-first routing. I'll come back to that.
+Dynamic routes (optional) only activate on user interaction. This ensures the component doesn't stack the history with every auto-slide. Additionally, I was experimenting with redux-first routing, and I’ll revisit that aspect later.
 
 ## Demos
 
-- Original design (w/ one notable change):
+- **Original design (with one notable change):**  
   [https://bb-react-slideshow.netlify.app/rico](https://bb-react-slideshow.netlify.app/rico)
-- Stepper button demo:
+- **Stepper button demo:**  
   [https://bb-react-slideshow.netlify.app/demo2](https://bb-react-slideshow.netlify.app/demo2)
-- Index dots (and routing disabled):
+- **Index dots (and routing disabled):**  
   [https://bb-react-slideshow.netlify.app/demo3](https://bb-react-slideshow.netlify.app/demo3)
 
 ## Features
 
-- **Reusable Component**: The slideshow can be integrated into any React application and fits many use cases with the options available.
-- **Dynamic Routing (Optional)**: Utilize dynamic routes for deep-linking slides, keeping navigation in sync with the application state.
-- **Auto-Slide Functionality**: Automatically transitions between slides, pausing when user interaction is detected. Includes a restart button to re-enable auto-slide.
-- **Custom Hooks**: Simplified logic using custom hooks for professional, maintainable code.
-- **Configuration Options**: Adjustable settings for auto-slide timing/restart and dynamic routing. Two optional sets of controls.
-- **Accessibility**: Built with keyboard navigation support and ARIA attributes to ensure an inclusive experience.
+- **Reusable Component:** The slideshow can be integrated into any React application and fits many use cases with the available options.
+- **Dynamic Routing (Optional):** Utilize dynamic routes for deep-linking slides, keeping navigation in sync with the application state.
+- **Auto-Slide Functionality:** Automatically transitions between slides, pausing when user interaction is detected. Includes a restart button to re-enable auto-slide.
+- **Custom Hooks:** Simplified logic using custom hooks for professional, maintainable code.
+- **Configuration Options:** Adjustable settings for auto-slide timing/restart and dynamic routing. Includes two optional sets of controls.
+- **Accessibility:** Built with keyboard navigation support and ARIA attributes to ensure an inclusive experience.
 
 ## Roadmap
 
-- **Modularize the Controls**: Explore making controls a separate component that can be linked or passed to the slideshow component. Then the slideshow will use whatever features are provided in each control set.
-- **Finish Default Styling**: Overridable default styling should represent a basic slideshow out of the box.
+- **Modularize the Controls:** Explore making controls a separate component that can be linked or passed to the slideshow component. The slideshow will then use whatever features are provided in each control set.
+- **Finish Default Styling:** Overridable default styling should represent a basic slideshow out of the box.
+
+## Example
 
 Here is an example JavaScript function:
 
