@@ -217,18 +217,18 @@ const App: React.FC = () => {
       <Routes>
         {/* Redirect */}
         <Route
-          path="/rico-slideshow"
-          element={<Navigate to={`${basePath}/rico-slideshow/ricobot`} />}
+          path="/rico"
+          element={<Navigate to={`${basePath}/rico/ricobot`} />}
         />
 
         {/* Route for the primary slideshow, with dynamic slide navigation */}
         <Route
-          path={`${basePath}/rico-slideshow/:slug`}
+          path={`${basePath}/rico/:slug`}
           element={
             <Slideshow
               classPrefix={"demo-1-"}
               slides={slides}
-              basePath={`${basePath}/rico-slideshow`}
+              basePath={`${basePath}/rico`}
               initialAutoSlide={true}
               debug={true}
             />

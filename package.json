@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/BBaysinger/bb-react-slideshow.git"
   },
-  "homepage": "https://bb-react-slideshow.netlify.app/rico-slideshow/one",
+  "homepage": "https://bb-react-slideshow.netlify.app/rico/one",
   "engines": {
     "node": ">=23.4.0",
     "npm": ">=11.0.0"
