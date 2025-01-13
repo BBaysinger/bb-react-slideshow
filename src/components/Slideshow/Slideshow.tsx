@@ -99,7 +99,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       // Update the currentIndex to match the slug from the URL
       if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
         setCurrentIndex(matchedIndex);
-        delayAutoSlide();
+        // delayAutoSlide();
       }
     }
   }, [slug, slides]);
@@ -253,36 +253,32 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   );
 
   useEffect(() => {
-    // Delay in milliseconds before triggering the first render actions
-    const delay = 0;
-
     // Proceed only if the slideshow is not paused
     if (!isPausedRef.current) {
       if (slug) {
         // Handle the first render when routing is enabled
         if (isFirstRender.current) {
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             if (currentRouteIndex !== -1) {
               // If the route index is valid, set the current slide to the routed slide
               setCurrentIndex(currentRouteIndex);
             } else {
               // Otherwise, navigate to the first slide and set it as the current slide
               navigate(`${basePath}/${slides[0].slug}`);
-              // setCurrentIndex(0);
             }
             // Mark the first render as complete
             isFirstRender.current = false;
-          }, delay);
+          });
         }
       } else {
         // Handle the first render when routing is disabled
         if (isFirstRender.current) {
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             // Set the first slide as the current slide
             setCurrentIndex(0);
             // Mark the first render as complete
             isFirstRender.current = false;
-          }, delay);
+          });
         }
       }
 
@@ -323,7 +319,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     if (restartDelay > -1 && !isPausedRef.current) {
       // Set a timeout to restart the auto-slide after the specified delay
       timerRef.current = setTimeout(() => {
-        startAutoSlide();
+        startAutoSlide(true);
       }, restartDelay);
     }
   }, [clearTimer, restartDelay, startAutoSlide]);
