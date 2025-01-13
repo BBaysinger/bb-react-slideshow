@@ -323,9 +323,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         if (isInternalNavigation.current) {
           // Reset the flag for future navigations
           isInternalNavigation.current = false;
-          autoSlideCounterRef.current = 0;
         } else {
           // External navigation (e.g., browser history buttons)
+          autoSlideCounterRef.current = 0;
           delayAutoSlide();
         }
       }
