@@ -1,5 +1,6 @@
 @use "sass:math";
 @use "sass:map";
+@use "sass:string";
 
 // Breakpoint base variables (unitless)
 $b320: 320; // Ultra-narrow screens (e.g., smartwatches, highly compact UIs).
@@ -135,4 +136,15 @@ $breakpoints: (
   @media (hover: none) and (orientation: portrait) and (max-width: 429px) {
     @content;
   }
+}
+
+// This removes redundancy of the rest of the SVG XML allows you to declare a
+// shape with only the path data. Assuming shapes within a 1in x 1in square viewbox.
+@function svg($d, $color: #fff) {
+  @return string.unquote(
+    "url(\"data:image/svg+xml,%3C?xml version='1.0' " +
+      "encoding='UTF-8'?%3E%3Csvg id='a' xmlns='http://www.w3.org/2000/svg' " +
+      "width='1in' height='1in' viewBox='0 0 72 72'%3E%3Cpath " + "d='#{$d}' " +
+      "fill='%23#{string.slice(#{$color}, 2)}'/%3E%3C/svg%3E\")"
+  );
 }
