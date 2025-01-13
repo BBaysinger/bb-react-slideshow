@@ -12,7 +12,7 @@ on auto-slide, (though the route updates [using `replace: true`] for deep linkin
 ## Demos
 
 NOTE: I'm working on the routing history currently. Chrome has an apparent defect with this that I'm also
-seeing in another project. But the strategy pretty new...
+seeing in another project. But the strategy pretty new. Everything should work ok otherwise.
 
 - **Original design (w/ enhancement):**  
   [https://bb-react-slideshow.netlify.app/rico](https://bb-react-slideshow.netlify.app/rico)
