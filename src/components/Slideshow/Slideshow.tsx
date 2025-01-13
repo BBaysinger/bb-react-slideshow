@@ -208,9 +208,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
             // Update the route for deep linking without stacking the history.
             isInternalNavigation.current = true;
 
-            console.log(autoSlideCounterRef.current);
+            console.log(autoSlideCounterRef.current > 0);
             navigate(`${basePath}/${slides[newIndex].slug}`, {
-              replace: autoSlideCounterRef.current > 1,
+              replace: autoSlideCounterRef.current > 0,
             });
           } else {
             setCurrentIndex(newIndex);
