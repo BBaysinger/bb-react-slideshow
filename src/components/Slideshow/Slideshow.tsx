@@ -95,24 +95,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     : -1;
 
   useEffect(() => {
-    if (slug) {
-      const matchedIndex = slides.findIndex((slide) => slide.slug === slug);
-      // Update the currentIndex to match the slug from the URL
-      if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
-        setCurrentIndex(matchedIndex);
-
-        if (isInternalNavigation.current) {
-          // Reset the flag for future navigations
-          isInternalNavigation.current = false;
-        } else {
-          // External navigation (e.g., browser history buttons)
-          delayAutoSlide();
-        }
-      }
-    }
-  }, [slug, slides]);
-
-  useEffect(() => {
     // Timer to control the delay before resetting the transition state
     let timer: NodeJS.Timeout | null = null;
 
@@ -137,7 +119,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         clearTimeout(timer); // Prevent memory leaks by ensuring the timer is cleared
       }
     };
-  }, [currentIndex]);
+  }, [currentIndex, transitionResetDelay]);
 
   useEffect(() => {
     // Updates the height of the container to match the current slide's height.
@@ -328,6 +310,24 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       }, restartDelay);
     }
   }, [clearTimer, restartDelay, startAutoSlide]);
+
+  useEffect(() => {
+    if (slug) {
+      const matchedIndex = slides.findIndex((slide) => slide.slug === slug);
+      // Update the currentIndex to match the slug from the URL
+      if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
+        setCurrentIndex(matchedIndex);
+
+        if (isInternalNavigation.current) {
+          // Reset the flag for future navigations
+          isInternalNavigation.current = false;
+        } else {
+          // External navigation (e.g., browser history buttons)
+          delayAutoSlide();
+        }
+      }
+    }
+  }, [slug, slides, delayAutoSlide]);
 
   const handleUserInteraction = useCallback(
     (newIndex: number) => {
