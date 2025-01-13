@@ -207,15 +207,17 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
           if (enableRouting) {
             // Update the route for deep linking without stacking the history.
             isInternalNavigation.current = true;
+
+            console.log(autoSlideCounterRef.current);
             navigate(`${basePath}/${slides[newIndex].slug}`, {
               replace: autoSlideCounterRef.current > 1,
             });
           } else {
             setCurrentIndex(newIndex);
           }
-        };
 
-        autoSlideCounterRef.current += 1;
+          autoSlideCounterRef.current += 1;
+        };
 
         // If immediateSlide is true, move to the next slide immediately
         if (immediateSlide) {
@@ -321,6 +323,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
         if (isInternalNavigation.current) {
           // Reset the flag for future navigations
           isInternalNavigation.current = false;
+          autoSlideCounterRef.current = 0;
         } else {
           // External navigation (e.g., browser history buttons)
           delayAutoSlide();
