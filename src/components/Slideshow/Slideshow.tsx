@@ -206,17 +206,18 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         // Resume the auto-slide by setting the paused state to false
         setIsPaused(false);
 
-        if (autoSlideMode === AUTOSLIDE_MODES.PERSISTENT) {
+        // if (autoSlideMode === AUTOSLIDE_MODES.PERSISTENT) {
           const doAutoSlide = (index: number) => {
             const newIndex = index % slides.length;
             if (enableRouting) {
-              // Update the route for deep linking without stacking the history.
-              isInternalNavigation.current = true;
-
-              // console.log(autoSlideCounterRef.current > 0);
-              navigate(`${basePath}/${slides[newIndex].slug}`, {
-                replace: autoSlideCounterRef.current > 0,
-              });
+              // Come back to this. It's not consistent, and Chrome seems to have
+              // a defect to do with dynamic routing history that I'm observing here
+              // and in another project. 😡
+              // isInternalNavigation.current = true;
+              // navigate(`${basePath}/${slides[newIndex].slug}`, {
+              //   replace: autoSlideCounterRef.current > 0,
+              // });
+              setCurrentIndex(newIndex);
             } else {
               setCurrentIndex(newIndex);
             }
@@ -233,7 +234,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           timerRef.current = setInterval(() => {
             doAutoSlide(currentIndexRef.current + 1);
           }, interval);
-        }
+        // }
       },
       [
         autoSlideMode,
