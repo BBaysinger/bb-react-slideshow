@@ -64,6 +64,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
   const preloaderRanRef = useRef(false); // If the preloader has run
   const autoSlideCounterRef = useRef(0); // Counter for auto-slide intervals
+  const isInternalNavigation = useRef(false);
 
   // States
   const [currentIndex, setCurrentIndex] = useState<number>(-1); // Current slide index
@@ -99,7 +100,14 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       // Update the currentIndex to match the slug from the URL
       if (matchedIndex !== -1 && matchedIndex !== currentIndexRef.current) {
         setCurrentIndex(matchedIndex);
-        // delayAutoSlide();
+
+        if (isInternalNavigation.current) {
+          // Reset the flag for future navigations
+          isInternalNavigation.current = false;
+        } else {
+          // External navigation (e.g., browser history buttons)
+          delayAutoSlide();
+        }
       }
     }
   }, [slug, slides]);
@@ -112,6 +120,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     setPreviousIndex(currentIndexRef.current);
     previousIndexRef.current = currentIndexRef.current;
 
+    // Update the current index reference for use in the next render
+    currentIndexRef.current = currentIndex;
+
     // Set the transitioning state to true for triggering transition effects
     setIsTransitioning(true);
 
@@ -119,9 +130,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
     timer = setTimeout(() => {
       setIsTransitioning(false); // End the transitioning state after the delay
     }, transitionResetDelay);
-
-    // Update the current index reference for use in the next render
-    currentIndexRef.current = currentIndex;
 
     // Cleanup function to clear the timeout when the effect is re-run or unmounted
     return () => {
@@ -132,24 +140,20 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
   }, [currentIndex]);
 
   useEffect(() => {
-    /**
-     * Updates the height of the container to match the current slide's height.
-     * to reduce whitespace and avoid overflow issues.
-     */
+    // Updates the height of the container to match the current slide's height.
+    // to reduce whitespace and avoid overflow issues.
     const updateHeight = () => {
-      const currentRef = slideRefs.current[currentIndex]; // Get the current slide's ref
-      if (currentRef) {
-        const height = currentRef.offsetHeight; // Measure the height of the current slide
-        setDivHeight(height ? `${height}px` : "unset"); // Update the container's height
+      const currentSlide = slideRefs.current[currentIndex];
+      if (currentSlide) {
+        const height = currentSlide.offsetHeight;
+        setDivHeight(height ? `${height}px` : "unset");
       }
     };
 
-    updateHeight(); // Initialize height on mount or slide change
+    updateHeight();
 
-    // Update the height on window resize to ensure responsiveness
     window.addEventListener("resize", updateHeight);
 
-    // Clean up event listener on unmount
     return () => {
       window.removeEventListener("resize", updateHeight);
     };
@@ -220,6 +224,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
           const newIndex = index % slides.length;
           if (enableRouting) {
             // Update the route for deep linking without stacking the history.
+            isInternalNavigation.current = true;
             navigate(`${basePath}/${slides[newIndex].slug}`, {
               replace: autoSlideCounterRef.current > 1,
             });
@@ -329,6 +334,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       autoSlideCounterRef.current = 0;
       // If routing is enabled, navigate to the new slide's route
       if (enableRouting) {
+        isInternalNavigation.current = true;
         navigate(`${basePath}/${slides[newIndex].slug}`);
       } else {
         setCurrentIndex(newIndex);
