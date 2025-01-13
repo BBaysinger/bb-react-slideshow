@@ -144,16 +144,11 @@ $breakpoints: (
 @function svg($d, $color: #fff) {
   // Ensure $color is treated as a string
   $color-string: if(meta.type-of($color) == "string", $color, "#{$color}");
-
-  // Initialize $formatted-color
-  $formatted-color: "";
-
-  // Determine the formatted color
-  @if string.index($color-string, "#") == 1 {
-    $formatted-color: "%23#{string.slice($color-string, 2)}"; // Remove the `#` and add `%23`
-  } @else {
-    $formatted-color: $color-string; // Use the color as-is
-  }
+  $formatted-color: if(
+    string.index($color-string, "#") == 1,
+    "%23#{string.slice($color-string, 2)}",
+    $color-string
+  );
 
   // Return the SVG as a data URL
   @return string.unquote(
