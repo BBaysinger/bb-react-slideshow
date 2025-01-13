@@ -28,8 +28,7 @@ const defaultLabels: SlideshowLabels = {
  * Slides are defined as an array of objects with background images, thumbnails,
  * and JSX content passed in as props to make the component reusable and flexible.
  *
- * Dynamic routes (optional) only stack the history on user interaction, and not
- * on auto-slide, though the route updates (using `replace: true`) for deep linking.
+ * Dynamic routes (optional). They only stack the history on user interaction, and not on auto-slide.
  *
  * @param slides - An array of slide content or components
  * @param autoSlideMode - Auto-slide mode: "none", "initial" (starts on first render), "persistent" (always on)
@@ -207,33 +206,33 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         setIsPaused(false);
 
         // if (autoSlideMode === AUTOSLIDE_MODES.PERSISTENT) {
-          const doAutoSlide = (index: number) => {
-            const newIndex = index % slides.length;
-            if (enableRouting) {
-              // Come back to this. It's not consistent, and Chrome seems to have
-              // a defect to do with dynamic routing history that I'm observing here
-              // and in another project. 😡
-              // isInternalNavigation.current = true;
-              // navigate(`${basePath}/${slides[newIndex].slug}`, {
-              //   replace: autoSlideCounterRef.current > 0,
-              // });
-              setCurrentIndex(newIndex);
-            } else {
-              setCurrentIndex(newIndex);
-            }
-
-            autoSlideCounterRef.current += 1;
-          };
-
-          // If immediateSlide is true, move to the next slide immediately
-          if (immediateSlide) {
-            doAutoSlide(currentIndexRef.current + 1);
+        const doAutoSlide = (index: number) => {
+          const newIndex = index % slides.length;
+          if (enableRouting) {
+            // Come back to this. It's not consistent, and Chrome seems to have
+            // a defect to do with dynamic routing history that I'm observing here
+            // and in another project. 😡
+            // isInternalNavigation.current = true;
+            // navigate(`${basePath}/${slides[newIndex].slug}`, {
+            //   replace: autoSlideCounterRef.current > 0,
+            // });
+            setCurrentIndex(newIndex);
+          } else {
+            setCurrentIndex(newIndex);
           }
 
-          // Start a recurring timer to automatically change the slide at the given interval
-          timerRef.current = setInterval(() => {
-            doAutoSlide(currentIndexRef.current + 1);
-          }, interval);
+          autoSlideCounterRef.current += 1;
+        };
+
+        // If immediateSlide is true, move to the next slide immediately
+        if (immediateSlide) {
+          doAutoSlide(currentIndexRef.current + 1);
+        }
+
+        // Start a recurring timer to automatically change the slide at the given interval
+        timerRef.current = setInterval(() => {
+          doAutoSlide(currentIndexRef.current + 1);
+        }, interval);
         // }
       },
       [
