@@ -56,14 +56,14 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
   // Refs
   const isFirstRender = useRef(true); // Tracks the first render
-  // const navigateRef = useRef(useNavigate()); // Stable ref for navigation
   const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
   const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
   const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
   const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
   const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
-  const preloaderRan = useRef(false); // If the preloader has run
+  const preloaderRanRef = useRef(false); // If the preloader has run
+  const autoSlideCounterRef = useRef(0); // Counter for auto-slide intervals
 
   // States
   const [currentIndex, setCurrentIndex] = useState<number>(-1); // Current slide index
@@ -157,7 +157,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
   useEffect(() => {
     // Ensure the preloader runs only once to avoid redundant operations
-    if (!preloaderRan.current) {
+    if (!preloaderRanRef.current) {
       // Determine the starting index for preloading, defaulting to 0 if no
       // current index is set
       const preloadIndex =
@@ -176,7 +176,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       preloader.preload();
 
       // Mark the preloader as having run to prevent repeated preloading
-      preloaderRan.current = true;
+      preloaderRanRef.current = true;
     }
   }, [slides]);
 
@@ -216,25 +216,28 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
       setIsPaused(false);
 
       if (initialAutoSlide) {
-        const navigateToSlide = (index: number) => {
+        const autoSlide = (index: number) => {
           const newIndex = index % slides.length;
-
           if (enableRouting) {
             // Update the route for deep linking without stacking the history.
-            navigate(`${basePath}/${slides[newIndex].slug}`, { replace: true });
+            navigate(`${basePath}/${slides[newIndex].slug}`, {
+              replace: autoSlideCounterRef.current > 1,
+            });
           } else {
             setCurrentIndex(newIndex);
           }
         };
 
+        autoSlideCounterRef.current += 1;
+
         // If immediateSlide is true, move to the next slide immediately
         if (immediateSlide) {
-          navigateToSlide(currentIndexRef.current + 1);
+          autoSlide(currentIndexRef.current + 1);
         }
 
         // Start a recurring timer to automatically change the slide at the given interval
         timerRef.current = setInterval(() => {
-          navigateToSlide(currentIndexRef.current + 1);
+          autoSlide(currentIndexRef.current + 1);
         }, interval);
       }
     },
@@ -327,6 +330,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo((props) => {
 
   const handleUserInteraction = useCallback(
     (newIndex: number) => {
+      autoSlideCounterRef.current = 0;
       // If routing is enabled, navigate to the new slide's route
       if (enableRouting) {
         navigate(`${basePath}/${slides[newIndex].slug}`);
