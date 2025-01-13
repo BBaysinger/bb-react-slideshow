@@ -241,7 +241,7 @@ const App: React.FC = () => {
               classPrefix={"demo1-"}
               slides={slides}
               basePath={`${basePath}/rico`}
-              initialAutoSlide={true}
+              autoSlideMode={"persistent"}
               debug={true}
             />
           }
@@ -261,7 +261,7 @@ const App: React.FC = () => {
               classPrefix={"demo2-"}
               slides={slides}
               basePath={`${basePath}/demo2`}
-              initialAutoSlide={true}
+              autoSlideMode={"persistent"}
               debug={true}
             />
           }
@@ -282,7 +282,7 @@ const App: React.FC = () => {
               classPrefix={"demo3-"}
               slides={slides}
               basePath={`${basePath}/demo3`}
-              initialAutoSlide={true}
+              autoSlideMode={"persistent"}
               enableRouting={false}
               debug={true}
             />
