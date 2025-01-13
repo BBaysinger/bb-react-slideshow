@@ -11,6 +11,14 @@ interface Slide {
   title?: string;
 }
 
+export const AUTOSLIDE_MODES = {
+  NONE: "none",
+  INITIAL: "initial",
+  PERSISTENT: "persistent",
+} as const;
+
+type AutoSlideMode = (typeof AUTOSLIDE_MODES)[keyof typeof AUTOSLIDE_MODES];
+
 type SlideshowLabels = {
   previous?: string;
   next?: string;
@@ -21,7 +29,7 @@ type SlideshowLabels = {
 interface SlideshowProps {
   slides: Slide[];
   basePath?: string;
-  initialAutoSlide?: boolean;
+  autoSlideMode?: AutoSlideMode;
   interval?: number;
   content?: React.ReactNode;
   heading?: React.ReactNode;
@@ -33,4 +41,4 @@ interface SlideshowProps {
   debug?: string | number | boolean | null;
 }
 
-export type { SlideshowProps, Slide, SlideshowLabels };
+export type { SlideshowProps, Slide, SlideshowLabels, AutoSlideMode };
