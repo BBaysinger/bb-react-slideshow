@@ -349,7 +349,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     const handlePrevUserTriggered = useCallback(() => {
       // Calculate the new index for the previous slide
-      // Wraps around to the last slide if the current slide is the first
       const newIndex: number =
         (currentIndexRef.current - 1 + slides.length) % slides.length;
 
@@ -358,7 +357,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     const handleNextUserTriggered = useCallback(() => {
       // Calculate the new index for the next slide
-      // Wraps around to the first slide if the current slide is the last
       const newIndex: number = (currentIndexRef.current + 1) % slides.length;
 
       handleUserInteraction(newIndex);
