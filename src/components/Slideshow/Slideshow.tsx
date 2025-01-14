@@ -9,14 +9,6 @@ import {
 import ImagePreloader from "utils/ImagePreloader";
 import styles from "./Slideshow.module.scss";
 
-// Default navigation button labels
-const defaultLabels: SlideshowLabels = {
-  previous: "< Previous",
-  next: "Next >",
-  resume: "Restart",
-  pause: "Pause",
-};
-
 /**
  * React Slideshow Component
  *
@@ -613,5 +605,13 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     );
   },
 );
+
+// Default navigation button labels
+const defaultLabels: SlideshowLabels = {
+  previous: "< Previous",
+  next: "Next >",
+  resume: "Restart",
+  pause: "Pause",
+};
 
 export default Slideshow;
