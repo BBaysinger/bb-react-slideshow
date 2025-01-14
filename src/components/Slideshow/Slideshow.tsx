@@ -72,7 +72,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     const navigate = useNavigate();
     const isDebug = () => Boolean(debug);
-    const { slug } = useParams<{ slug?: string }>();
+    const { slug } = useParams<{ slug?: string }>(); // Routing slug from the URL
 
     // Validate that 'basePath' is provided when routing is enabled
     if (enableRouting && !basePath) {
@@ -140,8 +140,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     useEffect(() => {
       // Ensure the preloader runs only once to avoid redundant operations
       if (!preloaderRanRef.current) {
-        // Determine the starting index for preloading, defaulting to 0 if no
-        // current index is set
+        // Determine the starting index for preloading
         const preloadIndex =
           currentIndexRef.current >= 0 ? currentIndexRef.current : 0;
 
@@ -164,14 +163,11 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     useEffect(() => {
       // Update the current slide's slug whenever the currentIndex or slides change
-      // If no valid slide is found, default to an empty string
       setCurrentSlug(slides[currentIndex]?.slug || "");
     }, [currentIndex, slides]);
 
     useEffect(() => {
-      // Keep the 'isPaused' state synchronized with a mutable reference
-      // This allows other parts of the component to access the latest 'isPaused' value
-      // without re-triggering React's rendering flow
+      // Keep the 'isPaused' state synchronized and avoid stale values
       isPausedRef.current = isPaused;
     }, [isPaused]);
 
@@ -216,7 +212,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           autoSlideCounterRef.current += 1;
         };
 
-        // If immediateSlide is true, move to the next slide immediately
+        // Move to the next slide immediately after unpausing
         if (immediateSlide) {
           doAutoSlide(currentIndexRef.current + 1);
         }
@@ -225,7 +221,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         timerRef.current = setInterval(() => {
           doAutoSlide(currentIndexRef.current + 1);
         }, interval);
-        // }
       },
       [
         autoSlideMode,
@@ -239,7 +234,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     );
 
     useEffect(() => {
-      // Proceed only if the slideshow is not paused
       if (!isPausedRef.current) {
         if (slug) {
           // Handle the first render when routing is enabled
@@ -359,7 +353,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       const newIndex: number =
         (currentIndexRef.current - 1 + slides.length) % slides.length;
 
-      // Handle the user-triggered interaction with the calculated index
       handleUserInteraction(newIndex);
     }, [slides, handleUserInteraction]);
 
@@ -368,34 +361,19 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       // Wraps around to the first slide if the current slide is the last
       const newIndex: number = (currentIndexRef.current + 1) % slides.length;
 
-      // Handle the user-triggered interaction with the calculated index
       handleUserInteraction(newIndex);
     }, [slides, handleUserInteraction]);
-
-    // Store references to the functions to maintain stable function identities across renders
-    const handlePrevRef = useRef(handlePrevUserTriggered);
-    const handleNextRef = useRef(handleNextUserTriggered);
-    const clearTimerRef = useRef(clearTimer);
-
-    useEffect(() => {
-      // Update the refs with the latest function implementations on every render
-      // This ensures the refs always point to the most up-to-date logic
-      handlePrevRef.current = handlePrevUserTriggered;
-      handleNextRef.current = handleNextUserTriggered;
-      clearTimerRef.current = clearTimer;
-    }, [handlePrevUserTriggered, handleNextUserTriggered, clearTimer]);
 
     useEffect(() => {
       // Handle keyboard navigation for previous and next slides
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === "ArrowLeft") {
           // Trigger the "previous slide" action when the left arrow key is pressed
-          handlePrevRef.current();
+          handlePrevUserTriggered();
         } else if (event.key === "ArrowRight") {
           // Trigger the "next slide" action when the right arrow key is pressed
-          handleNextRef.current();
+          handleNextUserTriggered();
         }
-        // Additional logic for handling keyboard events would go here
       };
 
       // Add a global event listener for 'keydown' to enable keyboard navigation
@@ -403,21 +381,19 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
       return () => {
         // Clear any active timers when the component unmounts or the effect re-runs
-        clearTimerRef.current();
+        clearTimer();
         // Remove the global 'keydown' event listener to avoid memory leaks
         window.removeEventListener("keydown", handleKeyDown);
       };
     }, []);
 
     const togglePause = () => {
-      // Check if the slideshow is currently paused
       if (isPausedRef.current) {
         // If paused, restart the auto-slide and immediately advance to the next slide
         startAutoSlide(true);
       } else {
         // If not paused, stop the auto-slide by clearing any active timers
         clearTimer();
-        // Update the paused state to true
         setIsPaused(true);
       }
     };
