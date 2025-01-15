@@ -292,7 +292,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
     @include fluid-property(padding-bottom, $bpmin, $bpmax, 80px, 51px);
     @include fluid-property(margin-left, $bpmin, $bpmax, 22px, 88px);
     @include fluid-property(margin-right, $bpmin, $bpmax, 22px, 88px);
-    @include breakpoint-up($b992px) {
+    @include breakpoint-up($b768px) {
       display: flex;
       align-items: flex-end;
       gap: 26px;
@@ -323,7 +323,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
       width: 80%;
     }
 
-    @include breakpoint-up($b992px) {
+    @include breakpoint-up($b768px) {
       min-width: unset;
       width: 110px;
       max-width: 176px;

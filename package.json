@@ -47,6 +47,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "keywords": [
+    "slideshow",
     "react",
     "vite",
     "typescript",
@@ -57,7 +58,6 @@
     "web-development",
     "react-router",
     "ui-components",
-    "front-end-development",
-    "slideshow"
+    "front-end-development"
   ]
 }
