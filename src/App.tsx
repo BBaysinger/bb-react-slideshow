@@ -9,7 +9,7 @@ import styles from "./App.module.scss";
 
 /**
  * Multiple demos of the Slideshow component.
- * Defines routes, initializes slide data, and configures the Slideshow.
+ * Defines routes, initializes slide data, and configures the Slideshows.
  *
  * JSX slide content is passed along to the slideshow(s) as props along with respective data.
  * In this use case the HTML gets pre-processed to dynamically apply CSS variables
