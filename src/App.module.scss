@@ -335,7 +335,6 @@ $demos: ("demo1-", "demo2-", "demo3-");
     &.#{$demo1}active {
       opacity: 1;
       cursor: default;
-      width: 40px;
       &:before {
         content: "";
         position: absolute;
