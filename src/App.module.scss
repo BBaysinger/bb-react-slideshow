@@ -11,8 +11,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
 
 // Styling externally to demonstrate reusability of the component.
 :global {
-  // Prefixing all classes instead of relying on nesting to avoid specificity/
-  // override issues and to prevent bloating the output CSS.
+  // Prefixing all classes instead of relying on nesting, to avoid specificity/
+  // override issues and to prevent bloating in the output CSS.
   @each $demo in $demos {
     .#{$demo}slideshow {
       box-sizing: border-box;
@@ -28,7 +28,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
       // Using fluid properties is a liberty taken in the absence of
       // breakpoints or tablet design provisons. This would not necessarily
       // be done in production if text style guide or mobile designs are provided.
-      // And should never be done on large bodies of text or intricate table layouts.
+      // And should never be done on large bodies of text or intricate table layouts,
+      // but I believe interactive pieces are often a best use case.
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
       @include mobile-portrait-hoverless {
         @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
@@ -42,7 +43,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
     }
 
     .#{$demo}content-wrapper {
-      transition: height 0.9s ease-out;
+      transition: height 0.9s ease-out 0.25s;
       @include fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
 
       * {
