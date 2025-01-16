@@ -28,8 +28,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
       // Using fluid properties is a liberty taken in the absence of
       // breakpoints or tablet design provisons. This would not necessarily
       // be done in production if text style guide or mobile designs are provided.
-      // And should never be done on large bodies of text or intricate table layouts,
-      // but I believe interactive pieces are often a best use case.
+      // And should never be done on large bodies of text or intricate table layouts.
+      // But I believe interactive pieces are often a best use case.
       @include fluid-property(margin-top, $bpmin, $bpmax, 76px, 66px);
       @include mobile-portrait-hoverless {
         @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
