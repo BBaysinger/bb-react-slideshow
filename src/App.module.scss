@@ -322,9 +322,10 @@ $demos: ("demo1-", "demo2-", "demo3-");
     @include breakpoint-up($b768px) {
       position: relative;
       top: 8px;
+      width: 11.5%;
     }
 
-    @include breakpoint-up($b992px) {
+    @include breakpoint-up($b1024px) {
       width: 96px;
     }
 
@@ -335,6 +336,18 @@ $demos: ("demo1-", "demo2-", "demo3-");
     &.#{$demo1}active {
       opacity: 1;
       cursor: default;
+      @include breakpoint-up($b768px) {
+        top: 0;
+        width: 17%;
+        margin-bottom: 0.5%;
+        transition: none;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      @include breakpoint-up($b992px) {
+        width: 145px;
+        margin-bottom: 8px;
+      }
       &:before {
         content: "";
         position: absolute;
@@ -346,18 +359,10 @@ $demos: ("demo1-", "demo2-", "demo3-");
         background-image: url("@/assets/images/border.svg");
         background-size: contain;
         background-repeat: no-repeat;
-        @include breakpoint-up($b992px) {
+        @include breakpoint-up($b768px) {
           width: 120%;
           height: 120%;
         }
-      }
-      @include breakpoint-up($b992px) {
-        top: 0;
-        width: 145px;
-        margin-bottom: 8px;
-        transition: none;
-        margin-left: 10px;
-        margin-right: 10px;
       }
       &:hover {
         transform: scale(1);
