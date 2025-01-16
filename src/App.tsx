@@ -241,7 +241,7 @@ const App: React.FC = () => {
               classPrefix={"demo1-"}
               slides={slides}
               basePath={`${basePath}/rico`}
-              autoSlideMode={"persistent"}
+              autoSlideMode={"none"}
               debug={true}
             />
           }
