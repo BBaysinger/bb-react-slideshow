@@ -34,8 +34,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
       @include mobile-portrait-hoverless {
         @include fluid-property(margin-top, $bpmin, $bpmax, 5px, 66px);
       }
-      .#{$demo}overlay-wrapper-1,
-      .#{$demo}overlay-wrapper-2,
+      .#{$demo}foreground-wrapper,
+      .#{$demo}vignette,
       .#{$demo}content-wrapper,
       .#{$demo}slide-wrapper {
         @include fluid-property(margin-top, $bpmin, $bpmax, 30px, 86px);
@@ -195,8 +195,8 @@ $demos: ("demo1-", "demo2-", "demo3-");
       @include fluid-property(height, $bpmin, $bpmax, 225px, 767px);
     }
 
-    .#{$demo}overlay-wrapper-1,
-    .#{$demo}overlay-wrapper-2 {
+    .#{$demo}foreground-wrapper,
+    .#{$demo}vignette {
       max-height: 100%;
       @include fluid-property(height, $bpmin, $bpmax, 226px, 768px);
     }
@@ -241,12 +241,12 @@ $demos: ("demo1-", "demo2-", "demo3-");
       }
     }
 
-    .#{$demo}overlay-wrapper-1 {
+    .#{$demo}foreground-wrapper {
       $offset: clamp(-80px, -6.05vw, -0px);
-      .#{$demo}overlay {
+      .#{$demo}foreground-slide {
         display: none;
       }
-      .#{$demo}overlay-1-1 {
+      .#{$demo}foreground-slide-1 {
         display: block;
         height: 100vw;
         background-image: url("@/assets/images/1-foreground.webp");
@@ -271,7 +271,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
       }
     }
 
-    .#{$demo}overlay-wrapper-2 {
+    .#{$demo}vignette {
       // From SPS. Changed to #000 to overlap the BG seamlessly.
       // to left,
       // rgba(37, 45, 55, 0) 40%,
