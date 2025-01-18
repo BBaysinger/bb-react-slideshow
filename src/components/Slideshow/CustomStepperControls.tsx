@@ -1,7 +1,7 @@
-import { SlideshowLabels, SlideshowControl } from "./Slideshow.types";
+import { SlideshowLabels, SlideshowControlType } from "./Slideshow.types";
 import styles from "./CustomStepperControls.module.scss";
 
-const CustomStepperControls: SlideshowControl = ({
+const CustomStepperControls: SlideshowControlType = ({
   onPrev,
   onNext,
   onTogglePause,
@@ -66,9 +66,17 @@ const defaultLabels: SlideshowLabels = {
 // Factory function to create custom stepper controls with custom labels.
 export const createStepperControls = (
   customLabels: SlideshowLabels,
-): SlideshowControl => {
-  return ({ onPrev, onNext, onTogglePause, isPaused = false, classPrefix }) => (
+): SlideshowControlType => {
+  return ({
+    onPrev,
+    onNext,
+    onTogglePause,
+    isPaused = false,
+    currentIndex,
+    classPrefix,
+  }) => (
     <CustomStepperControls
+      currentIndex={currentIndex}
       onNext={onNext}
       onPrev={onPrev}
       onTogglePause={onTogglePause}

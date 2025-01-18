@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Slide {
+interface SlideType {
   slug: string;
   background: string;
   thumbnail?: string;
@@ -27,7 +27,7 @@ type SlideshowLabels = {
 };
 
 interface SlideshowProps {
-  slides: Slide[];
+  slides: SlideType[];
   basePath?: string;
   autoSlideMode?: AutoSlideMode;
   interval?: number;
@@ -35,13 +35,13 @@ interface SlideshowProps {
   restartDelay?: number;
   transitionResetDelay?: number;
   classPrefix: string;
-  controls?: SlideshowControl[];
+  controls?: SlideshowControlType[];
   debug?: string | number | boolean | null;
 }
 
-export type SlideshowControl = React.FC<{
-  currentIndex?: number;
-  slides?: Slide[];
+export type SlideshowControlType = React.FC<{
+  currentIndex: number | undefined;
+  slides?: SlideType[];
   onPrev: () => void;
   onNext: () => void;
   onIndex?: (index: number) => void;
@@ -51,4 +51,4 @@ export type SlideshowControl = React.FC<{
   classPrefix: string;
 }>;
 
-export type { SlideshowProps, Slide, SlideshowLabels, AutoSlideMode };
+export type { SlideshowProps, SlideType, SlideshowLabels, AutoSlideMode };

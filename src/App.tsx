@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
-import { Slide } from "components/Slideshow/Slideshow.types";
+import { SlideType } from "components/Slideshow/Slideshow.types";
 import CustomIndexedControls from "components/Slideshow/CustomIndexedControls";
 import { createStepperControls } from "components/Slideshow/CustomStepperControls";
 import CSSVariableInjector from "utils/CSSVariableInjector";
@@ -31,7 +31,7 @@ const App: React.FC = () => {
       : import.meta.env.VITE_DEV_BASE_URL;
 
   // Array of slide data for the slideshow, including images, content, and metadata
-  const slides: Slide[] = [
+  const slides: SlideType[] = [
     {
       slug: "ricobot",
       background: `${basePath}/assets/images/1-background.webp`,

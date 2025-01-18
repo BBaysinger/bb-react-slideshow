@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { SlideshowControl } from "./Slideshow.types";
+import { SlideshowControlType } from "./Slideshow.types";
 import styles from "./CustomIndexedControls.module.scss";
 
-const CustomIndexedControls: SlideshowControl = ({
+const CustomIndexedControls: SlideshowControlType = ({
   currentIndex = 0,
   slides,
   onIndex,
