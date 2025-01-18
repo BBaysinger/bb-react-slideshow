@@ -55,7 +55,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     // Refs
     const isFirstRender = useRef(true); // Tracks the first render
     const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
-    const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
     const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
     const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
     const preloaderRanRef = useRef(false); // If the preloader has run
@@ -64,10 +63,10 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     // States
     const [currentIndex, setCurrentIndex] = useState<number>(-1); // Current slide index
-    const [_previousIndex, setPreviousIndex] = useState<number>(-1); // Previous slide index
+    const [previousIndex, setPreviousIndex] = useState<number>(-1); // Previous slide index
     const [isTransitioning, setIsTransitioning] = useState(false); // Whether a transition is in progress
     const [isPaused, setIsPaused] = useState(false); // Whether the slideshow is paused
-    const [_currentSlug, setCurrentSlug] = useState(""); // Current slide slug for routing
+    const [currentSlug, setCurrentSlug] = useState(""); // Current slide slug for routing
 
     const navigate = useNavigate();
     const isDebug = () => Boolean(debug);
@@ -95,7 +94,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
       // Update the previous index to the current one before it changes
       setPreviousIndex(currentIndexRef.current);
-      previousIndexRef.current = currentIndexRef.current;
 
       // Update the current index reference for use in the next render
       currentIndexRef.current = currentIndex;
@@ -366,11 +364,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         classPrefix={classPrefix}
         isPaused={false}
         isTransitioning={isTransitioning}
+        currentSlug={currentSlug}
       >
         <Debug
           isDebug={isDebug()}
           currentIndex={currentIndex}
-          previousIndex={_previousIndex}
+          previousIndex={previousIndex}
           isTransitioning={isTransitioning}
           classPrefix={classPrefix}
         />

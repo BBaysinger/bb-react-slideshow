@@ -1,16 +1,21 @@
 import React from "react";
 
+import styles from "./Slideshow.module.scss";
+
 const SlideshowWrapper: React.FC<{
   children: React.ReactNode;
   classPrefix: string;
   isPaused: boolean;
   isTransitioning: boolean;
-}> = ({ children, classPrefix, isPaused, isTransitioning }) => (
+  currentSlug: string;
+}> = ({ children, classPrefix, isPaused, isTransitioning, currentSlug }) => (
   <div
-    className={`${classPrefix}slideshow ${isTransitioning ? `${classPrefix}transitioning` : ""} ${isPaused ? `${classPrefix}paused` : ""}`}
-    aria-roledescription="carousel"
-    aria-live="polite"
-    aria-busy={isTransitioning}
+    className={
+      `${styles["slideshow-wrapper"]} ${classPrefix}slideshow ` +
+      `${classPrefix}slideshow-slide-${currentSlug} ` +
+      `${isTransitioning ? `${styles.transitioning} ${classPrefix}transitioning` : ""}` +
+      `${isPaused ? `${styles.paused} ${classPrefix}paused` : ""}`
+    }
   >
     {children}
   </div>
