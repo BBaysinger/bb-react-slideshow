@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { SlideshowProps, AUTOSLIDE_MODES } from "./Slideshow.types";
-import SlideshowWrapper from "./SlideshowWrapper";
-import SlideWrapper from "./SlideWrapper";
-import Overlay from "./Overlay";
-import ContentWrapper from "./ContentWrapper";
-import ControlsWrapper from "./ControlsWrapper";
+import SlideshowWrapper from "./components/SlideshowWrapper";
+import SlideWrapper from "./components/SlideWrapper";
+import Overlay from "./components/Overlay";
+import ContentWrapper from "./components/ContentWrapper";
+import ControlsWrapper from "./components/ControlsWrapper";
 import ImagePreloader from "utils/ImagePreloader";
-import Debug from "./Debug";
+import Debug from "./components/Debug";
 // import styles from "./Slideshow.module.scss";
 
 /**

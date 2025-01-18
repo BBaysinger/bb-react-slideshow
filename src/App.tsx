@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
-import Slideshow from "components/Slideshow/Slideshow";
-import { SlideType } from "components/Slideshow/Slideshow.types";
-import CustomIndexedControls from "components/Slideshow/CustomIndexedControls";
-import { createStepperControls } from "components/Slideshow/CustomStepperControls";
+import Slideshow from "slideshow/Slideshow";
+import { SlideType } from "slideshow/Slideshow.types";
+import CustomIndexedControls from "slideshow/components/CustomIndexedControls";
+import { createStepperControls } from "slideshow/components/CustomStepperControls";
 import CSSVariableInjector from "utils/CSSVariableInjector";
 import styles from "./App.module.scss";
 

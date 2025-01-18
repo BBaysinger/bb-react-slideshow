@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { SlideType } from "./Slideshow.types";
+import { SlideType } from "../Slideshow.types";
 import styles from "./Slideshow.module.scss";
 
 const ContentWrapper: React.FC<{

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SlideType } from "./Slideshow.types";
+import { SlideType } from "../Slideshow.types";
 import Slide from "./Slide";
 import styles from "./Slideshow.module.scss";
 
