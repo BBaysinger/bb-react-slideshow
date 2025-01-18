@@ -1,4 +1,4 @@
-import { SlideshowLabels, SlideshowControlType } from "./Slideshow.types";
+import { SlideshowLabels, SlideshowControlType } from "../Slideshow.types";
 import styles from "./CustomStepperControls.module.scss";
 
 const CustomStepperControls: SlideshowControlType = ({

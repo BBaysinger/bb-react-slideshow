@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SlideType } from "./Slideshow.types";
+import { SlideType } from "../Slideshow.types";
 import styles from "./Slideshow.module.scss";
 
 const Slide: React.FC<{

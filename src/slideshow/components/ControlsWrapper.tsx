@@ -1,7 +1,10 @@
 import React from "react";
 
-import { SlideshowControlType, SlideType } from "./Slideshow.types";
-import { SlideshowLabels } from "./Slideshow.types";
+import {
+  SlideshowControlType,
+  SlideType,
+  SlideshowLabels,
+} from "../Slideshow.types";
 import styles from "./Slideshow.module.scss";
 
 export const ControlsWrapper: React.FC<
