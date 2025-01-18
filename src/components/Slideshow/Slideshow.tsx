@@ -277,20 +277,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       autoSlideMode,
     ]);
 
-    // useEffect(() => {
-    //   // Ensure the current indexed element exists before attempting to focus it
-    //   if (
-    //     indexedButtonRefs.current &&
-    //     indexedButtonRefs.current[currentIndexRef.current]
-    //   ) {
-    //     // Set focus to the thumbnail corresponding to the current slide
-    //     // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
-    //     indexedButtonRefs.current[currentIndexRef.current]!.focus({
-    //       preventScroll: true,
-    //     });
-    //   }
-    // });
-
     const delayAutoSlide = useCallback(() => {
       // Clear any existing timers to reset the auto-slide behavior
       clearTimer();
@@ -499,92 +485,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
               />
             ))}
           </div>
-
-          {/* Stepper Navigation Buttons *}
-          <div
-            className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
-          >
-            {/* Previous Slide Button }
-            {labels.previous && (
-              <button
-                tabIndex={0}
-                onClick={handlePrevUserTriggered}
-                aria-label="Previous slide"
-                aria-controls="slideshow"
-                className={`${styles.previous} ${classPrefix}previous`}
-              >
-                {labels.previous}
-              </button>
-            )}
-
-            {/* Pause/Resume Button *}
-            <button
-              tabIndex={0}
-              onClick={togglePause}
-              aria-label={isPaused ? labels.resume : labels.pause}
-              className={
-                `${isPaused ? styles.resume : styles.pause} ` +
-                `${classPrefix}${isPaused ? "resume" : "pause"}`
-              }
-            >
-              {isPaused ? labels.resume : labels.pause}
-            </button>
-
-            {/* Next Slide Button *}
-            {labels.next && (
-              <button
-                tabIndex={0}
-                onClick={handleNextUserTriggered}
-                aria-label="Next slide"
-                aria-controls="slideshow"
-                className={`${styles.next} ${classPrefix}next`}
-              >
-                {labels.next}
-              </button>
-            )}
-          </div>
-
-          {/* Indexed (Thumbnail/Dot) Navigation *}
-          <div
-            className={`${styles["indexed-button-wrapper"]} ${classPrefix}indexed-button-wrapper`}
-            role="tablist"
-          >
-            {slides.map((_, index) => (
-              <button
-                tabIndex={index}
-                key={index}
-                ref={(el) => {
-                  if (indexedButtonRefs.current !== null) {
-                    indexedButtonRefs.current[index] = el;
-                  }
-                }}
-                onClick={() => handleUserInteraction(index)}
-                className={
-                  `${styles["indexed-button"]} ` +
-                  `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
-                  `${classPrefix}indexed-button`
-                }
-                role="tab"
-                aria-selected={index === currentIndex}
-                aria-controls={`slide-${index}`}
-                id={`tab-${index}`}
-              >
-                {slides[index].thumbnail && (
-                  <img
-                    src={slides[index].thumbnail}
-                    alt={slides[index].alt || `Slide button ${index + 1}`}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          {/ Accessibility Note *}
-          <p
-            className={`${styles["visually-hidden"]} ${classPrefix}visually-hidden`}
-          >
-            Use the left and right arrow keys to navigate the slideshow.
-          </p> */}
         </div>
       </>
     );
