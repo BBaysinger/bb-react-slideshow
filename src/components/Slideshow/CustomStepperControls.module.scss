@@ -1,9 +1,10 @@
 // Overridable defaults. Even though this is an example of a fully custom component,
-// styling alone would usually make this as custom as it needs to be, so
-// we're styling this globally in the demo to show how it would usually be done.
+// styling alone would usually make this as custom as it needs to be, so we're styling
+// this globally (elsewhere) in the demo to show how it would usually be done.
 
 .stepper-button-wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   button {
     cursor: pointer;

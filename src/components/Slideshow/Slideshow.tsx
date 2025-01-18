@@ -481,6 +481,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                 onNext={handleNextUserTriggered}
                 onIndex={handleUserInteraction}
                 onTogglePause={togglePause}
+                classPrefix={classPrefix}
                 isPaused={isPaused}
               />
             ))}

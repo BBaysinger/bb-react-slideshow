@@ -1,24 +1,24 @@
 // Overridable defaults. Even though this is an example of a fully custom component,
-// styling alone would usually make this as custom as it needs to be, so
-// we're styling this globally in the demo to show how it would usually be done.
+// styling alone would usually make this as custom as it needs to be, so we're styling
+// this globally (elsewhere) in the demo to show how it would usually be done.
 
 .indexed-button-wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .indexed-button {
-  width: 100px;
-  height: 100px;
+  position: relative;
   cursor: pointer;
-  opacity: 0.5;
   border: 0;
   outline: 0;
   padding: 0;
+  width: 100px; // Arbitrary default
+  opacity: 0.7; // Arbitrary default
   img {
     width: 100%;
-    height: 100%;
   }
   &.active {
     cursor: default;
