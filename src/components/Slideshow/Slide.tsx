@@ -1,6 +1,7 @@
 import React from "react";
 
 import { SlideType } from "./Slideshow.types";
+import styles from "./Slideshow.module.scss";
 
 const Slide: React.FC<{
   slide: SlideType;
@@ -9,7 +10,10 @@ const Slide: React.FC<{
   index: number;
 }> = ({ slide, isActive, classPrefix, index }) => (
   <div
-    className={`${classPrefix}slide ${isActive ? `${classPrefix}active` : ""}`}
+    className={
+      `${styles.slide} ${isActive ? `${styles.active} ${classPrefix}active` : ""} ` +
+      `${classPrefix}slide-${index} ${classPrefix}slide`
+    }
     style={{ backgroundImage: `url(${slide.background})` }}
     role="group"
     aria-roledescription="slide"

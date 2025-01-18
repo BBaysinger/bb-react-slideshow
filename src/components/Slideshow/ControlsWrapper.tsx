@@ -2,6 +2,7 @@ import React from "react";
 
 import { SlideshowControlType, SlideType } from "./Slideshow.types";
 import { SlideshowLabels } from "./Slideshow.types";
+import styles from "./Slideshow.module.scss";
 
 export const ControlsWrapper: React.FC<
   Parameters<SlideshowControlType>[0] & {
@@ -20,7 +21,9 @@ export const ControlsWrapper: React.FC<
   labels,
   classPrefix,
 }) => (
-  <div>
+  <div
+    className={`${styles["controls-wrapper"]} ${classPrefix}controls-wrapper`}
+  >
     {controls?.map((Control, index) => (
       <Control
         key={index}
