@@ -9,7 +9,7 @@ const CustomIndexedControls: SlideshowControl = ({
   classPrefix = "",
 }) => {
   // Refs for indexed buttons (thumbnails or dots)
-  const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); 
+  const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     // Ensure the current indexed element exists before attempting to focus it
@@ -27,14 +27,14 @@ const CustomIndexedControls: SlideshowControl = ({
       className={`${styles["indexed-button-wrapper"]} ${classPrefix}indexed-button-wrapper`}
       role="tablist"
     >
-      {slides.map((_, index) => (
+      {slides?.map((_, index) => (
         <button
           tabIndex={index}
           key={index}
           ref={(el) => {
             indexedButtonRefs.current[index] = el;
           }}
-          onClick={() => onIndex(index)}
+          onClick={() => onIndex?.(index)}
           className={
             `${styles["indexed-button"]} ` +
             `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +

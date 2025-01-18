@@ -6,52 +6,50 @@ const CustomStepperControls: SlideshowControl = ({
   onNext,
   labels = defaultLabels,
   onTogglePause,
-  isPaused,
+  isPaused = false,
   classPrefix = "",
 }) => (
-  <div className="custom-stepper-controls">
-    <div
-      className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
-    >
-      {/* Previous Slide Button */}
-      {labels?.previous && (
-        <button
-          tabIndex={0}
-          onClick={onPrev}
-          aria-label="Previous slide"
-          aria-controls="slideshow"
-          className={`${styles.previous} ${classPrefix}previous`}
-        >
-          {labels.previous}
-        </button>
-      )}
-
-      {/* Pause/Resume Button */}
+  <div
+    className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
+  >
+    {/* Previous Slide Button */}
+    {labels?.previous && (
       <button
         tabIndex={0}
-        onClick={onTogglePause}
-        aria-label={isPaused ? labels?.resume : labels?.pause}
-        className={
-          `${isPaused ? styles.resume : styles.pause} ` +
-          `${classPrefix}${isPaused ? "resume" : "pause"}`
-        }
+        onClick={onPrev}
+        aria-label="Previous slide"
+        aria-controls="slideshow"
+        className={`${styles.previous} ${classPrefix}previous`}
       >
-        {isPaused ? labels?.resume : labels?.pause}
+        {labels.previous}
       </button>
+    )}
 
-      {/* Next Slide Button */}
-      {labels?.next && (
-        <button
-          tabIndex={0}
-          onClick={onNext}
-          aria-label="Next slide"
-          aria-controls="slideshow"
-          className={`${styles.next} ${classPrefix}next`}
-        >
-          {labels.next}
-        </button>
-      )}
-    </div>
+    {/* Pause/Resume Button */}
+    <button
+      tabIndex={0}
+      onClick={onTogglePause}
+      aria-label={isPaused ? labels?.resume : labels?.pause}
+      className={
+        `${isPaused ? styles.resume : styles.pause} ` +
+        `${classPrefix}${isPaused ? "resume" : "pause"}`
+      }
+    >
+      {isPaused ? labels?.resume : labels?.pause}
+    </button>
+
+    {/* Next Slide Button */}
+    {labels?.next && (
+      <button
+        tabIndex={0}
+        onClick={onNext}
+        aria-label="Next slide"
+        aria-controls="slideshow"
+        className={`${styles.next} ${classPrefix}next`}
+      >
+        {labels.next}
+      </button>
+    )}
   </div>
 );
 
@@ -67,19 +65,17 @@ const defaultLabels: SlideshowLabels = {
 export const createStepperControls = (
   customLabels: SlideshowLabels,
 ): SlideshowControl => {
-  return ({ onPrev, onNext, labels }) => (
-    <div className="custom-stepper-controls">
-      <button
-        onClick={onPrev}
-        aria-label="Previous slide"
-        className="stepper-prev"
-      >
-        {customLabels.previous || labels?.previous || "←"}
-      </button>
-      <button onClick={onNext} aria-label="Next slide" className="stepper-next">
-        {customLabels.next || labels?.next || "→"}
-      </button>
-    </div>
+  return ({ onPrev, onNext, onTogglePause, isPaused = false }) => (
+    <CustomStepperControls
+      onNext={onNext}
+      onPrev={onPrev}
+      currentIndex={0}
+      onTogglePause={onTogglePause}
+      isPaused={isPaused}
+      slides={[]}
+      onIndex={() => {}}
+      labels={customLabels || defaultLabels}
+    />
   );
 };
 
