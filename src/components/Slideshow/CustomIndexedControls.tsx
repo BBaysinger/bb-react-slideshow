@@ -8,7 +8,8 @@ const CustomIndexedControls: SlideshowControl = ({
   onIndex,
   classPrefix = "",
 }) => {
-  const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
+  // Refs for indexed buttons (thumbnails or dots)
+  const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); 
 
   useEffect(() => {
     // Ensure the current indexed element exists before attempting to focus it
