@@ -47,7 +47,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       classPrefix = "",
       debug = false,
       controls,
-      // labels = defaultLabels,
     } = props;
 
     // Refs
@@ -497,6 +496,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
                 slides={slides}
                 onPrev={handlePrevUserTriggered}
                 onNext={handleNextUserTriggered}
+                onIndex={handleUserInteraction}
                 onTogglePause={togglePause}
                 isPaused={isPaused}
               />

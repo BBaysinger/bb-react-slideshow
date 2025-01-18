@@ -3,8 +3,9 @@ import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
+import CustomIndexedControls from "components/Slideshow/CustomIndexedControls";
+import CustomStepperControls, { createStepperControls } from "components/Slideshow/CustomStepperControls";
 import CSSVariableInjector from "utils/CSSVariableInjector";
-
 import styles from "./App.module.scss";
 
 /**
@@ -210,6 +211,15 @@ const App: React.FC = () => {
       : "Rico Slideshow - Welcome";
   }, [location, slides]);
 
+  const customLabels = {
+    previous: "Back",
+    next: "Forward",
+    resume: "Restart",
+    pause: "Pause",
+  };
+  
+  const CustomStepperWithLabels = createStepperControls(customLabels);
+  
   // Render the application with multiple routes, each displaying a Slideshow demo
   // with different configuration options.
   return (
@@ -242,6 +252,7 @@ const App: React.FC = () => {
               slides={slides}
               basePath={`${basePath}/rico`}
               autoSlideMode={"persistent"}
+              controls={[CustomIndexedControls]}
               debug={true}
             />
           }
@@ -262,6 +273,7 @@ const App: React.FC = () => {
               slides={slides}
               basePath={`${basePath}/demo2`}
               autoSlideMode={"persistent"}
+              controls={[CustomStepperWithLabels]}
               debug={true}
             />
           }
@@ -284,6 +296,7 @@ const App: React.FC = () => {
               basePath={`${basePath}/demo3`}
               autoSlideMode={"persistent"}
               enableRouting={false}
+              controls={[CustomIndexedControls]}
               debug={true}
             />
           }
