@@ -4,12 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SlideshowProps, AUTOSLIDE_MODES } from "./Slideshow.types";
 import SlideshowWrapper from "./components/SlideshowWrapper";
 import SlideWrapper from "./components/SlideWrapper";
-import Overlay from "./components/Overlay";
+import ForegroundWrapper from "./components/ForegroundWrapper";
 import ContentWrapper from "./components/ContentWrapper";
 import ControlsWrapper from "./components/ControlsWrapper";
 import ImagePreloader from "utils/ImagePreloader";
 import Debug from "./components/Debug";
-// import styles from "./Slideshow.module.scss";
+import Vignette from "./components/Vignette";
 
 /**
  * React Slideshow Component
@@ -378,11 +378,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
           currentIndex={currentIndex}
           classPrefix={classPrefix}
         />
-        <Overlay
+        <ForegroundWrapper
           slides={slides}
           currentIndex={currentIndex}
           classPrefix={classPrefix}
         />
+        <Vignette classPrefix={classPrefix} />
         <ContentWrapper
           slides={slides}
           currentIndex={currentIndex}

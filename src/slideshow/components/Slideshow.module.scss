@@ -54,22 +54,12 @@
   display: none;
 }
 
-.overlay-wrapper-1,
-.overlay-wrapper-2 {
+.foreground-wrapper,
+.vignette {
   position: absolute;
   pointer-events: none;
   width: 100vw;
   top: 0;
-}
-
-.overlay {
-  position: absolute;
-  width: 100vw;
-  opacity: 0;
-
-  &.active {
-    opacity: 1;
-  }
 }
 
 .debug {
