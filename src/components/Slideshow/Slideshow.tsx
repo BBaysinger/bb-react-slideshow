@@ -409,7 +409,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
               <div
                 key={index}
                 className={
-                  `${styles.slide} ${index === currentIndex ? styles.active : ""} ` +
+                  `${styles.slide} ${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
                   `${classPrefix}slide-${index} ${classPrefix}slide`
                 }
                 style={{

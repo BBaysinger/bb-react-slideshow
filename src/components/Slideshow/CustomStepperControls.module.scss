@@ -3,6 +3,7 @@
 // this globally (elsewhere) in the demo to show how it would usually be done.
 
 .stepper-button-wrapper {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

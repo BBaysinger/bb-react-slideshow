@@ -137,7 +137,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
         transform 2s ease-in-out;
       will-change: opacity, transform;
 
-      &.active {
+      &.#{$demo}active {
         opacity: 1;
         transform: scale(1);
       }
