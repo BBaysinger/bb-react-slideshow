@@ -20,6 +20,7 @@ Dynamic routes (optional). They only stack the history on user interaction, and 
 ## Features
 
 - **Reusable Component:** The slideshow can be integrated into any React application and fits many use cases with the available options.
+- **Modular Controls:** Multiple control options are separate components that can be linked or passed to the slideshow component. The slideshow will then use whatever features are provided in each control set. Multiple sets can be used by one slideshow.
 - **Dynamic Routing (Optional):** Utilize dynamic routes for deep-linking slides, keeping navigation in sync with the application state.
 - **Auto-Slide Functionality:** Automatically transitions between slides, pausing when user interaction is detected. Includes a restart button to re-enable auto-slide.
 - **Custom Hooks:** Simplified logic using custom hooks for professional, maintainable code.
@@ -28,10 +29,9 @@ Dynamic routes (optional). They only stack the history on user interaction, and 
 
 ## Roadmap
 
-- **Modularize Controls:** Explore making controls a separate component that can be linked or passed to the slideshow component. The slideshow will then use whatever features are provided in each control set.
 - **Finish Default Styling:** Overridable default styling should represent a basic slideshow out of the box.
 - **Route (replace) Updates for Auto Slide:** I would love route updates on autoslide via `replace` so as to avoid stacking the history. Unfortunately, Chrome has an apparent defect with this that I'm also
-  seeing in another project. I'll come back to it.
+  seeing in another project. I may need to investigate and reproduce the issue for a bug report.
 
 ## Example
 
