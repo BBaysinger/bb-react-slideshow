@@ -29,15 +29,10 @@
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
-  transform: scale(1.5);
-  transition:
-    opacity 1s ease-in-out,
-    transform 2s ease-in-out;
   will-change: opacity, transform;
 
   &.active {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -53,10 +48,6 @@
   &.active {
     display: block;
   }
-}
-
-.indexed-button {
-  position: relative;
 }
 
 .visually-hidden {
@@ -88,12 +79,4 @@
   top: 0;
   font-size: 8px;
   display: none;
-}
-
-.stepper-button-wrapper {
-  display: flex;
-  justify-content: center;
-  button {
-    cursor: pointer;
-  }
 }
