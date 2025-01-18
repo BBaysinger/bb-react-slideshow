@@ -65,7 +65,7 @@ const defaultLabels: SlideshowLabels = {
 
 // Factory function to create custom stepper controls with custom labels.
 export const createStepperControls = (
-  customLabels: SlideshowLabels
+  customLabels: SlideshowLabels,
 ): SlideshowControl => {
   return ({ onPrev, onNext, labels }) => (
     <div className="custom-stepper-controls">

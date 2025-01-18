@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import {
-  SlideshowProps,
-  AUTOSLIDE_MODES,
-} from "./Slideshow.types";
+import { SlideshowProps, AUTOSLIDE_MODES } from "./Slideshow.types";
 import ImagePreloader from "utils/ImagePreloader";
 import styles from "./Slideshow.module.scss";
 
@@ -502,7 +499,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
               />
             ))}
           </div>
-
 
           {/* Stepper Navigation Buttons *}
           <div

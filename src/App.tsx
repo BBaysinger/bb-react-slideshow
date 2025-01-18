@@ -4,7 +4,7 @@ import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Slideshow from "components/Slideshow/Slideshow";
 import { Slide } from "components/Slideshow/Slideshow.types";
 import CustomIndexedControls from "components/Slideshow/CustomIndexedControls";
-import CustomStepperControls, { createStepperControls } from "components/Slideshow/CustomStepperControls";
+import { createStepperControls } from "components/Slideshow/CustomStepperControls";
 import CSSVariableInjector from "utils/CSSVariableInjector";
 import styles from "./App.module.scss";
 
@@ -217,9 +217,9 @@ const App: React.FC = () => {
     resume: "Restart",
     pause: "Pause",
   };
-  
+
   const CustomStepperWithLabels = createStepperControls(customLabels);
-  
+
   // Render the application with multiple routes, each displaying a Slideshow demo
   // with different configuration options.
   return (
