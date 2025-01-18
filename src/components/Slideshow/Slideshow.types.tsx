@@ -33,7 +33,6 @@ interface SlideshowProps {
   interval?: number;
   enableRouting?: boolean;
   restartDelay?: number;
-  labels: SlideshowLabels;
   transitionResetDelay?: number;
   classPrefix?: string;
   controls?: SlideshowControl[];
