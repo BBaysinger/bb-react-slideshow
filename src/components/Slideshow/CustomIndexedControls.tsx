@@ -12,10 +12,7 @@ const CustomIndexedControls: SlideshowControl = ({
 
   useEffect(() => {
     // Ensure the current indexed element exists before attempting to focus it
-    if (
-      indexedButtonRefs.current &&
-      indexedButtonRefs.current[currentIndex]
-    ) {
+    if (indexedButtonRefs.current && indexedButtonRefs.current[currentIndex]) {
       // Set focus to the thumbnail corresponding to the current slide
       // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
       indexedButtonRefs.current[currentIndex]!.focus({
