@@ -2,8 +2,14 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { SlideshowProps, AUTOSLIDE_MODES } from "./Slideshow.types";
+import SlideshowWrapper from "./SlideshowWrapper";
+import SlideWrapper from "./SlideWrapper";
+import Overlay from "./Overlay";
+import ContentWrapper from "./ContentWrapper";
+import ControlsWrapper from "./ControlsWrapper";
 import ImagePreloader from "utils/ImagePreloader";
-import styles from "./Slideshow.module.scss";
+import Debug from "./Debug";
+// import styles from "./Slideshow.module.scss";
 
 /**
  * React Slideshow Component
@@ -51,7 +57,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const currentIndexRef = useRef<number>(-1); // Tracks the current index for stable access
     const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
     const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
-    const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
     const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
     const preloaderRanRef = useRef(false); // If the preloader has run
     const autoSlideCounterRef = useRef(0); // Counter for auto-slide intervals
@@ -61,9 +66,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const [currentIndex, setCurrentIndex] = useState<number>(-1); // Current slide index
     const [_previousIndex, setPreviousIndex] = useState<number>(-1); // Previous slide index
     const [isTransitioning, setIsTransitioning] = useState(false); // Whether a transition is in progress
-    const [divHeight, setDivHeight] = useState<string>("unset"); // Height of the element, adjusted for content
     const [isPaused, setIsPaused] = useState(false); // Whether the slideshow is paused
-    const [currentSlug, setCurrentSlug] = useState(""); // Current slide slug for routing
+    const [_currentSlug, setCurrentSlug] = useState(""); // Current slide slug for routing
 
     const navigate = useNavigate();
     const isDebug = () => Boolean(debug);
@@ -111,43 +115,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         }
       };
     }, [currentIndex, transitionResetDelay]);
-
-    useEffect(() => {
-      // Updates the height of the container to match the current slide's height.
-      // to reduce whitespace and avoid overflow issues.
-      let resizeId: number | null = null;
-
-      const updateHeight = () => {
-        const currentSlide = slideRefs.current[currentIndex];
-        if (currentSlide) {
-          const height = currentSlide.offsetHeight;
-          setDivHeight(height ? `${height}px` : "unset");
-        }
-      };
-
-      const throttledUpdateHeight = () => {
-        if (!resizeId) {
-          resizeId = requestAnimationFrame(() => {
-            updateHeight();
-            resizeId = null;
-          });
-        }
-      };
-
-      // Initial update
-      updateHeight();
-
-      // Attach throttled event listener
-      window.addEventListener("resize", throttledUpdateHeight);
-
-      return () => {
-        // Cleanup event listener and cancel any pending animation frame
-        window.removeEventListener("resize", throttledUpdateHeight);
-        if (resizeId !== null) {
-          cancelAnimationFrame(resizeId);
-        }
-      };
-    }, [currentIndex]);
 
     useEffect(() => {
       // Ensure the preloader runs only once to avoid redundant operations
@@ -395,115 +362,45 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     };
 
     return (
-      <>
-        {/* Debugging Information (Hidden by default) */}
-        {isDebug() && (
-          <div className={`${styles["debug"]} ${classPrefix}debug`}>
-            {`curr: ${currentIndexRef.current} prev: ${previousIndexRef.current} ` +
-              `transitioning: ${isTransitioning}`}
-          </div>
-        )}
-
-        {/* Slideshow Wrapper */}
-        <div
-          className={
-            `${styles["slideshow-wrapper"]} ${classPrefix}slideshow ` +
-            `${classPrefix}slideshow-slide-${currentSlug} ` +
-            `${isTransitioning ? `${styles.transitioning} ${classPrefix}transitioning` : ""}` +
-            `${isPaused ? `${styles.paused} ${classPrefix}paused` : ""}`
-          }
-          aria-roledescription="carousel"
-          aria-label="Slideshow"
-          aria-live="polite"
-          aria-busy={isTransitioning}
-        >
-          {/* Slide Elements */}
-          <div
-            className={`${styles["slide-wrapper"]} ${classPrefix}slide-wrapper`}
-          >
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={
-                  `${styles.slide} ${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
-                  `${classPrefix}slide-${index} ${classPrefix}slide`
-                }
-                style={{
-                  backgroundImage: `url(${slide.background})`,
-                }}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${slide.alt || `Slide ${index + 1} of ${slides.length}`}`}
-                aria-hidden={index !== currentIndex}
-              ></div>
-            ))}
-          </div>
-
-          {/* Overlay Layers for Visual Effects */}
-          <div
-            className={
-              `${styles["overlay-wrapper-1"]} ` +
-              `${classPrefix}overlay-wrapper ${classPrefix}overlay-wrapper-1`
-            }
-          >
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                className={
-                  `${classPrefix}overlay-1-${index + 1} ` +
-                  `${styles.overlay} ${classPrefix}overlay ` +
-                  `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
-                  `${index === previousIndexRef.current && isTransitioning ? ` ${classPrefix}previous` : ""}`
-                }
-              ></div>
-            ))}
-          </div>
-          <div
-            className={
-              `${styles["overlay-wrapper-2"]} ` +
-              `${classPrefix}overlay-wrapper ${classPrefix}overlay-wrapper-2`
-            }
-          ></div>
-
-          {/* Content Wrapper */}
-          <div
-            style={{ height: divHeight }}
-            className={`${styles["content-wrapper"]} ${classPrefix}content-wrapper`}
-          >
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                ref={(el) => {
-                  slideRefs.current[index] = el;
-                }}
-                className={
-                  `${styles.content} ${classPrefix}content ` +
-                  `${index === currentIndex ? styles.active + ` ${classPrefix}active` : ""} ` +
-                  `${index === previousIndexRef.current ? `${classPrefix}previous` : ""}`
-                }
-              >
-                {slides[index].content}
-              </div>
-            ))}
-          </div>
-
-          <div>
-            {controls?.map((SlideshowControl, index) => (
-              <SlideshowControl
-                key={index}
-                currentIndex={currentIndex}
-                slides={slides}
-                onPrev={handlePrevUserTriggered}
-                onNext={handleNextUserTriggered}
-                onIndex={handleUserInteraction}
-                onTogglePause={togglePause}
-                classPrefix={classPrefix}
-                isPaused={isPaused}
-              />
-            ))}
-          </div>
-        </div>
-      </>
+      <SlideshowWrapper
+        classPrefix={classPrefix}
+        isPaused={false}
+        isTransitioning={isTransitioning}
+      >
+        <Debug
+          isDebug={isDebug()}
+          currentIndex={currentIndex}
+          previousIndex={_previousIndex}
+          isTransitioning={isTransitioning}
+          classPrefix={classPrefix}
+        />
+        <SlideWrapper
+          slides={slides}
+          currentIndex={currentIndex}
+          classPrefix={classPrefix}
+        />
+        <Overlay
+          slides={slides}
+          currentIndex={currentIndex}
+          classPrefix={classPrefix}
+        />
+        <ContentWrapper
+          slides={slides}
+          currentIndex={currentIndex}
+          classPrefix={classPrefix}
+        />
+        <ControlsWrapper
+          controls={controls}
+          currentIndex={currentIndex}
+          slides={slides}
+          onPrev={handlePrevUserTriggered}
+          onNext={handleNextUserTriggered}
+          onIndex={handleUserInteraction}
+          onTogglePause={togglePause}
+          classPrefix={classPrefix}
+          isPaused={isPaused}
+        />
+      </SlideshowWrapper>
     );
   },
 );
