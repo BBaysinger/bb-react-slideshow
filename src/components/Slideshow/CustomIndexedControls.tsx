@@ -3,10 +3,10 @@ import { SlideshowControl } from "./Slideshow.types";
 import styles from "./CustomIndexedControls.module.scss";
 
 const CustomIndexedControls: SlideshowControl = ({
-  currentIndex,
+  currentIndex = 0,
   slides,
   onIndex,
-  classPrefix = "",
+  classPrefix,
 }) => {
   // Refs for indexed buttons (thumbnails or dots)
   const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);

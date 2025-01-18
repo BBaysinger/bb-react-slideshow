@@ -34,21 +34,21 @@ interface SlideshowProps {
   enableRouting?: boolean;
   restartDelay?: number;
   transitionResetDelay?: number;
-  classPrefix?: string;
+  classPrefix: string;
   controls?: SlideshowControl[];
   debug?: string | number | boolean | null;
 }
 
 export type SlideshowControl = React.FC<{
-  currentIndex: number;
-  slides: Slide[];
+  currentIndex?: number;
+  slides?: Slide[];
   onPrev: () => void;
   onNext: () => void;
-  onIndex: (index: number) => void;
+  onIndex?: (index: number) => void;
   onTogglePause: () => void;
   isPaused: boolean;
   labels?: SlideshowLabels;
-  classPrefix?: string;
+  classPrefix: string;
 }>;
 
 export type { SlideshowProps, Slide, SlideshowLabels, AutoSlideMode };

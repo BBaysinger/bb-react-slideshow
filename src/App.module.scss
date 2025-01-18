@@ -44,6 +44,7 @@ $demos: ("demo1-", "demo2-", "demo3-");
 
     .#{$demo}content-wrapper {
       transition: height 0.9s ease-out 0.25s;
+      will-change: height;
       @include fluid-property(min-height, $bpmin, $bpmax, 390px, 506px);
 
       * {
@@ -419,10 +420,6 @@ $demos: ("demo1-", "demo2-", "demo3-");
 
   $demo2: list.nth($demos, 2);
 
-  .#{$demo2}indexed-button-wrapper {
-    display: none;
-  }
-
   .#{$demo2}stepper-button-wrapper {
     transform: scale(1.5);
     position: relative;
@@ -505,10 +502,6 @@ $demos: ("demo1-", "demo2-", "demo3-");
 
   $demo3: list.nth($demos, 3);
 
-  .#{$demo3}stepper-button-wrapper {
-    display: none;
-  }
-
   .#{$demo3}indexed-button-wrapper {
     display: flex;
     align-items: center;
@@ -527,7 +520,6 @@ $demos: ("demo1-", "demo2-", "demo3-");
     border: 2px solid #fff;
     width: 15px;
     height: 15px;
-    // overflow: hidden;
     outline: 0;
     margin: 0 5px;
     cursor: pointer;

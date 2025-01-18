@@ -52,7 +52,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
     const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
     const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
-    // const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
     const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
     const preloaderRanRef = useRef(false); // If the preloader has run
     const autoSlideCounterRef = useRef(0); // Counter for auto-slide intervals
@@ -116,6 +115,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     useEffect(() => {
       // Updates the height of the container to match the current slide's height.
       // to reduce whitespace and avoid overflow issues.
+      let resizeId: number | null = null;
+
       const updateHeight = () => {
         const currentSlide = slideRefs.current[currentIndex];
         if (currentSlide) {
@@ -124,12 +125,27 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         }
       };
 
+      const throttledUpdateHeight = () => {
+        if (!resizeId) {
+          resizeId = requestAnimationFrame(() => {
+            updateHeight();
+            resizeId = null;
+          });
+        }
+      };
+
+      // Initial update
       updateHeight();
 
-      window.addEventListener("resize", updateHeight);
+      // Attach throttled event listener
+      window.addEventListener("resize", throttledUpdateHeight);
 
       return () => {
-        window.removeEventListener("resize", updateHeight);
+        // Cleanup event listener and cancel any pending animation frame
+        window.removeEventListener("resize", throttledUpdateHeight);
+        if (resizeId !== null) {
+          cancelAnimationFrame(resizeId);
+        }
       };
     }, [currentIndex]);
 
