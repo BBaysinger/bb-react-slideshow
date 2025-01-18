@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import {
   SlideshowProps,
-  SlideshowLabels,
   AUTOSLIDE_MODES,
 } from "./Slideshow.types";
 import ImagePreloader from "utils/ImagePreloader";
@@ -47,7 +46,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       transitionResetDelay = 1600,
       classPrefix = "",
       debug = false,
-      labels = defaultLabels,
+      controls,
+      // labels = defaultLabels,
     } = props;
 
     // Refs
@@ -56,7 +56,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const previousIndexRef = useRef<number>(-1); // Tracks the previous index for stable access
     const isPausedRef = useRef(false); // Tracks whether the slideshow is paused
     const slideRefs = useRef<(HTMLDivElement | null)[]>([]); // Refs for individual slides
-    const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
+    // const indexedButtonRefs = useRef<(HTMLButtonElement | null)[]>([]); // Refs for indexed buttons (thumbnails or dots)
     const timerRef = useRef<NodeJS.Timeout | null>(null); // Timer for auto-slide
     const preloaderRanRef = useRef(false); // If the preloader has run
     const autoSlideCounterRef = useRef(0); // Counter for auto-slide intervals
@@ -281,19 +281,19 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       autoSlideMode,
     ]);
 
-    useEffect(() => {
-      // Ensure the current indexed element exists before attempting to focus it
-      if (
-        indexedButtonRefs.current &&
-        indexedButtonRefs.current[currentIndexRef.current]
-      ) {
-        // Set focus to the thumbnail corresponding to the current slide
-        // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
-        indexedButtonRefs.current[currentIndexRef.current]!.focus({
-          preventScroll: true,
-        });
-      }
-    });
+    // useEffect(() => {
+    //   // Ensure the current indexed element exists before attempting to focus it
+    //   if (
+    //     indexedButtonRefs.current &&
+    //     indexedButtonRefs.current[currentIndexRef.current]
+    //   ) {
+    //     // Set focus to the thumbnail corresponding to the current slide
+    //     // 'preventScroll: true' ensures that focusing the element doesn't cause scrolling
+    //     indexedButtonRefs.current[currentIndexRef.current]!.focus({
+    //       preventScroll: true,
+    //     });
+    //   }
+    // });
 
     const delayAutoSlide = useCallback(() => {
       // Clear any existing timers to reset the auto-slide behavior
@@ -489,11 +489,26 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             ))}
           </div>
 
-          {/* Stepper Navigation Buttons */}
+          <div>
+            {controls?.map((SlideshowControl, index) => (
+              <SlideshowControl
+                key={index}
+                currentIndex={currentIndex}
+                slides={slides}
+                onPrev={handlePrevUserTriggered}
+                onNext={handleNextUserTriggered}
+                onTogglePause={togglePause}
+                isPaused={isPaused}
+              />
+            ))}
+          </div>
+
+
+          {/* Stepper Navigation Buttons *}
           <div
             className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
           >
-            {/* Previous Slide Button */}
+            {/* Previous Slide Button }
             {labels.previous && (
               <button
                 tabIndex={0}
@@ -506,7 +521,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
               </button>
             )}
 
-            {/* Pause/Resume Button */}
+            {/* Pause/Resume Button *}
             <button
               tabIndex={0}
               onClick={togglePause}
@@ -519,7 +534,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
               {isPaused ? labels.resume : labels.pause}
             </button>
 
-            {/* Next Slide Button */}
+            {/* Next Slide Button *}
             {labels.next && (
               <button
                 tabIndex={0}
@@ -533,7 +548,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             )}
           </div>
 
-          {/* Indexed (Thumbnail/Dot) Navigation */}
+          {/* Indexed (Thumbnail/Dot) Navigation *}
           <div
             className={`${styles["indexed-button-wrapper"]} ${classPrefix}indexed-button-wrapper`}
             role="tablist"
@@ -568,24 +583,16 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
             ))}
           </div>
 
-          {/* Accessibility Note */}
+          {/ Accessibility Note *}
           <p
             className={`${styles["visually-hidden"]} ${classPrefix}visually-hidden`}
           >
             Use the left and right arrow keys to navigate the slideshow.
-          </p>
+          </p> */}
         </div>
       </>
     );
   },
 );
-
-// Default navigation button labels
-const defaultLabels: SlideshowLabels = {
-  previous: "< Previous",
-  next: "Next >",
-  resume: "Restart",
-  pause: "Pause",
-};
 
 export default Slideshow;
