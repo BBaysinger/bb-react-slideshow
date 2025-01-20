@@ -30,5 +30,9 @@ export default defineConfig(({ command, mode }) => {
     define: {
       basePath: JSON.stringify(baseUrl),
     },
+    server: {
+      host: true, // Ensures it binds to all network interfaces
+      port: 5173, // Specify the port explicitly
+    },
   };
 });
