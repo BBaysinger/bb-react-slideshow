@@ -339,7 +339,7 @@ const App: React.FC = () => {
               slides={slides.concat(animationTest)}
               basePath={`${basePath}/demo4`}
               autoSlideMode={"persistent"}
-              enableRouting={false}
+              enableRouting={true}
               controls={[CustomIndexedControls, CustomStepperWithLabels]}
               debug={true}
             />
