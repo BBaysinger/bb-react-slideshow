@@ -524,18 +524,19 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
       cursor: pointer;
       padding: 0;
 
-      &.#{$demo}active {
-        background-color: #fff;
-      }
-
-      img {
-        display: none;
-      }
-
       &:hover {
         opacity: 0.9;
         transform: scale(1.1);
         background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      &.#{$demo}active {
+        background-color: #fff;
+        opacity: 1;
+      }
+
+      img {
+        display: none;
       }
     }
   }
