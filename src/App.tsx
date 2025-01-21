@@ -231,14 +231,14 @@ const App: React.FC = () => {
       <div className="animation-test">
         <h3>Cat in a Dog Show</h3>
         <h2>THAT'S OK, IT'S MARU</h2>
-        <p>Nulla facilisi. Sed metus erat, condimentum et elit et.</p>
+        <p>This is an animation test.</p>
         <p>Fusce quis lacus quis dui dapibus sodales non a sem.</p>
         <p>Proin dapibus erat sed convallis vehicula.</p>
         <p>Cras vitae egestas diam.</p>
         <p>Mauris eu faucibus turpis.</p>
         <p>Nullam a erat eros.</p>
         <p>Suspendisse et consequat nisi.</p>
-      </div>,
+      </div>
     ),
   };
 
