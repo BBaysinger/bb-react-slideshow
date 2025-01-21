@@ -3,8 +3,6 @@
 $bpmin: 360px; // Min width inferred from designs (though 320px is supported)
 $bpmax: 1366px; // Max width inferred from designs
 
-$demos: ("demo1-", "demo2-", "demo3-", "demo4-");
-
 .slideshow-demo {
   position: relative;
 }
@@ -13,7 +11,7 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
 :global {
   // Prefixing all classes instead of relying on nesting, to avoid specificity/
   // override issues and to prevent bloating in the output CSS.
-  @each $demo in $demos {
+  @each $demo in ("demo1-", "demo2-", "demo3-", "demo4-") {
     .#{$demo}slideshow {
       box-sizing: border-box;
       color: white;
@@ -150,7 +148,7 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
       pointer-events: none;
       visibility: hidden;
       will-change: visibility;
-      transition: visibility 0.3s; /* Avoids flicker */
+      transition: visibility 0s 1s; /* Avoids flicker */
       @include fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
       @include fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
 
@@ -158,7 +156,7 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
         position: relative;
         transform: translateY(10vw) translateZ(0);
         will-change: unset;
-        opacity: 0.01;
+        opacity: 0;
         transition:
           opacity 0.4s linear,
           transform 1s ease-out;
@@ -169,6 +167,7 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
 
       &.#{$demo}active {
         visibility: visible;
+        transition: none;
         pointer-events: all;
         > * > * {
           will-change: opacity, transform;
@@ -291,208 +290,210 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
   // Rico Slideshow Config 1
   //////////////////////////////////////////////////////////////////
 
-  $demo1: list.nth($demos, 1);
+  @each $demo in ("demo1-", "demo4-") {
+    .#{$demo}indexed-button-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      row-gap: 4.2vw;
+      max-width: 844px;
 
-  .#{$demo1}stepper-button-wrapper {
-    display: none;
-  }
-
-  .#{$demo1}indexed-button-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    row-gap: 4.2vw;
-    max-width: 844px;
-
-    @include fluid-property(margin-top, $bpmin, $bpmax, 14px, 48px);
-    @include fluid-property(margin-left, $bpmin, $bpmax, 30px, 92px);
-    @include fluid-property(margin-right, $bpmin, $bpmax, 30px, 92px);
-    @include fluid-property(padding-bottom, $bpmin, $bpmax, 90px, 60px);
-  }
-
-  button.#{$demo1}indexed-button {
-    width: 14.5%;
-    cursor: pointer;
-    opacity: 0.7;
-    padding: 0;
-    box-sizing: border-box;
-    outline: 0;
-    border: 0;
-    background-color: transparent;
-    aspect-ratio: 1 / 1;
-    max-width: 164px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-self: center;
-    transition: transform 0.3s ease-out;
-    min-width: 30%;
-
-    @include breakpoint-up($b576px) {
-      min-width: unset;
+      @include fluid-property(margin-top, $bpmin, $bpmax, 14px, 48px);
+      @include fluid-property(margin-left, $bpmin, $bpmax, 30px, 92px);
+      @include fluid-property(margin-right, $bpmin, $bpmax, 30px, 92px);
+      @include fluid-property(padding-bottom, $bpmin, $bpmax, 90px, 60px);
     }
 
-    @include breakpoint-up($b768px) {
-      position: relative;
-      top: 8px;
-      width: 11.5%;
-    }
-
-    @include breakpoint-up($b1024px) {
-      width: 96px;
-    }
-
-    // @include mobile-portrait-hoverless {
-    //   width: 80%;
-    // }
-
-    &.#{$demo1}active {
-      opacity: 1;
-      cursor: default;
-      @include breakpoint-up($b768px) {
-        top: 0;
-        width: 17%;
-        margin-bottom: 0.5%;
-        transition: none;
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-      @include breakpoint-up($b992px) {
-        width: 145px;
-        margin-bottom: 8px;
-      }
-      &:before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 115%;
-        height: 115%;
-        background-image: url("@/assets/images/border.svg");
-        background-size: contain;
-        background-repeat: no-repeat;
-        @include breakpoint-up($b768px) {
-          width: 120%;
-          height: 120%;
-        }
-      }
-      &:hover {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    img {
-      display: block;
-      border-radius: 5%;
-      width: 100%;
-      // Disable long press on mobile.
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    &:hover {
-      opacity: 0.9;
-      transform: scale(1.1);
-    }
-  }
-
-  @media (hover: none) {
-    .#{$demo1}slideshow {
-      button.#{$demo1}indexed-button {
-        &:hover {
-          // Disable hover scale, since it sticks after touch. 🤪
-          transform: scale(1);
-        }
-      }
-    }
-  }
-
-  //////////////////////////////////////////////////////////////////
-  // Rico Slideshow Config 2
-  //////////////////////////////////////////////////////////////////
-
-  $demo2: list.nth($demos, 2);
-
-  .#{$demo2}stepper-button-wrapper {
-    transform: scale(1.5);
-    position: relative;
-    margin-top: 10px;
-    margin-bottom: 40px;
-    button {
-      margin: 0 5px;
-      background-color: transparent;
+    button.#{$demo}indexed-button {
+      width: 14.5%;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 0;
+      box-sizing: border-box;
+      outline: 0;
       border: 0;
-      font-size: 0;
-      line-height: 0;
-      height: 22px;
-      opacity: 0.82;
-      &:hover {
-        opacity: 1;
+      background-color: transparent;
+      aspect-ratio: 1 / 1;
+      max-width: 164px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-self: center;
+      transition: transform 0.3s ease-out;
+      min-width: 30%;
+
+      @include breakpoint-up($b576px) {
+        min-width: unset;
       }
-      &.#{$demo2}previous {
-        &:before {
-          content: "";
-          width: 0;
-          height: 0;
-          border-top: 10px solid transparent;
-          border-bottom: 10px solid transparent;
-          border-right: 22px solid #fff;
-        }
-      }
-      &.#{$demo2}pause {
+
+      @include breakpoint-up($b768px) {
         position: relative;
-        width: 22px;
-        &::before,
-        &::after {
-          content: "";
-          position: absolute;
-          background-color: #fff;
-          width: 8px;
-          height: 22px;
+        top: 8px;
+        width: 11.5%;
+      }
+
+      @include breakpoint-up($b1024px) {
+        width: 96px;
+      }
+
+      &.#{$demo}active {
+        opacity: 1;
+        cursor: default;
+        @include breakpoint-up($b768px) {
           top: 0;
+          width: 17%;
+          margin-bottom: 0.5%;
+          transition: none;
+          margin-left: 10px;
+          margin-right: 10px;
         }
-        &::before {
-          left: 0;
+        @include breakpoint-up($b992px) {
+          width: 145px;
+          margin-bottom: 8px;
         }
-        &::after {
-          right: 0;
-        }
-      }
-      &.#{$demo2}resume {
-        width: 22px;
         &:before {
           content: "";
           position: absolute;
-          width: 24px;
-          height: 24px;
-          top: -1px;
-          transform: translateX(-50%);
-          background-color: #fff;
-          mask-image: svg(
-            "M0,0v72h72V0H0ZM22.33,55.31V16.69l36.27,19.31-36.27,19.31Z"
-          );
-          mask-size: contain;
-          mask-repeat: no-repeat;
-          border-radius: 6px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 115%;
+          height: 115%;
+          background-image: url("@/assets/images/border.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          @include breakpoint-up($b768px) {
+            width: 120%;
+            height: 120%;
+          }
+        }
+        &:hover {
+          transform: scale(1);
+          opacity: 1;
         }
       }
-      &.#{$demo2}next {
-        &:before {
-          content: "";
-          width: 0;
-          height: 0;
-          border-top: 10px solid transparent;
-          border-bottom: 10px solid transparent;
-          border-left: 22px solid #fff;
+
+      img {
+        display: block;
+        border-radius: 5%;
+        width: 100%;
+        // Disable long press on mobile.
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.1);
+      }
+    }
+
+    @media (hover: none) {
+      .#{$demo}slideshow {
+        button.#{$demo}indexed-button {
+          &:hover {
+            // Disable hover scale, since it sticks after touch. 🤪
+            transform: scale(1);
+          }
         }
       }
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////
+  // Rico Slideshow Config 2 and 4
+  //////////////////////////////////////////////////////////////////
+
+  @each $demo in ("demo2-", "demo4-") {
+    .#{$demo}stepper-button-wrapper {
+      transform: scale(1.5);
+      position: relative;
+      margin-top: 10px;
+      margin-bottom: 40px;
+      button {
+        margin: 0 5px;
+        background-color: transparent;
+        border: 0;
+        font-size: 0;
+        line-height: 0;
+        height: 22px;
+        opacity: 0.82;
+        &:hover {
+          opacity: 1;
+        }
+        &.#{$demo}previous {
+          &:before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 22px solid #fff;
+          }
+        }
+        &.#{$demo}pause {
+          position: relative;
+          width: 22px;
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            background-color: #fff;
+            width: 8px;
+            height: 22px;
+            top: 0;
+          }
+          &::before {
+            left: 0;
+          }
+          &::after {
+            right: 0;
+          }
+        }
+        &.#{$demo}resume {
+          width: 22px;
+          &:before {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: -1px;
+            transform: translateX(-50%);
+            background-color: #fff;
+            mask-image: svg(
+              "M0,0v72h72V0H0ZM22.33,55.31V16.69l36.27,19.31-36.27,19.31Z"
+            );
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            border-radius: 6px;
+          }
+        }
+        &.#{$demo}next {
+          &:before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 22px solid #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .demo4-stepper-button-wrapper {
+    margin-top: -26px;
+  }
+
+  .animation-test {
+    p {
+      margin-bottom: 10px;
     }
   }
 
@@ -500,7 +501,7 @@ $demos: ("demo1-", "demo2-", "demo3-", "demo4-");
   /// Rico Slideshow Config 3
   //////////////////////////////////////////////////////////////////
 
-  @each $demo in ("demo3-", "demo4-") {
+  @each $demo in ("demo3-") {
     .#{$demo}indexed-button-wrapper {
       display: flex;
       align-items: center;
