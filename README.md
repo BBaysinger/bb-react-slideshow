@@ -16,6 +16,8 @@ Dynamic routes (optional). They only stack the history on user interaction, and 
   [https://bb-react-slideshow.netlify.app/demo2](https://bb-react-slideshow.netlify.app/demo2)
 - **Index dots (and routing disabled):**  
   [https://bb-react-slideshow.netlify.app/demo3](https://bb-react-slideshow.netlify.app/demo3)
+- **Mutliple control sets (and routing disabled):**  
+  [https://bb-react-slideshow.netlify.app/demo4](https://bb-react-slideshow.netlify.app/demo4)
 
 ## Features
 
