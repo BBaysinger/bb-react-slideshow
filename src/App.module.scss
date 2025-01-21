@@ -146,9 +146,9 @@ $bpmax: 1366px; // Max width inferred from designs
       position: absolute;
       padding-right: 28px;
       pointer-events: none;
-      visibility: hidden;
-      will-change: visibility;
-      transition: visibility 0s 1s; /* Avoids flicker */
+      // visibility: hidden; // Fix later.
+      // will-change: visibility;
+      // transition: visibility 0s 1s; /* Avoids flicker */
       @include fluid-property(padding-top, $bpmin, $bpmax, 20px, 78px);
       @include fluid-property(margin-left, $bpmin, $bpmax, 28px, 79px);
 
@@ -166,8 +166,8 @@ $bpmax: 1366px; // Max width inferred from designs
       }
 
       &.#{$demo}active {
-        visibility: visible;
-        transition: none;
+        // visibility: visible;
+        // transition: none;
         pointer-events: all;
         > * > * {
           will-change: opacity, transform;
