@@ -238,7 +238,7 @@ const App: React.FC = () => {
         <p>Mauris eu faucibus turpis.</p>
         <p>Nullam a erat eros.</p>
         <p>Suspendisse et consequat nisi.</p>
-      </div>
+      </div>,
     ),
   };
 
@@ -324,7 +324,13 @@ const App: React.FC = () => {
           }
         />
 
-        {/* Animation Test */}
+        {/* Demo 4 redirect */}
+        <Route
+          path="/demo4"
+          element={<Navigate to={`${basePath}/demo4/ricobot`} />}
+        />
+
+        {/* Animation Test and multiple sets of controls. */}
         <Route
           path={`${basePath}/demo4/:slug`}
           element={
