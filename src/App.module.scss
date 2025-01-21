@@ -3,7 +3,7 @@
 $bpmin: 360px; // Min width inferred from designs (though 320px is supported)
 $bpmax: 1366px; // Max width inferred from designs
 
-$demos: ("demo1-", "demo2-", "demo3-");
+$demos: ("demo1-", "demo2-", "demo3-", "demo4-");
 
 .slideshow-demo {
   position: relative;
@@ -500,43 +500,43 @@ $demos: ("demo1-", "demo2-", "demo3-");
   /// Rico Slideshow Config 3
   //////////////////////////////////////////////////////////////////
 
-  $demo3: list.nth($demos, 3);
-
-  .#{$demo3}indexed-button-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
-
-  button.#{$demo3}indexed-button {
-    display: flex;
-    background-color: transparent;
-    border-radius: 50%;
-    font-size: 0;
-    line-height: 0;
-    border: 2px solid #fff;
-    width: 15px;
-    height: 15px;
-    outline: 0;
-    margin: 0 5px;
-    cursor: pointer;
-    padding: 0;
-
-    &.#{$demo3}active {
-      background-color: #fff;
+  @each $demo in ("demo3-", "demo4-") {
+    .#{$demo}indexed-button-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 40px;
     }
 
-    img {
-      display: none;
-    }
+    button.#{$demo}indexed-button {
+      display: flex;
+      background-color: transparent;
+      border-radius: 50%;
+      font-size: 0;
+      line-height: 0;
+      border: 2px solid #fff;
+      width: 15px;
+      height: 15px;
+      outline: 0;
+      margin: 0 5px;
+      cursor: pointer;
+      padding: 0;
 
-    &:hover {
-      opacity: 0.9;
-      transform: scale(1.1);
-      background-color: rgba(255, 255, 255, 0.5);
+      &.#{$demo}active {
+        background-color: #fff;
+      }
+
+      img {
+        display: none;
+      }
+
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.1);
+        background-color: rgba(255, 255, 255, 0.5);
+      }
     }
   }
 }

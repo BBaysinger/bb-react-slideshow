@@ -203,7 +203,7 @@ const App: React.FC = () => {
   useEffect(() => {
     // Update the document title based on the route slug
     const currentSlide = slides.find((slide) =>
-      location.pathname.includes(slide.slug),
+      location.pathname.includes(slide.slug)
     );
 
     document.title = currentSlide
@@ -219,6 +219,27 @@ const App: React.FC = () => {
   };
 
   const CustomStepperWithLabels = createStepperControls(customLabels);
+
+  const animationTest = {
+    slug: "test",
+    background: `${basePath}/assets/images/6-background.webp`,
+    thumbnail: `${basePath}/assets/images/6-thumbnail.webp`,
+    alt: "test",
+    title: "test",
+    content: CSSVariableInjector.applyChildCSSVariables(
+      <div>
+        <h3>Nunc Rutrum Sodales</h3>
+        <p>Nulla facilisi. Sed metus erat, condimentum et elit et.</p>
+        <p>Fusce quis lacus quis dui dapibus sodales non a sem.</p>
+        <p>Proin dapibus erat sed convallis vehicula.</p>
+        <p>Donec et vehicula est.</p>
+        <p>Cras vitae egestas diam.</p>
+        <p>Mauris eu faucibus turpis.</p>
+        <p>Nullam a erat eros.</p>
+        <p>Suspendisse et consequat nisi.</p>
+      </div>
+    ),
+  };
 
   // Render the application with multiple routes, each displaying a Slideshow demo
   // with different configuration options.
@@ -294,6 +315,22 @@ const App: React.FC = () => {
               classPrefix={"demo3-"}
               slides={slides}
               basePath={`${basePath}/demo3`}
+              autoSlideMode={"persistent"}
+              enableRouting={false}
+              controls={[CustomIndexedControls]}
+              debug={true}
+            />
+          }
+        />
+
+        {/* Animation Test */}
+        <Route
+          path={`${basePath}/demo4/:slug`}
+          element={
+            <Slideshow
+              classPrefix={"demo4-"}
+              slides={slides.concat(animationTest)}
+              basePath={`${basePath}/demo4`}
               autoSlideMode={"persistent"}
               enableRouting={false}
               controls={[CustomIndexedControls]}
