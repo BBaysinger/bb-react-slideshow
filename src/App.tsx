@@ -203,7 +203,7 @@ const App: React.FC = () => {
   useEffect(() => {
     // Update the document title based on the route slug
     const currentSlide = slides.find((slide) =>
-      location.pathname.includes(slide.slug)
+      location.pathname.includes(slide.slug),
     );
 
     document.title = currentSlide
@@ -220,24 +220,25 @@ const App: React.FC = () => {
 
   const CustomStepperWithLabels = createStepperControls(customLabels);
 
+  // Animation test slide
   const animationTest = {
-    slug: "test",
-    background: `${basePath}/assets/images/6-background.webp`,
-    thumbnail: `${basePath}/assets/images/6-thumbnail.webp`,
+    slug: "maru",
+    background: `${basePath}/assets/images/7-background.webp`,
+    thumbnail: `${basePath}/assets/images/7-thumbnail.webp`,
     alt: "test",
     title: "test",
     content: CSSVariableInjector.applyChildCSSVariables(
-      <div>
-        <h3>Nunc Rutrum Sodales</h3>
+      <div className="animation-test">
+        <h3>Cat in a Dog Show</h3>
+        <h2>THAT'S OK, IT'S MARU</h2>
         <p>Nulla facilisi. Sed metus erat, condimentum et elit et.</p>
         <p>Fusce quis lacus quis dui dapibus sodales non a sem.</p>
         <p>Proin dapibus erat sed convallis vehicula.</p>
-        <p>Donec et vehicula est.</p>
         <p>Cras vitae egestas diam.</p>
         <p>Mauris eu faucibus turpis.</p>
         <p>Nullam a erat eros.</p>
         <p>Suspendisse et consequat nisi.</p>
-      </div>
+      </div>,
     ),
   };
 
@@ -333,7 +334,7 @@ const App: React.FC = () => {
               basePath={`${basePath}/demo4`}
               autoSlideMode={"persistent"}
               enableRouting={false}
-              controls={[CustomIndexedControls]}
+              controls={[CustomIndexedControls, CustomStepperWithLabels]}
               debug={true}
             />
           }
