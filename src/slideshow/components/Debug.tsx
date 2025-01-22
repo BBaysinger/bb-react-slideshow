@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Slideshow.module.scss";
 
 const Debug: React.FC<{
-  isDebug: boolean;
+  isDebug: string | number | boolean | null;
   currentIndex: number;
   previousIndex: number;
   isTransitioning: boolean;
