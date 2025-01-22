@@ -61,7 +61,10 @@ const ContentWrapper: React.FC<{
           ref={(el) => {
             slideRefs.current[index] = el;
           }}
-          className={`${classPrefix}content ${index === currentIndex ? `${classPrefix}active` : ""}`}
+          className={
+            `${classPrefix}content ` +
+            `${index === currentIndex ? `${classPrefix}active` : ""}`
+          }
         >
           {slide.content}
         </div>
