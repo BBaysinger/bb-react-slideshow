@@ -118,8 +118,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       // Ensure the preloader runs only once to avoid redundant operations
       if (!preloaderRanRef.current) {
         // Determine the starting index for preloading
-        const preloadIndex =
-          currentIndexRef.current >= 0 ? currentIndexRef.current : 0;
+        const preloadIndex = currentIndex >= 0 ? currentIndex : 0;
 
         // Reorder the slide backgrounds to start preloading from the current index
         const reorderedSources = [
@@ -136,7 +135,7 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         // Mark the preloader as having run to prevent repeated preloading
         preloaderRanRef.current = true;
       }
-    }, [slides]);
+    }, [slides, currentIndex]);
 
     useEffect(() => {
       // Update the current slide's slug whenever the currentIndex or slides change
@@ -173,18 +172,18 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         // if (autoSlideMode === AUTOSLIDE_MODES.PERSISTENT) {
         const doAutoSlide = (index: number) => {
           const newIndex = index % slides.length;
-          if (enableRouting) {
-            // Come back to this. It's not consistent, and Chrome seems to have
-            // a defect to do with dynamic routing history that I'm observing here
-            // and in another project. 😡
-            // isInternalNavigation.current = true;
-            // navigate(`${basePath}/${slides[newIndex].slug}`, {
-            //   replace: autoSlideCounterRef.current > 0,
-            // });
-            setCurrentIndex(newIndex);
-          } else {
-            setCurrentIndex(newIndex);
-          }
+          // if (enableRouting) {
+          //   // Come back to this. It's not consistent, and Chrome seems to have
+          //   // a defect to do with dynamic routing history that I'm observing here
+          //   // and in another project. 😡
+          //   isInternalNavigation.current = true;
+          //   navigate(`${basePath}/${slides[newIndex].slug}`, {
+          //     replace: autoSlideCounterRef.current > 0,
+          //   });
+          //   setCurrentIndex(newIndex);
+          // } else {
+          setCurrentIndex(newIndex);
+          // }
 
           autoSlideCounterRef.current += 1;
         };
