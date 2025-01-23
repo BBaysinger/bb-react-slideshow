@@ -82,12 +82,18 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       ? slides.findIndex((slide) => slide.slug === slug)
       : -1;
 
-    // Update `currentIndex` based on route
+    // Update `currentIndex` based on route and reset auto-slide
     useEffect(() => {
       if (slug && currentRouteIndex !== -1) {
         setCurrentIndex(currentRouteIndex);
+
+        // Reset auto-slide timer on route change
+        if (autoSlideMode !== AUTOSLIDE_MODES.NONE) {
+          setNextSlideTime(Date.now() + interval);
+          setIsPaused(false); // Ensure auto-slide resumes
+        }
       }
-    }, [slug, currentRouteIndex]);
+    }, [slug, currentRouteIndex, autoSlideMode, interval]);
 
     // Handle transitions
     useEffect(() => {
