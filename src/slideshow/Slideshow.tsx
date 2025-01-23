@@ -146,27 +146,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     }, [restartDelay, autoSlideMode]);
 
     // Handlers for user interaction
-    const handleNext = useCallback(() => {
-      setCurrentIndex((prev) => (prev + 1) % slides.length);
-      delayAutoSlide();
-    }, [slides.length, delayAutoSlide]);
-
-    const handlePrev = useCallback(() => {
-      setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-      delayAutoSlide();
-    }, [slides.length, delayAutoSlide]);
-
-    const handlePauseToggle = useCallback(() => {
-      setIsPaused((prev) => {
-        if (prev) {
-          // If resuming, immediately move to the next slide
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-          setNextSlideTime(Date.now() + interval); // Reset auto-slide timer
-        }
-        return !prev;
-      });
-    }, [slides.length, interval]);
-
     const handleNavigation = useCallback(
       (newIndex: number) => {
         if (enableRouting) {
@@ -179,7 +158,34 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       [enableRouting, basePath, slides, navigate, delayAutoSlide],
     );
 
-    // Keyboard navigation
+    const handlePrev = useCallback(() => {
+      setCurrentIndex((prevIndex) => {
+        const newIndex = (prevIndex - 1 + slides.length) % slides.length;
+        handleNavigation(newIndex);
+        return newIndex;
+      });
+    }, [slides.length, handleNavigation]);
+
+    const handleNext = useCallback(() => {
+      setCurrentIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % slides.length;
+        handleNavigation(newIndex);
+        return newIndex;
+      });
+    }, [slides.length, handleNavigation]);
+
+    const handlePauseToggle = useCallback(() => {
+      setIsPaused((prev) => {
+        if (prev) {
+          // If resuming, immediately move to the next slide
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+          setNextSlideTime(Date.now() + interval); // Reset auto-slide timer
+        }
+        return !prev;
+      });
+    }, [slides.length, interval]);
+
+    // Handle keypresses for navigation
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === "ArrowLeft") handlePrev();
@@ -187,8 +193,12 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       };
 
       window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [handleNext, handlePrev]);
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [navigate, location, slides]);
+
     return (
       <SlideshowWrapper
         classPrefix={classPrefix}
