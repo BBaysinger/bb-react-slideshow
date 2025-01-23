@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { SlideshowProps, AUTOSLIDE_MODES } from "./Slideshow.types";
@@ -62,6 +62,14 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     const navigate = useNavigate();
     const { slug } = useParams<{ slug?: string }>();
+
+    // Ref to track the latest index
+    const currentIndexRef = useRef(currentIndex);
+
+    // Update the ref whenever `currentIndex` changes
+    useEffect(() => {
+      currentIndexRef.current = currentIndex;
+    }, [currentIndex]);
 
     // Initialize routing and determine the first slide
     useEffect(() => {
@@ -158,20 +166,15 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       [enableRouting, basePath, slides, navigate, delayAutoSlide],
     );
 
-    const handlePrev = useCallback(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = (prevIndex - 1 + slides.length) % slides.length;
-        handleNavigation(newIndex);
-        return newIndex;
-      });
+    const handleNext = useCallback(() => {
+      const nextIndex = (currentIndexRef.current + 1) % slides.length;
+      handleNavigation(nextIndex);
     }, [slides.length, handleNavigation]);
 
-    const handleNext = useCallback(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % slides.length;
-        handleNavigation(newIndex);
-        return newIndex;
-      });
+    const handlePrev = useCallback(() => {
+      const prevIndex =
+        (currentIndexRef.current - 1 + slides.length) % slides.length;
+      handleNavigation(prevIndex);
     }, [slides.length, handleNavigation]);
 
     const handlePauseToggle = useCallback(() => {
@@ -183,9 +186,9 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
         }
         return !prev;
       });
-    }, [slides.length, interval]);
+    }, []);
 
-    // Handle keypresses for navigation
+    // Keyboard navigation
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === "ArrowLeft") handlePrev();
@@ -193,12 +196,8 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       };
 
       window.addEventListener("keydown", handleKeyDown);
-
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    }, [navigate, location, slides]);
-
+      return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [handleNext, handlePrev]);
     return (
       <SlideshowWrapper
         classPrefix={classPrefix}
