@@ -157,8 +157,15 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     }, [slides.length, delayAutoSlide]);
 
     const handlePauseToggle = useCallback(() => {
-      setIsPaused((prev) => !prev);
-    }, []);
+      setIsPaused((prev) => {
+        if (prev) {
+          // If resuming, immediately move to the next slide
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+          setNextSlideTime(Date.now() + interval); // Reset auto-slide timer
+        }
+        return !prev;
+      });
+    }, [slides.length, interval]);
 
     const handleNavigation = useCallback(
       (newIndex: number) => {
