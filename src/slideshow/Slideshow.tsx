@@ -60,11 +60,11 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const [currentSlug, setCurrentSlug] = useState<string>("");
     const [nextSlideTime, setNextSlideTime] = useState<number | null>(null);
 
+    // Refs
+    const currentIndexRef = useRef(currentIndex);
+
     const navigate = useNavigate();
     const { slug } = useParams<{ slug?: string }>();
-
-    // Ref to track the latest index
-    const currentIndexRef = useRef(currentIndex);
 
     // Update the ref whenever `currentIndex` changes
     useEffect(() => {
