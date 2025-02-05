@@ -16,9 +16,6 @@ import styles from "./App.module.scss";
  * In this use case the HTML gets pre-processed to dynamically apply CSS variables
  * for crossfade animations.
  *
- * Content was added taking a cue from the SPS home page where there is content on
- * each slide. (But it's also a logical feature. And crossfades are awesome 🤘.)
- *
  * @author Bradley Baysinger
  * @since The beginning of time.
  * @version N/A
