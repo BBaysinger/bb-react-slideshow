@@ -48,7 +48,7 @@ const App: React.FC = () => {
             exciting and diverse worlds, available now&nbsp;on&nbsp;PS5!
           </p>
           <a
-            href="https://www.playstation.com/"
+            href="https://www.facebook.com/ricothefrenchbulldog/"
             className={`cta`}
             target="_blank"
           >
@@ -74,7 +74,7 @@ const App: React.FC = () => {
             a bed before. His guilty-but-adorable side-eye is&nbsp;unmatched.
           </p>
           <a
-            href="https://www.playstation.com/"
+            href="https://www.facebook.com/ricothefrenchbulldog/"
             className={`cta`}
             target="_blank"
           >
@@ -101,7 +101,7 @@ const App: React.FC = () => {
             next snowy&nbsp;escapade!
           </p>
           <a
-            href="https://www.playstation.com/"
+            href="https://www.facebook.com/ricothefrenchbulldog/"
             className={`cta`}
             target="_blank"
           >
@@ -127,7 +127,7 @@ const App: React.FC = () => {
             Soak up the sunshine with this fearless flying&nbsp;Frenchie.
           </p>
           <a
-            href="https://www.playstation.com/"
+            href="https://www.facebook.com/ricothefrenchbulldog/"
             className={`cta`}
             target="_blank"
           >
@@ -154,7 +154,7 @@ const App: React.FC = () => {
             birthday&nbsp;ever!
           </p>
           <a
-            href="https://www.playstation.com/"
+            href="https://www.facebook.com/ricothefrenchbulldog/"
             className={`cta`}
             target="_blank"
           >
@@ -181,7 +181,7 @@ const App: React.FC = () => {
             day&nbsp;out.
           </p>
           <a
-            href="https://www.playstation.com/"
+            href="https://www.facebook.com/ricothefrenchbulldog/"
             className={`cta`}
             target="_blank"
           >
