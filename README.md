@@ -31,6 +31,7 @@ Dynamic routes (optional). They only stack the history on user interaction, and 
 
 ## Roadmap
 
+- **Package a Module:** For NPM import.
 - **Finish Default Styling:** Overridable default styling should represent a basic slideshow out of the box.
 - **Route (replace) Updates for Auto Slide:** I would love route updates on autoslide via `replace` so as to avoid stacking the history. Unfortunately, Chrome has an apparent defect with this that I'm also
   seeing in another project. I may need to investigate and reproduce the issue for a bug report.
