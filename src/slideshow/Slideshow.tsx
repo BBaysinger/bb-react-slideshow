@@ -62,14 +62,22 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
 
     // Refs
     const currentIndexRef = useRef(currentIndex);
+    const currentSlugRef = useRef<string>("");
 
     const navigate = useNavigate();
     const { slug } = useParams<{ slug?: string }>();
 
-    // Update the ref whenever `currentIndex` changes
+    // Update slug when the slide changes
     useEffect(() => {
       currentIndexRef.current = currentIndex;
-    }, [currentIndex]);
+      setCurrentSlug(slides[currentIndex]?.slug || "");
+    }, [currentIndex, slides]);
+
+    useEffect(() => {
+      if (slug) {
+        currentSlugRef.current = slug;
+      }
+    }, [slug]);
 
     // Initialize routing and determine the first slide
     useEffect(() => {
@@ -147,11 +155,6 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
       }
     }, [currentIndex, slides]);
 
-    // Update slug when the slide changes
-    useEffect(() => {
-      setCurrentSlug(slides[currentIndex]?.slug || "");
-    }, [currentIndex, slides]);
-
     // Restart auto-slide after user interaction
     const delayAutoSlide = useCallback(() => {
       if (restartDelay > 0 && autoSlideMode !== AUTOSLIDE_MODES.NONE) {
@@ -163,7 +166,13 @@ const Slideshow: React.FC<SlideshowProps> = React.memo(
     const handleNavigation = useCallback(
       (newIndex: number) => {
         if (enableRouting) {
-          navigate(`${basePath}/${slides[newIndex].slug}`);
+          const targetRoute = `${basePath}/${slides[newIndex].slug}`;
+          const currentRoute = `${basePath}/${currentSlugRef.current}`;
+          if (targetRoute !== currentRoute) {
+            navigate(targetRoute);
+          } else {
+            setCurrentIndex(newIndex);
+          }
         } else {
           setCurrentIndex(newIndex);
         }
