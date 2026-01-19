@@ -1,4 +1,5 @@
 import { SlideshowLabels, SlideshowControlType } from "../Slideshow.types";
+import clsx from "clsx";
 import styles from "./CustomStepperControls.module.scss";
 
 const CustomStepperControls: SlideshowControlType = ({
@@ -11,7 +12,10 @@ const CustomStepperControls: SlideshowControlType = ({
 }) => {
   return (
     <div
-      className={`${styles["stepper-button-wrapper"]} ${classPrefix}stepper-button-wrapper`}
+      className={clsx(
+        styles["stepper-button-wrapper"],
+        `${classPrefix}stepper-button-wrapper`,
+      )}
     >
       {/* Previous Slide Button */}
       {labels?.previous && (
@@ -31,10 +35,10 @@ const CustomStepperControls: SlideshowControlType = ({
         tabIndex={0}
         onClick={onTogglePause}
         aria-label={isPaused ? labels?.resume : labels?.pause}
-        className={
-          `${isPaused ? styles.resume : styles.pause} ` +
-          `${classPrefix}${isPaused ? "resume" : "pause"}`
-        }
+        className={clsx(
+          isPaused ? styles.resume : styles.pause,
+          `${classPrefix}${isPaused ? "resume" : "pause"}`,
+        )}
       >
         {isPaused ? labels?.resume : labels?.pause}
       </button>

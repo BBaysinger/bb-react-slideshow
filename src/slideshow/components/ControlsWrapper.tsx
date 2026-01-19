@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 
 import {
   SlideshowControlType,
@@ -25,7 +26,7 @@ export const ControlsWrapper: React.FC<
   classPrefix,
 }) => (
   <div
-    className={`${styles["controls-wrapper"]} ${classPrefix}controls-wrapper`}
+    className={clsx(styles["controls-wrapper"], `${classPrefix}controls-wrapper`)}
   >
     {controls?.map((Control, index) => (
       <Control

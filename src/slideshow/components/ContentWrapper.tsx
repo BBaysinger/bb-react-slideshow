@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
 
 import { SlideType } from "../Slideshow.types";
 import styles from "./Slideshow.module.scss";
@@ -52,7 +53,7 @@ const ContentWrapper: React.FC<{
 
   return (
     <div
-      className={`${styles["content-wrapper"]} ${classPrefix}content-wrapper`}
+      className={clsx(styles["content-wrapper"], `${classPrefix}content-wrapper`)}
       style={{ height: divHeight }}
     >
       {slides.map((slide, index) => (
@@ -61,10 +62,10 @@ const ContentWrapper: React.FC<{
           ref={(el) => {
             slideRefs.current[index] = el;
           }}
-          className={
-            `${classPrefix}content ` +
-            `${index === currentIndex ? `${classPrefix}active` : ""}`
-          }
+          className={clsx(
+            `${classPrefix}content`,
+            index === currentIndex && `${classPrefix}active`,
+          )}
         >
           {slide.content}
         </div>

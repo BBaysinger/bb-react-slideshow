@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 
 import { SlideType } from "../Slideshow.types";
 import Slide from "./Slide";
@@ -9,7 +10,7 @@ const SlideWrapper: React.FC<{
   currentIndex: number;
   classPrefix: string;
 }> = ({ slides, currentIndex, classPrefix }) => (
-  <div className={`${styles["slide-wrapper"]} ${classPrefix}slide-wrapper`}>
+  <div className={clsx(styles["slide-wrapper"], `${classPrefix}slide-wrapper`)}>
     {slides.map((slide, index) => (
       <Slide
         key={index}
