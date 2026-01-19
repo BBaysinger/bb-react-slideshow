@@ -26,7 +26,10 @@ export const ControlsWrapper: React.FC<
   classPrefix,
 }) => (
   <div
-    className={clsx(styles["controls-wrapper"], `${classPrefix}controls-wrapper`)}
+    className={clsx(
+      styles["controls-wrapper"],
+      `${classPrefix}controls-wrapper`,
+    )}
   >
     {controls?.map((Control, index) => (
       <Control

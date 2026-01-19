@@ -53,7 +53,10 @@ const ContentWrapper: React.FC<{
 
   return (
     <div
-      className={clsx(styles["content-wrapper"], `${classPrefix}content-wrapper`)}
+      className={clsx(
+        styles["content-wrapper"],
+        `${classPrefix}content-wrapper`,
+      )}
       style={{ height: divHeight }}
     >
       {slides.map((slide, index) => (
