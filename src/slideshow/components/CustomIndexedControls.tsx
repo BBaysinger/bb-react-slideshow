@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import clsx from "clsx";
 
 import { SlideshowControlType } from "../Slideshow.types";
 import styles from "./CustomIndexedControls.module.scss";
@@ -25,7 +26,10 @@ const CustomIndexedControls: SlideshowControlType = ({
 
   return (
     <div
-      className={`${styles["indexed-button-wrapper"]} ${classPrefix}indexed-button-wrapper`}
+      className={clsx(
+        styles["indexed-button-wrapper"],
+        `${classPrefix}indexed-button-wrapper`,
+      )}
       role="tablist"
     >
       {slides?.map((_, index) => (
@@ -36,11 +40,12 @@ const CustomIndexedControls: SlideshowControlType = ({
             indexedButtonRefs.current[index] = el;
           }}
           onClick={() => onIndex?.(index)}
-          className={
-            `${styles["indexed-button"]} ` +
-            `${index === currentIndex ? `${styles.active} ${classPrefix}active` : ""} ` +
-            `${classPrefix}indexed-button`
-          }
+          className={clsx(
+            styles["indexed-button"],
+            `${classPrefix}indexed-button`,
+            index === currentIndex && styles.active,
+            index === currentIndex && `${classPrefix}active`,
+          )}
           role="tab"
           aria-selected={index === currentIndex}
           aria-controls={`slide-${index}`}

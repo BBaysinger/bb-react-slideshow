@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 
 import styles from "./Slideshow.module.scss";
 
@@ -10,12 +11,15 @@ const SlideshowWrapper: React.FC<{
   currentSlug: string;
 }> = ({ children, classPrefix, isPaused, isTransitioning, currentSlug }) => (
   <div
-    className={
-      `${styles["slideshow-wrapper"]} ${classPrefix}slideshow ` +
-      `${classPrefix}slideshow-slide-${currentSlug} ` +
-      `${isTransitioning ? `${styles.transitioning} ${classPrefix}transitioning` : ""}` +
-      `${isPaused ? `${styles.paused} ${classPrefix}paused` : ""}`
-    }
+    className={clsx(
+      styles["slideshow-wrapper"],
+      `${classPrefix}slideshow`,
+      `${classPrefix}slideshow-slide-${currentSlug}`,
+      isTransitioning && styles.transitioning,
+      isTransitioning && `${classPrefix}transitioning`,
+      isPaused && styles.paused,
+      isPaused && `${classPrefix}paused`,
+    )}
   >
     {children}
   </div>

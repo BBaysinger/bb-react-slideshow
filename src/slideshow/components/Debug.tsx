@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 
 import styles from "./Slideshow.module.scss";
 
@@ -17,7 +18,7 @@ const Debug: React.FC<{
 }) => (
   <>
     {isDebug && (
-      <div className={`${styles["debug"]} ${classPrefix}debug`}>
+      <div className={clsx(styles["debug"], `${classPrefix}debug`)}>
         {`curr: ${currentIndex} prev: ${previousIndex} ` +
           `transitioning: ${isTransitioning}`}
       </div>
