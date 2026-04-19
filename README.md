@@ -1,39 +1,49 @@
 # bb-react-slideshow
 
-A React + TypeScript slideshow component (with a demo app) built on Vite.
+A **reusable React slideshow component** with a demo app, built with **React, TypeScript, and Vite**.
 
-The core `Slideshow` component supports:
+This project started as an early deeper exercise in **React hooks, composable state, and interactive UI behavior**, and grew into a flexible slideshow system designed to support a range of presentation styles, control patterns, and content structures without changing its core logic.
 
-- Auto-slide (`none` | `initial` | `persistent`)
-- Optional route-driven slide selection (React Router)
-- Pluggable control sets (thumbnails/dots, steppers, custom controls)
-- Keyboard navigation (left/right arrows)
-- Image prefetching
+The component currently lives in `src/slideshow`, while this repo ships as a demo app showing different configurations and behaviors.
 
-This repo currently ships as a demo app, with the component living in `src/slideshow`.
+## What it supports
+
+- **Auto-slide modes**: `none`, `initial`, `persistent`
+- **Optional route-driven slide selection** with React Router
+- **Pluggable control sets** such as thumbnails, dots, steppers, and custom controls
+- **Keyboard navigation** with left/right arrow support
+- **Image prefetching**
+- **Configurable slide data** for backgrounds, thumbnails, foreground imagery, metadata, and JSX content
+- **Multiple demo configurations** showing different navigation and routing setups
 
 ## Live demos
 
-- Original design (with enhancement): https://bb-react-slideshow.netlify.app/rico
-- Stepper buttons: https://bb-react-slideshow.netlify.app/demo2
-- Index dots + routing disabled (no route updates on navigation): https://bb-react-slideshow.netlify.app/demo3
-- Multiple control sets (thumbnails + stepper): https://bb-react-slideshow.netlify.app/demo4
+- **Original design (with enhancement):** https://bb-react-slideshow.netlify.app/rico
+- **Stepper buttons:** https://bb-react-slideshow.netlify.app/demo2
+- **Index dots + routing disabled:** https://bb-react-slideshow.netlify.app/demo3
+- **Multiple control sets (thumbnails + stepper):** https://bb-react-slideshow.netlify.app/demo4
+
+## Why I built it
+
+Rather than building a one-off carousel for a single screen, I wanted to explore how a richer slideshow component could be structured for **reuse, flexibility, and maintainability**. A big part of the project was learning how to organize **stateful interactive behavior** with hooks, while keeping routing, timed transitions, controls, and media handling modular enough to support different use cases.
 
 ## Quick start
 
-Prereqs (per `package.json`):
+### Requirements
+
+Per `package.json`:
 
 - Node `>= 23.4.0`
 - npm `>= 11.0.0`
 
-Install + run:
+### Install and run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Build + preview:
+### Build and preview
 
 ```bash
 npm run build
@@ -42,97 +52,105 @@ npm run preview
 
 ## Scripts
 
-- `npm run dev`: start Vite dev server
-- `npm run build`: typecheck (project build) + production build
-- `npm run preview`: serve the production build locally
-- `npm run lint`: run ESLint
-- `npm run format`: run Prettier
-- `npm run pb`: format + typecheck + build
+- `npm run dev` — start the Vite dev server
+- `npm run build` — typecheck and create a production build
+- `npm run preview` — preview the production build locally
+- `npm run lint` — run ESLint
+- `npm run format` — run Prettier
+- `npm run pb` — format, typecheck, and build
 
-## Environment / base paths
+## Environment and base paths
 
-Vite’s `base` is configured from env vars in [vite.config.ts](vite.config.ts):
+Vite's `base` is configured through environment variables in [`vite.config.ts`](vite.config.ts):
 
 - `VITE_DEV_BASE_URL`
 - `VITE_PROD_BASE_URL`
 
-They’re also used by the demo app (see [src/App.tsx](src/App.tsx)) to build asset URLs and route prefixes.
+These are also used by the demo app in [`src/App.tsx`](src/App.tsx) to build asset URLs and route prefixes.
 
-Defaults live in [.env](.env):
+Defaults live in [`.env`](.env):
 
 ```dotenv
 VITE_DEV_BASE_URL=""
 VITE_PROD_BASE_URL=""
 ```
 
-Notes:
+### Notes
 
-- For deployment at domain root, keep them empty.
-- For deployment under a subpath, set them to that subpath (commonly `"/my-subdir"`).
-- If you use a subpath, ensure your host is configured to serve `index.html` for SPA routes (Netlify does this via [public/\_redirects](public/_redirects)).
+- For deployment at the domain root, leave both values empty.
+- For deployment under a subpath, set them to that subpath, commonly `"/my-subdir"`.
+- If using a subpath, make sure your host is configured to serve `index.html` for SPA routes. Netlify is configured for this via [`public/_redirects`](public/_redirects).
 
 ## Component usage
 
 ### `Slideshow` props
 
-The public types live in [src/slideshow/Slideshow.types.tsx](src/slideshow/Slideshow.types.tsx).
+The public types live in [`src/slideshow/Slideshow.types.tsx`](src/slideshow/Slideshow.types.tsx).
 
-Key props:
+Key props include:
 
-- `slides` (required): array of `SlideType`
-- `classPrefix` (required): string prefix applied to globally-scoped classnames (helps avoid collisions)
-- `autoSlideMode`: `"none" | "initial" | "persistent"` (default: `"persistent"`)
-- `interval`: ms between slides (default: `6000`)
-- `restartDelay`: ms to delay auto-slide after user navigation (default: `12000`)
-- `enableRouting`: if `true`, user navigation updates the route via `navigate(...)` (default: `true`)
-- `basePath`: route prefix used when `enableRouting` is on (default: `"/slideshow"`)
-- `controls`: array of control components implementing `SlideshowControlType`
-- `debug`: show the debug overlay
+- `slides` *(required)* — array of `SlideType`
+- `classPrefix` *(required)* — string prefix applied to globally scoped class names to help avoid collisions
+- `autoSlideMode` — `"none" | "initial" | "persistent"` *(default: `"persistent"`)*
+- `interval` — milliseconds between slides *(default: `6000`)*
+- `restartDelay` — delay before auto-slide resumes after user navigation *(default: `12000`)*
+- `enableRouting` — when `true`, user navigation updates the route *(default: `true`)*
+- `basePath` — route prefix used when `enableRouting` is on *(default: `"/slideshow"`)*
+- `controls` — array of control components implementing `SlideshowControlType`
+- `debug` — enables the debug overlay
 
 ### `SlideType`
 
-Each slide is:
+Each slide supports:
 
-- `slug` (required): used for routing / identification
-- `background` (required): background image URL
-- `thumbnail` (optional): thumbnail image URL (used by indexed controls)
-- `foreground` (optional): foreground image URL (if used by your styling)
-- `alt`, `desc`, `title` (optional): metadata
-- `content` (optional): JSX content shown in the slide
+- `slug` *(required)* — used for routing and identification
+- `background` *(required)* — background image URL
+- `thumbnail` *(optional)* — thumbnail image URL for indexed controls
+- `foreground` *(optional)* — foreground image URL
+- `alt`, `desc`, `title` *(optional)* — metadata
+- `content` *(optional)* — JSX content rendered in the slide
 
 ### Controls API
 
-Controls are React components you pass via the `controls` prop. Each control receives callbacks and state like:
+Controls are React components passed through the `controls` prop. Each control receives slideshow state and navigation callbacks such as:
 
-- `onPrev`, `onNext`: navigate between slides
-- `onIndex(index)`: jump to a slide by index
-- `onTogglePause`: pause/resume (the built-in behavior advances 1 slide when resuming)
-- `currentIndex`, `isPaused`, `slides`, `classPrefix`, `labels`
+- `onPrev`, `onNext`
+- `onIndex(index)`
+- `onTogglePause`
+- `currentIndex`
+- `isPaused`
+- `slides`
+- `classPrefix`
+- `labels`
 
 Examples in this repo:
 
-- Indexed (thumbnails/dots): [src/slideshow/components/CustomIndexedControls.tsx](src/slideshow/components/CustomIndexedControls.tsx)
-- Stepper buttons: [src/slideshow/components/CustomStepperControls.tsx](src/slideshow/components/CustomStepperControls.tsx)
+- Indexed controls (thumbnails/dots): [`src/slideshow/components/CustomIndexedControls.tsx`](src/slideshow/components/CustomIndexedControls.tsx)
+- Stepper controls: [`src/slideshow/components/CustomStepperControls.tsx`](src/slideshow/components/CustomStepperControls.tsx)
   - Includes a helper factory: `createStepperControls(customLabels)`
 
-### Routing behavior (important)
+## Routing behavior
 
-- When a `:slug` route param is present, the slideshow will select the matching slide.
-- When `enableRouting` is `true`, user navigation updates the URL (pushes history).
-- Auto-slide intentionally does **not** update the URL (so it doesn’t spam browser history).
-- When `enableRouting` is `false`, the component won’t navigate on user interaction (but it can still read an existing `:slug` on mount).
+- When a `:slug` route param is present, the slideshow selects the matching slide.
+- When `enableRouting` is `true`, user navigation updates the URL and pushes history.
+- Auto-slide intentionally does **not** update the URL, so browser history does not get spammed during timed transitions.
+- When `enableRouting` is `false`, the component will not navigate on user interaction, but it can still read an existing `:slug` on mount.
 
 ## Demo app structure
 
-- Demo routes and slideshow configurations: [src/App.tsx](src/App.tsx)
-- `Slideshow` component: [src/slideshow/Slideshow.tsx](src/slideshow/Slideshow.tsx)
+- Demo routes and slideshow configurations: [`src/App.tsx`](src/App.tsx)
+- Core component: [`src/slideshow/Slideshow.tsx`](src/slideshow/Slideshow.tsx)
 - Styling: SCSS Modules under `src/slideshow/components/*.module.scss` and globals in `src/scss`
 - Utilities:
-  - CSS variable injection for staggered animations: [src/utils/CSSVariableInjector.ts](src/utils/CSSVariableInjector.ts)
-  - Sequential image prefetching: [src/utils/ImagePreloader.ts](src/utils/ImagePreloader.ts)
+  - CSS variable injection for staggered animations: [`src/utils/CSSVariableInjector.ts`](src/utils/CSSVariableInjector.ts)
+  - Sequential image prefetching: [`src/utils/ImagePreloader.ts`](src/utils/ImagePreloader.ts)
+
+## Project direction
+
+This repo currently presents the slideshow as a **working demo app plus reusable component code**, rather than as a fully packaged library. The larger goal was to build something flexible enough to serve as a reusable slideshow solution across different presentation needs, while learning more disciplined patterns for managing interactive component behavior with hooks.
 
 ## Roadmap
 
-- Package as an npm module (export `Slideshow` + types cleanly)
-- Provide default theme styling that’s easy to override
-- Investigate route updates on autoslide via `replace` (to avoid stacking history)
+- Package the component as an npm module with cleaner public exports
+- Provide a default theme layer that is easy to override
+- Explore auto-slide route updates via `replace` to avoid stacking browser history
