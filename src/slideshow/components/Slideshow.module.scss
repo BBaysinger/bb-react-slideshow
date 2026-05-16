@@ -1,10 +1,9 @@
 @use "../../scss/globals.scss" as *;
 
 /**
-* This should all be overridable defaults. Just the bare minimum
-* to make it seem like a slideshow out of the box.
-* TODO: This is unchecked. Evaluate what are preferable,
-* overridable defaults.
+* These are baseline styles so the component renders sensibly without
+* requiring a theme. Revisit which defaults should remain here versus
+* moving behind a more explicit theme layer.
 */
 
 .slideshow-wrapper {

@@ -2,7 +2,7 @@
 
 A **reusable React slideshow component** with a demo app, built with **React, TypeScript, and Vite**.
 
-A **flexible slideshow system** designed around reusable component logic, route-aware state, configurable controls, timed transitions, and structured slide data. It supports a range of presentation styles, control patterns, and content structures without requiring changes to the core slideshow logic.
+A slideshow component built around route-aware state, configurable controls, timed transitions, and structured slide data. The demo app shows how the same core component can be reused across different navigation and styling setups.
 
 The component currently lives in `src/slideshow`, while this repo ships as a demo app showing different configurations and behaviors.
 
@@ -25,7 +25,7 @@ The component currently lives in `src/slideshow`, while this repo ships as a dem
 
 ## Why I built it
 
-This project was built to avoid the limitations of a one-off carousel tied to a single screen or content shape. The slideshow separates reusable component behavior from presentation-specific configuration, keeping routing, timed transitions, controls, media handling, and slide content modular enough to support multiple use cases from the same core system.
+This project started as a way to avoid rebuilding slideshow behavior for each screen. The core component handles routing, timed transitions, controls, media loading, and slide state, while each demo configures its own slide data and presentation.
 
 ## Quick start
 
@@ -147,7 +147,7 @@ Examples in this repo:
 
 ## Project direction
 
-This repo currently presents the slideshow as a **working demo app plus reusable component code**, rather than as a fully packaged library. The component is structured as a reusable slideshow solution that can support different presentation needs through configuration, custom controls, route behavior, and flexible slide data.
+This repo is currently a demo app with the slideshow component living in `src/slideshow`, rather than a packaged library. The current structure is useful for iterating on behavior and testing different control and routing combinations before extracting a cleaner public API.
 
 ## Roadmap
 

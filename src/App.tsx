@@ -17,8 +17,7 @@ import styles from "./App.module.scss";
  * for crossfade animations.
  *
  * @author Bradley Baysinger
- * @since The beginning of time.
- * @version N/A
+ * @since 2024
  */
 const App: React.FC = () => {
   // Determine the base URL for assets and routing based on the environment
@@ -75,7 +74,7 @@ const App: React.FC = () => {
             className={`cta`}
             target="_blank"
           >
-            RICOS'S SHENANIGANS
+            RICO'S SHENANIGANS
           </a>
         </div>
       ),
@@ -222,19 +221,16 @@ const App: React.FC = () => {
     slug: "maru",
     background: `${basePath}/assets/images/7-background.webp`,
     thumbnail: `${basePath}/assets/images/7-thumbnail.webp`,
-    alt: "test",
-    title: "test",
+    alt: "Maru the cat",
+    title: "Maru",
     content: CSSVariableInjector.applyChildCSSVariables(
       <div className="animation-test">
         <h3>Cat in a Dog Show</h3>
         <h2>THAT'S OK, IT'S MARU</h2>
-        <p>This is an animation test.</p>
-        <p>Fusce quis lacus quis dui dapibus sodales non a sem.</p>
-        <p>Proin dapibus erat sed convallis vehicula.</p>
-        <p>Cras vitae egestas diam.</p>
-        <p>Mauris eu faucibus turpis.</p>
-        <p>Nullam a erat eros.</p>
-        <p>Suspendisse et consequat nisi.</p>
+        <p>This slide exists to stress-test the staggered text animation.</p>
+        <p>It mixes short and long lines so the reveal timing is easy to spot.</p>
+        <p>It also gives the extra demo route one more slide to navigate through.</p>
+        <p>The content is intentionally plain so the animation behavior stays obvious.</p>
       </div>,
     ),
   };
