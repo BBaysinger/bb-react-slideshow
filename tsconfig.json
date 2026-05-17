@@ -24,7 +24,8 @@
 
     /* Custom */
     "composite": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
